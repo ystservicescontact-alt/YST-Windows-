@@ -421,79 +421,105 @@ CITIES = [
 """,
           [("Do you work in apartments and condos?", "Yes. We replace sealed units, balcony door rollers and hardware in apartments and condos."),
            ("Can you come for a single window?", "Yes. No job is too small.")]),
+    _city("window-repair-toronto", "Toronto", "(365) 340-4760",
+          "Foggy glass, broken windows, cranks and patio doors repaired in houses, condos and storefronts across the City of Toronto.",
+          """
+<h2>Window repair across Toronto</h2>
+<p>Toronto has every kind of window there is: century homes with old wood sashes in the Annex and Leslieville, postwar bungalows, 1990s replacement windows that are now failing, and thousands of condo units with floor-to-ceiling glass. We repair all of them, matching glass and hardware so the repair blends in.</p>
+<h2>What we fix most often in Toronto</h2>
+<ul>
+  <li>Foggy sealed units in houses and condo windows</li>
+  <li>Broken glass after break-ins, storms and accidents, with board-up when needed</li>
+  <li>Casement cranks, hinges and locks</li>
+  <li>Balcony and patio door rollers, tracks and locks</li>
+  <li>Storefront and office glass on main streets</li>
+</ul>
+<h2>Working in condos and apartments</h2>
+<p>We work with property managers and concierge desks: we book the elevator, bring protection for floors, and handle glass that has to come up in the service elevator. Tell us your building's rules when you request a quote.</p>
+<h2>Neighbourhoods we serve</h2>
+<p>Downtown, the Annex, Leslieville, the Beaches, Danforth, High Park, Roncesvalles, Leaside, Davisville, Yorkville, Liberty Village, CityPlace, Midtown and the rest of Toronto.</p>
+""",
+          [("Do you repair condo windows in Toronto?", "Yes. We replace sealed units, balcony door rollers and hardware in condos. Let us know if your building needs the elevator booked."),
+           ("Can you repair glass in old wood windows?", "Yes. We replace glass in wood sashes and storm windows in older Toronto homes.")]),
+    _city("window-repair-north-york", "North York", "(365) 340-4760",
+          "Window, glass and patio door repair for houses, townhouses and condos across North York.",
+          """
+<h2>Window repair across North York</h2>
+<p>North York mixes 1950s and 1960s bungalows in areas like Don Mills and Bathurst Manor with newer infill homes and the condo towers along Yonge Street. Older homes often have 25 to 30 year old replacement windows with failing seals and worn cranks, and condos need sealed units and balcony door repairs.</p>
+<h2>What we fix most often in North York</h2>
+<ul>
+  <li>Foggy and broken sealed units</li>
+  <li>Casement crank operators, hinges and locks</li>
+  <li>Balcony and patio door rollers and locks</li>
+  <li>Drafty windows that need new caulking and weatherstripping</li>
+</ul>
+<h2>Neighbourhoods we serve</h2>
+<p>Willowdale, Don Mills, Bayview Village, York Mills, Bathurst Manor, Lawrence Park, Downsview, Newtonbrook, Armour Heights and the Yonge and Sheppard area.</p>
+""",
+          [("Do you work in North York condos?", "Yes. We replace sealed units and balcony door hardware in condos and apartments."),
+           ("Do you charge extra for North York?", "No. It's in our regular service area and estimates are free.")]),
+    _city("window-repair-etobicoke", "Etobicoke", "(365) 340-4760",
+          "Foggy glass, broken windows, cranks and patio doors repaired across Etobicoke, from Mimico to Rexdale.",
+          """
+<h2>Window repair across Etobicoke</h2>
+<p>Etobicoke has large postwar lots with split-levels and bungalows in Islington and Kingsway, lakeside condos in Mimico and Humber Bay, and townhouses throughout. Many homes still have original or 1990s windows whose seals and hardware are at the end of their life. We fix the part that failed and keep the frame.</p>
+<h2>What we fix most often in Etobicoke</h2>
+<ul>
+  <li>Foggy double pane glass in picture and casement windows</li>
+  <li>Patio and balcony doors that drag or won't lock</li>
+  <li>Crank, hinge and lock replacement</li>
+  <li>Broken glass and emergency board-up</li>
+</ul>
+<h2>Neighbourhoods we serve</h2>
+<p>Islington Village, the Kingsway, Mimico, Humber Bay Shores, New Toronto, Long Branch, Alderwood, Markland Wood, Richview, Thistletown and Rexdale.</p>
+""",
+          [("Can you replace glass in lakeside condos?", "Yes. We replace sealed units and balcony door glass in condos along the waterfront."),
+           ("Do you serve all of Etobicoke?", "Yes, Etobicoke is in our regular service area.")]),
+    _city("window-repair-oakville", "Oakville", "(365) 340-4760",
+          "Window, glass and patio door repair across Oakville, from Old Oakville to Glen Abbey and Joshua Creek.",
+          """
+<h2>Window repair across Oakville</h2>
+<p>Many Oakville homes in Glen Abbey, River Oaks and Joshua Creek were built in the 1980s to 2000s with large windows, arched transoms and wide patio doors. Those big sealed units are the ones that fog first, and replacing whole windows of that size is expensive. We replace just the glass and keep your frames and trim.</p>
+<h2>What we fix most often in Oakville</h2>
+<ul>
+  <li>Large and custom-shaped foggy sealed units, including arches</li>
+  <li>Patio and garden door glass, rollers and locks</li>
+  <li>Casement crank and hinge repair</li>
+  <li>Exterior caulking and drafty windows</li>
+</ul>
+<h2>Neighbourhoods we serve</h2>
+<p>Old Oakville, Bronte, Glen Abbey, River Oaks, Joshua Creek, Clearview, Falgarwood, College Park, West Oak Trails and Palermo.</p>
+""",
+          [("Can you replace arched or custom-shaped glass?", "Yes. We have sealed units made to any shape and size, including arches and transoms."),
+           ("Do you serve Oakville regularly?", "Yes. Oakville is in our regular service area and estimates are free.")]),
+    _city("window-repair-newmarket", "Newmarket", "(365) 340-4760",
+          "Foggy windows, broken glass, cranks and patio doors repaired across Newmarket and Aurora.",
+          """
+<h2>Window repair across Newmarket</h2>
+<p>Newmarket grew quickly in the 1980s and 1990s, in neighbourhoods like Summerhill, Glenway and Armitage. Windows from that era are now 25 to 40 years old, and failing seals, foggy glass and worn crank operators are very common. A glass or hardware repair often gets years more out of those windows.</p>
+<h2>What we fix most often in Newmarket</h2>
+<ul>
+  <li>Foggy and broken sealed glass units</li>
+  <li>Casement crank operators, hinges and locks</li>
+  <li>Sliding patio door rollers and locks</li>
+  <li>Drafty windows and worn weatherstripping</li>
+</ul>
+<h2>Neighbourhoods we serve</h2>
+<p>Downtown Newmarket, Summerhill, Glenway, Armitage, Stonehaven, Woodland Hill, Bristol-London and nearby Aurora and East Gwillimbury.</p>
+""",
+          [("Do you also serve Aurora?", "Yes. We serve Aurora, Newmarket and the surrounding area."),
+           ("Is it worth repairing 30 year old windows?", "If the frames are solid, yes. New sealed units and hardware often make them work like new for far less than replacement.")]),
 ]
 
 # ---------------------------------------------------------------- home
 HOME = {
-    "title": "Window Repair GTA | Foggy Glass, Broken Windows & Patio Doors in Toronto",
+    "title": "Window Repair Toronto & GTA | Foggy Glass, Broken Windows, Patio Doors",
     "description": "Window and glass repair across Toronto and the GTA: foggy sealed units, broken glass, window cranks, hinges and patio doors. Repair first, replace only when needed. Free estimates.",
-    "extra_areas": ["Toronto", "North York", "Etobicoke", "Oakville", "Burlington", "Milton",
-                    "Pickering", "Ajax", "Whitby", "Oshawa", "Newmarket", "Aurora"],
-    "hero": """
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-copy">
-      <p class="eyebrow">Window &amp; glass repair · Toronto &amp; the GTA</p>
-      <h1>Fix the glass. <em>Keep the window.</em></h1>
-      <p class="lede">Foggy double panes, cracked glass, stuck cranks and sticking patio doors. We repair the part that failed, so you don't pay to replace the whole window.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="tel:{tel}">Call {phone}</a>
-        <a class="btn btn-ghost" href="#quote">Get a free estimate</a>
-      </div>
-      <div class="facts">
-        <div><strong>Free</strong>estimates</div>
-        <div><strong>Repair first</strong>replace only when needed</div>
-        <div><strong>All of the GTA</strong>homes &amp; businesses</div>
-      </div>
-    </div>
-    <figure class="pane-figure">
-      <div class="pane" id="pane">
-        <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <circle cx="300" cy="110" r="38" fill="#f7e7b5" opacity=".9"/>
-          <path d="M0 360 L60 300 L110 340 L170 270 L240 330 L300 280 L360 320 L400 300 L400 500 L0 500 Z" fill="#5e8f86" opacity=".55"/>
-          <path d="M0 400 L40 380 L80 395 L130 370 L190 390 L250 365 L320 392 L400 375 L400 500 L0 500 Z" fill="#2f5d58" opacity=".85"/>
-          <g fill="#1f423f"><path d="M50 470 L70 400 L90 470 Z"/><path d="M80 480 L104 392 L128 480 Z"/><path d="M290 475 L312 395 L334 475 Z"/><path d="M325 482 L345 412 L365 482 Z"/></g>
-        </svg>
-        <canvas id="fog" role="img" aria-label="Fogged glass. Drag across it to wipe it clear."></canvas>
-      </div>
-      <figcaption class="pane-caption">
-        <span>Fog between the panes means the seal failed. Drag across the glass to see it after a new sealed unit.</span>
-        <button type="button" id="refog">Fog it again</button>
-      </figcaption>
-    </figure>
-  </div>
-</section>""",
-    "compare": """
-<section class="band section" id="repair-or-replace">
-  <div class="wrap">
-    <div class="section-head"><p class="eyebrow">Repair or replace?</p>
-      <h2>Most windows don't need to be replaced</h2>
-      <p>If the frame is solid, repairing the failed part usually costs far less and is done faster.</p></div>
-    <div class="table-scroll">
-      <table class="compare">
-        <thead><tr><th scope="col"><span class="hidden-field">Comparison</span></th><th scope="col">Repair the glass or part</th><th scope="col">Replace the whole window</th></tr></thead>
-        <tbody>
-          <tr><td>Cost</td><td class="yes">A fraction of replacement</td><td>New frame, glass, install and trim</td></tr>
-          <tr><td>Time on site</td><td class="yes">Usually under an hour per window</td><td>Often a full day, with interior finishing</td></tr>
-          <tr><td>Walls &amp; trim</td><td class="yes">Not touched</td><td>Removed and refinished</td></tr>
-          <tr><td>Right call when</td><td>Frame is solid, the glass or a part failed</td><td>Frame is rotted, warped or badly damaged</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>""",
-    "process": """
-<section class="section" id="process">
-  <div class="wrap">
-    <div class="section-head"><p class="eyebrow">How it works</p><h2>From the first photo to clear glass</h2></div>
-    <ol class="steps">
-      <li><h3>Send photos</h3><p>Tell us what's wrong and send a photo. We can often quote from that alone.</p></li>
-      <li><h3>We measure</h3><p>We visit, check the frame and measure the glass to the 1/16&Prime;.</p></li>
-      <li><h3>Glass is made</h3><p>New sealed units are made to your exact size. Hardware is usually on the truck.</p></li>
-      <li><h3>We install</h3><p>We replace the part, clean up and test that the window opens, closes and locks.</p></li>
-    </ol>
-  </div>
-</section>""",
+    "tag": "Repair first. Replace only if needed.",
+    "h1": "Foggy or broken windows? We replace the glass, not the whole window.",
+    "lede": "Sealed glass units, cranks, hinges, locks and patio door rollers for homes and businesses across the GTA. Most repairs cost a fraction of a new window.",
+    "checks": ["Free estimates", "All window brands", "Homes, condos & storefronts"],
+    "extra_areas": ["Burlington", "Milton", "Pickering", "Ajax", "Whitby", "Oshawa", "Aurora", "Thornhill"],
     "faqs": [
         ("Why is there fog between my window panes?",
          "The edge seal of the sealed glass unit has failed and humid air got in. It can't be wiped off. The fix is a new sealed unit installed in your existing frame."),
@@ -501,27 +527,37 @@ HOME = {
          "No. Condensation on the room side in winter is usually high indoor humidity. If you can wipe it off, the seal is fine."),
         ("Do you need to replace the frame?",
          "Usually not. If the frame is in good condition we replace only the glass or the broken part."),
+        ("Can you give me a price from a photo?",
+         "Often, yes. Text us a photo of the whole window and a close-up of the problem. For sealed units we confirm the exact size when we measure."),
         ("Which areas do you serve?",
-         "Toronto and the GTA, including Mississauga, Brampton, Vaughan, Markham, Richmond Hill, Scarborough, North York, Etobicoke, Oakville and Durham Region."),
+         "Toronto and the GTA, including Mississauga, Brampton, Vaughan, Markham, Richmond Hill, North York, Scarborough, Etobicoke, Oakville, Newmarket and Durham Region."),
         ("Do you work on all brands?",
-         "Yes. We repair windows and patio doors from most manufacturers, in homes and commercial buildings."),
+         "Yes. We repair windows and patio doors from most manufacturers, in homes, condos and commercial buildings."),
     ],
 }
+
+# Before/after photos. Put files in src/photos/ and add entries like:
+# {"before": "foggy-before.jpg", "after": "foggy-after.jpg", "title": "Foggy picture window", "city": "Mississauga"}
+GALLERY = []
 
 # ---------------------------------------------------------------- other pages
 PAGES = [
     {
         "slug": "services",
         "crumb": "Services",
-        "title": "Window & Glass Repair Services | Window Repair GTA",
+        "title": "Window & Glass Repair Services in Toronto & the GTA | Window Repair GTA",
         "description": "All our window, glass and door repair services in Toronto and the GTA: foggy glass, broken glass, cranks, patio doors, caulking, screens, replacement and commercial.",
         "body": """
 <section class="page-hero"><div class="wrap">
-  <p class="eyebrow">Services</p>
+  {crumbs}
+  <span class="tag">Services</span>
   <h1>Window and glass repair services</h1>
-  <p class="lede">Every service we offer across {area}. Not sure what you need? Send a photo and we'll tell you.</p>
+  <p class="lede">Everything we fix across {area}. Not sure what you need? Text us a photo and we'll tell you.</p>
+  <div class="actions">{call}{text}</div>
 </div></section>
-<section class="section tight"><div class="wrap">{services}</div></section>""",
+{trust}
+<section class="section"><div class="wrap">{cards}</div></section>
+{cta}""",
     },
     {
         "slug": "contact",
@@ -529,19 +565,23 @@ PAGES = [
         "title": "Free Window Repair Estimate | Window Repair GTA",
         "description": "Request a free estimate for window, glass or patio door repair in Toronto and the GTA. Send a photo and we'll reply with a price.",
         "body": """
-<section class="section quote"><div class="wrap">
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">Free estimate</span>
+  <h1>Tell us about your window</h1>
+  <p class="lede">Fill in the form, call, or text us a photo. We usually reply the same day.</p>
+</div></section>
+<div class="wrap contact-grid">
   <div>
-    <div class="section-head" style="margin-bottom:0"><p class="eyebrow">Free estimate</p>
-      <h1 style="font-size:var(--step-4)">Tell us about your window</h1>
-      <p>Fill in the form or call. A photo helps us give you a price faster.</p></div>
+    <div class="actions">{call}{text}</div>
     <div class="contact-list">
-      <div><span class="eyebrow">Phone</span><a class="value" href="tel:{tel}">{phone}</a></div>
-      <div><span class="eyebrow">Service area</span><span>{area}</span></div>
+      <div><small>Phone or text</small><a href="tel:{tel}" data-where="contact-list">{phone}</a></div>
+      <div><small>Service area</small><b style="font-size:18px">{area}</b></div>
     </div>
-    <p class="note" style="margin-top:1.8rem">Tip: take one photo of the whole window and one close-up of the printing on the metal spacer between the panes.</p>
+    <p class="note" style="margin-top:24px">Tip: send one photo of the whole window and one close-up of the printing on the metal spacer between the panes. It tells us the brand and year.</p>
   </div>
   {form}
-</div></section>""",
+</div>""",
     },
     {
         "slug": "thanks",
@@ -551,10 +591,10 @@ PAGES = [
         "description": "Your estimate request was sent.",
         "body": """
 <section class="page-hero"><div class="wrap">
-  <p class="eyebrow">Request sent</p>
+  <span class="tag">Request sent</span>
   <h1>Thanks, we got your request</h1>
   <p class="lede">We'll get back to you soon with a price or a time to measure. If it's urgent, call us at {phone}.</p>
-  <div class="actions"><a class="btn btn-primary" href="tel:{tel}">Call {phone}</a><a class="btn btn-ghost" href="/">Back to home</a></div>
+  <div class="actions">{call}<a class="btn btn-outline" href="/">Back to home</a></div>
 </div></section>""",
     },
 ]
