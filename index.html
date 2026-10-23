@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Window Repair GTA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Window Repair GTA fixes foggy and broken windows, sealed glass units, hardware, screens and patio doors across Toronto and the GTA. Free estimates.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of full-width bands; hero splits copy | fogged window pane; content max 1120px */
+:root {
+  --bg: #f3f6f5;
+  --surface: #ffffff;
+  --ink: #12222a;
+  --muted: #4d5f66;
+  --line: #d5dfdf;
+  --accent: #0d6680;      /* glass blue-teal */
+  --accent-ink: #ffffff;
+  --seal: #c98a12;        /* sealant amber, used sparingly */
+  --band: #12222a;        /* dark band */
+  --band-ink: #e9f1f1;
+  --sky-1: #9cc9da;
+  --sky-2: #e7f1ee;
+  --frame: #f8faf9;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 4vw, 2.6rem);
+  --step-4: clamp(2.4rem, 6vw, 4rem);
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1a1f; --surface: #15252c; --ink: #e6efef; --muted: #9db0b5; --line: #26393f;
+    --accent: #4fb3cf; --accent-ink: #06171d; --seal: #e7ac3d; --band: #081216; --band-ink: #e6efef;
+    --sky-1: #1f4a5c; --sky-2: #33525a; --frame: #22343b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1a1f; --surface: #15252c; --ink: #e6efef; --muted: #9db0b5; --line: #26393f;
+  --accent: #4fb3cf; --accent-ink: #06171d; --seal: #e7ac3d; --band: #081216; --band-ink: #e6efef;
+  --sky-1: #1f4a5c; --sky-2: #33525a; --frame: #22343b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--seal); outline-offset: 2px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: var(--radius); font-weight: 600; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: 1rem; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--accent); }
+
+/* Header */
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--bg); border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+.logo-mark { width: 30px; height: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 3px; border: 2px solid var(--ink); border-radius: 3px; }
+.logo-mark span { background: var(--accent); opacity: .85; }
+.nav { display: flex; gap: 1.4rem; align-items: center; }
+.nav a { color: var(--ink); text-decoration: none; font-weight: 500; }
+.nav a:hover { color: var(--accent); }
+.nav .btn { min-height: 40px; color: var(--accent-ink); }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } }
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; padding-block: 3.5rem 4rem; }
+.hero-copy { display: grid; gap: 1.4rem; min-width: 0; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lede { font-size: var(--step-1); color: var(--muted); max-width: 34rem; }
+.hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+.hero-facts { display: flex; gap: 1.6rem; flex-wrap: wrap; padding-top: .4rem; font-size: .95rem; color: var(--muted); }
+.hero-facts strong { color: var(--ink); display: block; font-family: var(--font-display); font-size: 1.15rem; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; gap: 2rem; padding-block: 2rem 3rem; } }
+
+/* Window pane demo */
+.pane-figure { margin: 0; display: grid; gap: .7rem; min-width: 0; }
+.pane { position: relative; aspect-ratio: 4 / 5; max-width: 100%; border: 14px solid var(--frame); border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 18px 40px -20px rgba(10, 30, 40, .45); overflow: hidden; background: linear-gradient(180deg, var(--sky-1), var(--sky-2) 70%); touch-action: none; }
+.pane svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pane canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.pane::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(var(--frame), var(--frame)) center / 10px 100% no-repeat, linear-gradient(var(--frame), var(--frame)) center / 100% 10px no-repeat; }
+.pane-caption { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--muted); }
+.pane-caption button { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: var(--radius); padding: .35rem .8rem; cursor: pointer; font: inherit; }
+.spec { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+
+/* Sections */
+section { scroll-margin-top: 80px; }
+.section { padding-block: 4.5rem; }
+.section-head { display: grid; gap: .8rem; max-width: 40rem; margin-bottom: 2.5rem; }
+.section-head h2 { font-size: var(--step-3); font-weight: 700; }
+.section-head p { color: var(--muted); font-size: var(--step-1); }
+
+.services { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.service { padding: 1.8rem 1.6rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: .6rem; align-content: start; min-width: 0; }
+.service h3 { font-size: var(--step-1); font-weight: 700; }
+.service p { color: var(--muted); }
+.service .spec { margin-top: .3rem; }
+@media (max-width: 900px) { .services { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .services { grid-template-columns: 1fr; } }
+
+/* Repair vs replace band */
+.band { background: var(--band); color: var(--band-ink); }
+.band .eyebrow { color: var(--seal); }
+.band .section-head p { color: var(--band-ink); opacity: .8; }
+.compare-scroll { overflow-x: auto; }
+.compare { width: 100%; border-collapse: collapse; min-width: 520px; font-size: 1rem; }
+.compare th, .compare td { text-align: left; padding: 1rem .9rem; border-bottom: 1px solid rgba(255,255,255,.14); vertical-align: top; }
+.compare thead th { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; opacity: .75; }
+.compare td:first-child { font-weight: 600; }
+.compare .yes { color: var(--seal); font-weight: 600; }
+
+/* Process */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.steps li { display: grid; gap: .5rem; align-content: start; padding-top: 1rem; border-top: 3px solid var(--accent); counter-increment: step; min-width: 0; }
+.steps li::before { content: "Step " counter(step); font-family: var(--font-mono); font-size: .8rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.steps h3 { font-size: var(--step-1); }
+.steps p { color: var(--muted); }
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq { display: grid; max-width: 48rem; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding: 1.1rem 0; font-weight: 600; font-size: 1.08rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--font-mono); color: var(--accent); font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding-bottom: 1.2rem; color: var(--muted); max-width: 42rem; }
+
+/* Quote */
+.quote .wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+@media (max-width: 860px) { .quote .wrap { grid-template-columns: 1fr; } }
+.contact-list { display: grid; gap: 1.2rem; margin-top: 1.8rem; }
+.contact-list div { display: grid; gap: .15rem; }
+.contact-list .value { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--ink); user-select: all; }
+.tip { margin-top: 1.8rem; padding: 1rem 1.2rem; border-left: 3px solid var(--seal); background: var(--surface); color: var(--muted); font-size: .95rem; }
+form.quote-form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; display: grid; gap: 1.1rem; min-width: 0; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+label { display: grid; gap: .35rem; font-weight: 600; font-size: .95rem; min-width: 0; }
+input, select, textarea { font: inherit; font-weight: 400; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .8rem; width: 100%; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+textarea { min-height: 110px; resize: vertical; }
+.hint { font-weight: 400; color: var(--muted); font-size: .85rem; }
+.form-status { padding: .9rem 1rem; border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--ink); }
+
+footer { border-top: 1px solid var(--line); }
+.areas { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.areas li { padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 500; }
+.call-bar { display: none; }
+@media (max-width: 760px) {
+  .call-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; gap: .6rem; padding: .6rem max(16px, env(safe-area-inset-right, 0px)) calc(.6rem + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--surface); border-top: 1px solid var(--line); }
+  .call-bar .btn { flex: 1; }
+  footer .wrap { padding-bottom: 6rem; }
+}
+footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 2rem; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Window Repair GTA home">
+      <span class="logo-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      Window Repair GTA
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#areas">Areas</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#quote">Free estimate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Window &amp; glass repair · Toronto &amp; the GTA</p>
+        <h1>Fix the glass. <em>Keep the window.</em></h1>
+        <p class="hero-lede">Foggy double panes, cracked glass, stuck cranks and torn screens. We repair the part that failed, so you don't pay to replace the whole window.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#quote">Get a free estimate</a>
+          <a class="btn btn-ghost" href="#services">See what we fix</a>
+        </div>
+        <div class="hero-facts">
+          <div><strong>Free</strong>on-site estimates</div>
+          <div><strong>Warranty</strong>on parts &amp; labour</div>
+          <div><strong>All of the GTA</strong>homes &amp; businesses</div>
+        </div>
+      </div>
+
+      <figure class="pane-figure">
+        <div class="pane" id="pane">
+          <svg class="scene" viewBox="0 0 400 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <circle cx="300" cy="110" r="38" fill="#f7e7b5" opacity=".9"/>
+            <path d="M0 360 L60 300 L110 340 L170 270 L240 330 L300 280 L360 320 L400 300 L400 500 L0 500 Z" fill="#5e8f86" opacity=".55"/>
+            <path d="M0 400 L40 380 L80 395 L130 370 L190 390 L250 365 L320 392 L400 375 L400 500 L0 500 Z" fill="#2f5d58" opacity=".85"/>
+            <g fill="#1f423f">
+              <path d="M50 470 L70 400 L90 470 Z"/><path d="M80 480 L104 392 L128 480 Z"/>
+              <path d="M290 475 L312 395 L334 475 Z"/><path d="M325 482 L345 412 L365 482 Z"/>
+            </g>
+          </svg>
+          <canvas id="fog" aria-label="Fogged glass. Drag across it to wipe it clear." role="img"></canvas>
+        </div>
+        <figcaption class="pane-caption">
+          <span>Fog between the panes means the seal failed. Drag across the glass to see it after a new sealed unit.</span>
+          <button type="button" id="refog">Fog it again</button>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Services</p>
+        <h2>What we repair</h2>
+        <p>Most window problems come down to one worn or broken part. We find it and replace it.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <h3>Foggy &amp; failed glass units</h3>
+          <p>Moisture between the panes means the seal is gone. We replace only the sealed glass unit and keep your frame.</p>
+          <p class="spec">Double &amp; triple pane · Low-E · Argon fill</p>
+        </article>
+        <article class="service">
+          <h3>Broken &amp; cracked glass</h3>
+          <p>Stone chips, impact cracks and thermal stress cracks. We board up if needed and come back with the new glass.</p>
+          <p class="spec">Tempered · Laminated · Obscure</p>
+        </article>
+        <article class="service">
+          <h3>Hardware &amp; mechanisms</h3>
+          <p>Casement cranks, hinges, locks, handles and tilt latches that are stiff, loose or stripped.</p>
+          <p class="spec">Casement · Awning · Tilt &amp; turn</p>
+        </article>
+        <article class="service">
+          <h3>Sliding windows &amp; patio doors</h3>
+          <p>New rollers, tracks and handles for doors and sliders that stick, drag or won't lock.</p>
+          <p class="spec">Rollers · Tracks · Handle sets</p>
+        </article>
+        <article class="service">
+          <h3>Drafts &amp; leaks</h3>
+          <p>Worn weatherstripping and cracked caulking let in cold air and water. We reseal so the window closes tight again.</p>
+          <p class="spec">Weatherstrip · Exterior caulking</p>
+        </article>
+        <article class="service">
+          <h3>Screens</h3>
+          <p>Torn mesh, bent frames and missing screens, made to measure.</p>
+          <p class="spec">Fibreglass · Pet-resistant mesh</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band section" id="repair-or-replace">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Repair or replace?</p>
+        <h2>Most windows don't need to be replaced</h2>
+        <p>If the frame is solid, repairing the failed part usually costs far less and is done faster.</p>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare">
+          <thead>
+            <tr><th scope="col">&nbsp;</th><th scope="col">Repair the glass or part</th><th scope="col">Replace the whole window</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cost</td><td class="yes">A fraction of replacement</td><td>New frame, glass, install and trim</td></tr>
+            <tr><td>Time on site</td><td class="yes">Usually under an hour per window</td><td>Often a full day, with interior finishing</td></tr>
+            <tr><td>Walls &amp; trim</td><td class="yes">Not touched</td><td>Removed and refinished</td></tr>
+            <tr><td>When it's the right call</td><td>Frame is solid, the glass or a part failed</td><td>Frame is rotted, warped or badly damaged</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>From the first photo to clear glass</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Send photos</h3><p>Tell us what's wrong and send a photo. We often can quote from that alone.</p></li>
+        <li><h3>We measure</h3><p>We visit, check the frame and measure the glass to the 1/16&Prime;.</p></li>
+        <li><h3>Glass is made</h3><p>New sealed units are made to your exact size. Hardware is usually on the truck.</p></li>
+        <li><h3>We install</h3><p>We swap the part, clean up and test that the window opens, closes and locks.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="areas" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Service area</p>
+        <h2>We come to you across the GTA</h2>
+        <p>Don't see your city? Call us. We likely cover it.</p>
+      </div>
+      <ul class="areas">
+        <li>Toronto</li><li>North York</li><li>Scarborough</li><li>Etobicoke</li><li>Mississauga</li><li>Brampton</li><li>Vaughan</li><li>Markham</li><li>Richmond Hill</li><li>Oakville</li><li>Burlington</li><li>Milton</li><li>Pickering</li><li>Ajax</li><li>Whitby</li><li>Oshawa</li><li>Newmarket</li><li>Aurora</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions</p>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Why is there fog or moisture between my window panes?</summary>
+          <p>Double and triple pane glass is sealed at the edges. When that seal fails, humid air gets in and condenses between the panes. It can't be wiped off. The fix is a new sealed unit installed in your existing frame.</p>
+        </details>
+        <details>
+          <summary>Is condensation on the inside of the glass the same problem?</summary>
+          <p>No. Condensation on the room side in winter is usually caused by high indoor humidity, not a broken window. If you can wipe it off, the seal is fine. We'll tell you honestly if a repair won't help.</p>
+        </details>
+        <details>
+          <summary>Do you need to replace the frame?</summary>
+          <p>Usually not. If the frame is in good condition we replace only the glass or the broken part.</p>
+        </details>
+        <details>
+          <summary>How long does a new sealed unit take?</summary>
+          <p>Glass is made to measure, so there are a few days between measuring and installing. The installation itself is usually quick.</p>
+        </details>
+        <details>
+          <summary>Do you work on all brands?</summary>
+          <p>Yes. We repair windows and patio doors from most manufacturers, in homes and commercial buildings.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quote" id="quote" style="padding-top:0">
+    <div class="wrap">
+      <div>
+        <div class="section-head" style="margin-bottom:0">
+          <p class="eyebrow">Free estimate</p>
+          <h2>Tell us about your window</h2>
+          <p>We'll reply with a price or a time to come and measure.</p>
+        </div>
+        <div class="contact-list">
+          <div><span class="eyebrow">Phone</span><span class="value">(XXX) XXX-XXXX</span></div>
+          <div><span class="eyebrow">Email</span><span class="value" style="font-size:var(--step-1)">[your email]</span></div>
+          <div><span class="eyebrow">Service area</span><span>Toronto and the Greater Toronto Area</span></div>
+        </div>
+        <p class="tip">Tip: a photo of the whole window plus a close-up of the label on the spacer bar (between the panes) helps us quote faster.</p>
+      </div>
+
+      <form class="quote-form" id="quote-form" novalidate>
+        <div class="row">
+          <label for="q-name">Name<input id="q-name" name="name" autocomplete="name" required></label>
+          <label for="q-phone">Phone<input id="q-phone" name="phone" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email"></label>
+        <div class="row">
+          <label for="q-problem">What's wrong?
+            <select id="q-problem" name="problem">
+              <option>Foggy glass between panes</option>
+              <option>Broken or cracked glass</option>
+              <option>Crank, hinge or lock</option>
+              <option>Patio door or slider</option>
+              <option>Draft or leak</option>
+              <option>Screen</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label for="q-count">How many windows?<input id="q-count" name="count" type="number" min="1" value="1" inputmode="numeric"></label>
+        </div>
+        <label for="q-details">Details <span class="hint">Location, size if you know it, anything else</span>
+          <textarea id="q-details" name="details"></textarea>
+        </label>
+        <label for="q-photos">Photos <span class="hint">Optional</span>
+          <input id="q-photos" name="photos" type="file" accept="image/*" multiple>
+        </label>
+        <button class="btn btn-primary" type="submit">Request my estimate</button>
+        <p class="form-status" id="form-status" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Window Repair GTA · Window &amp; glass repair in Toronto and the GTA</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<div class="call-bar">
+  <a class="btn btn-primary" href="tel:+10000000000">Call (XXX) XXX-XXXX</a>
+  <a class="btn btn-ghost" href="#quote">Estimate</a>
+</div>
+
+<script>
+(function () {
+  var pane = document.getElementById('pane');
+  var canvas = document.getElementById('fog');
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var drawing = false, last = null;
+
+  function fog() {
+    var r = pane.getBoundingClientRect();
+    canvas.width = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    var g = ctx.createLinearGradient(0, 0, 0, r.height);
+    g.addColorStop(0, 'rgba(232,238,238,.90)');
+    g.addColorStop(1, 'rgba(214,224,224,.94)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, r.width, r.height);
+    // droplets
+    for (var i = 0; i < 260; i++) {
+      var x = Math.random() * r.width, y = Math.random() * r.height, s = Math.random() * 2.2 + .4;
+      ctx.fillStyle = 'rgba(255,255,255,' + (Math.random() * .5 + .2) + ')';
+      ctx.beginPath(); ctx.arc(x, y, s, 0, Math.PI * 2); ctx.fill();
+    }
+    // a few drips
+    ctx.strokeStyle = 'rgba(255,255,255,.35)';
+    ctx.lineCap = 'round';
+    for (var d = 0; d < 6; d++) {
+      var dx = Math.random() * r.width, dy = Math.random() * r.height * .5;
+      ctx.lineWidth = Math.random() * 2 + 1.5;
+      ctx.beginPath(); ctx.moveTo(dx, dy); ctx.lineTo(dx + (Math.random() * 4 - 2), dy + 40 + Math.random() * 90); ctx.stroke();
+    }
+  }
+
+  function wipe(x, y) {
+    ctx.globalCompositeOperation = 'destination-out';
+    var rad = Math.max(28, canvas.width / dpr * .09);
+    var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, 'rgba(0,0,0,1)');
+    g.addColorStop(.6, 'rgba(0,0,0,.9)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
+  }
+
+  function pos(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  function stroke(p) {
+    if (last) {
+      var dx = p.x - last.x, dy = p.y - last.y, n = Math.ceil(Math.hypot(dx, dy) / 8);
+      for (var i = 1; i <= n; i++) wipe(last.x + dx * i / n, last.y + dy * i / n);
+    } else wipe(p.x, p.y);
+    last = p;
+  }
+  canvas.addEventListener('pointerdown', function (e) { drawing = true; last = null; canvas.setPointerCapture(e.pointerId); stroke(pos(e)); });
+  canvas.addEventListener('pointermove', function (e) { if (drawing || e.pointerType === 'mouse') stroke(pos(e)); });
+  canvas.addEventListener('pointerup', function () { drawing = false; last = null; });
+  canvas.addEventListener('pointerleave', function () { last = null; });
+  document.getElementById('refog').addEventListener('click', fog);
+
+  var resizeTimer;
+  window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(fog, 150); });
+  fog();
+
+  // Quote form: not connected to a mail service yet
+  var form = document.getElementById('quote-form');
+  var status = document.getElementById('form-status');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('q-name'), phone = document.getElementById('q-phone');
+    if (!name.value.trim() || !phone.value.trim()) {
+      status.textContent = 'Please add your name and phone number so we can reach you.';
+      status.hidden = false;
+      (name.value.trim() ? phone : name).focus();
+      return;
+    }
+    status.textContent = 'Thanks, ' + name.value.trim() + '. This form is a preview and is not connected yet. Please call or email us for now.';
+    status.hidden = false;
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
