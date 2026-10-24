@@ -4,7 +4,7 @@
 Usage: python3 build.py
 Business details live in SITE below; page text lives in content.py.
 Photos: put image files in src/photos/ and reference them in content.py
-(a service's "image", or GALLERY entries). They are copied to /photos/.
+(see media.py for the exact file names). They are copied to /photos/.
 """
 import json
 import shutil
@@ -12,10 +12,11 @@ from datetime import date
 from html import escape
 from pathlib import Path
 
-from content import SERVICES, CITIES, HOME, PAGES, GALLERY
+from content import SERVICES, CITIES, HOME, PAGES
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug
 from extras import EXTRAS
+from media import photo, pair, gallery_pairs, video_html
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -163,9 +164,33 @@ def trust_html():
 
 
 def card_media(s):
-    if s.get("image"):
-        return f'<img src="/photos/{escape(s["image"])}" alt="{escape(s["name"])}" loading="lazy">'
+    img = photo(f"services/{s['slug']}")
+    if img:
+        return f'<img src="{img}" alt="{escape(s["name"])}" loading="lazy">'
     return ICONS[SERVICE_ICON[s["slug"]]]
+
+
+def ba_figure(before, after, title, city=""):
+    return f"""
+<figure class="ba">
+  <div class="ba-pair">
+    <div><img src="{before}" alt="Before: {escape(title)}" loading="lazy"><span>Before</span></div>
+    <div><img src="{after}" alt="After: {escape(title)}" loading="lazy"><span>After</span></div>
+  </div>
+  <figcaption>{escape(title)}<small>{escape(city)}</small></figcaption>
+</figure>"""
+
+
+def media_block(service_slug, title):
+    """Service photo, before/after pair and video, if any exist."""
+    out = ""
+    img = photo(f"services/{service_slug}")
+    if img:
+        out += f'<img class="prose-img" src="{img}" alt="{escape(title)}" loading="lazy">'
+    p = pair(f"services/{service_slug}")
+    if p:
+        out += f'<div class="gallery">{ba_figure(p[0], p[1], title)}</div>'
+    return out + video_html(service_slug, title)
 
 
 def cards_html(items):
@@ -177,20 +202,34 @@ def cards_html(items):
 
 
 def gallery_html():
-    if not GALLERY:
+    items = gallery_pairs()
+    for sv in SERVICES:
+        p = pair(f"services/{sv['slug']}")
+        if p:
+            items.append({"before": p[0], "after": p[1], "title": sv["name"], "city": ""})
+    if not items:
         return ""
-    figs = "".join(f"""
-<figure class="ba">
-  <div class="ba-pair">
-    <div><img src="/photos/{escape(g['before'])}" alt="Before: {escape(g['title'])}" loading="lazy"><span>Before</span></div>
-    <div><img src="/photos/{escape(g['after'])}" alt="After: {escape(g['title'])}" loading="lazy"><span>After</span></div>
-  </div>
-  <figcaption>{escape(g['title'])}<small>{escape(g.get('city', ''))}</small></figcaption>
-</figure>""" for g in GALLERY)
+    figs = "".join(ba_figure(g["before"], g["after"], g["title"], g["city"]) for g in items[:9])
     return f"""
 <section class="section" id="work"><div class="wrap">
   <div class="section-head"><div><h2>Recent work</h2><p>Real jobs from around the GTA.</p></div></div>
   <div class="gallery">{figs}</div>
+</div></section>"""
+
+
+def team_html():
+    img = photo("team")
+    vid = video_html("home", "Window Repair GTA at work")
+    if not img and not vid:
+        return ""
+    media = f'<img src="{img}" alt="Our team" loading="lazy">' if img else vid
+    second = vid if img else ""
+    return f"""
+<section class="section soft" id="team"><div class="wrap team">
+  <div class="team-media">{media}</div>
+  <div class="prose"><h2>Local, hands-on window repair</h2>
+    <p>We fix windows and patio doors every day across the GTA. When you call, you talk to the people who do the work.</p>
+    {second}<div class="actions">{call_btn("team")}{text_btn("team")}</div></div>
 </div></section>"""
 
 
@@ -351,7 +390,7 @@ def build_home():
     h = HOME
     checks = "".join(f"<li>{escape(c)}</li>" for c in h["checks"])
     body = f"""
-<section class="hero"><div class="wrap">
+<section{(' class="hero has-photo" style="--hero-img:url(' + photo("hero") + ')"') if photo("hero") else ' class="hero"'}><div class="wrap">
   <div class="hero-copy">
     <span class="tag">{escape(h['tag'])}</span>
     <h1>{escape(h['h1'])}</h1>
@@ -384,6 +423,7 @@ def build_home():
   </ol>
 </div></section>
 {gallery_html()}
+{team_html()}
 <section class="section soft" id="areas"><div class="wrap">
   <div class="section-head"><div><h2>Service areas</h2><p>We come to you anywhere in the GTA. Don't see your city? Call us.</p></div></div>
   <div class="area-map">
@@ -458,7 +498,8 @@ def build_service(s):
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p><ul class=\"areas\">{links}</ul>"
     else:
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
-    build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])], more + extra)
+    build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])],
+                  media_block(s["slug"], s["name"]) + more + extra)
 
 
 def build_city(c):
@@ -498,6 +539,7 @@ def build_combo(c, s):
 {trust_html()}
 <div class="wrap article">
   <div class="prose">
+    {media_block(s["slug"], title_name)}
     <h2>{escape(cs['short'])} in {escape(city)}: what we do</h2>
     <p>{escape(cs['what'])}</p>
     <ul class="ticks">{bullets}</ul>
@@ -576,6 +618,7 @@ def build_town(r, name, part):
 {trust_html()}
 <div class="wrap article">
   <div class="prose">
+    {(f'<img class="prose-img" src="{photo("cities/" + slug)}" alt="Window repair job in {escape(name)}" loading="lazy">') if photo("cities/" + slug) else ""}
     <h2>Window and glass repair in {escape(name)}</h2>
     <p>We repair windows and patio doors in homes, condos and businesses across {escape(r['name'])}.{part_line} Most problems come down to one failed part, so we replace the glass or hardware and keep your frame, trim and walls as they are.</p>
     <div class="local-box">

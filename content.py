@@ -536,9 +536,6 @@ HOME = {
     ],
 }
 
-# Before/after photos. Put files in src/photos/ and add entries like:
-# {"before": "foggy-before.jpg", "after": "foggy-after.jpg", "title": "Foggy picture window", "city": "Mississauga"}
-GALLERY = []
 
 # ---------------------------------------------------------------- other pages
 PAGES = [
