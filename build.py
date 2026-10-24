@@ -14,7 +14,7 @@ from pathlib import Path
 
 from content import SERVICES, CITIES, HOME, PAGES
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
-from areas import REGIONS, town_slug
+from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
 from media import photo, pair, gallery_pairs, video_html
 from services_more import CATEGORIES
@@ -35,8 +35,6 @@ SITE = {
     "area": "Toronto and the Greater Toronto Area",
 }
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800"
-         "&family=Archivo+Narrow:wght@700&display=swap")
 
 # Simple stroke icons (24x24, currentColor)
 _I = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>'
@@ -283,6 +281,7 @@ def quick_form():
   <label for="h-photo">Photo <span class="hint">Optional, helps us quote faster</span>
     <input id="h-photo" name="photo" type="file" accept="image/*"></label>
   <button class="btn btn-navy" type="submit">Get my free quote</button>
+  <p class="hint form-note">By sending this form you agree to our <a href="/privacy-policy/">privacy policy</a>.</p>
   <p class="or-text">or</p>
   {call_btn("hero-form", "btn-outline")}
 </form>"""
@@ -323,6 +322,7 @@ def full_form(source):
       <option>Saw your truck</option><option>Other</option>
     </select></label>
   <button class="btn btn-navy" type="submit">Request my free estimate</button>
+  <p class="hint form-note">By sending this form you agree to our <a href="/privacy-policy/">privacy policy</a>.</p>
 </form>"""
 
 
@@ -357,9 +357,8 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <meta property="og:description" content="{escape(description)}">
 <meta property="og:url" content="{canonical}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS}">
+<link rel="preload" href="/assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
 {ga}
 {ld}
@@ -398,7 +397,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
     <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
-  <div class="wrap footer-bottom">© {date.today().year} {SITE['name']}</div>
+  <div class="wrap footer-bottom">© {date.today().year} {SITE['name']} · <a href="/privacy-policy/">Privacy policy</a></div>
 </footer>
 <div class="call-bar">
   <a class="btn btn-yellow" href="tel:{SITE['tel']}" data-where="callbar">{ICONS['phone']}Call</a>
@@ -495,6 +494,7 @@ def quote_forms_html():
     <input name="photo3" type="file" accept="image/*" aria-label="Photo 3">
   </fieldset>
   <button class="btn btn-navy" type="submit">Send for a quote</button>
+  <p class="hint form-note">By sending this form you agree to our <a href="/privacy-policy/">privacy policy</a>.</p>
 </form></details>"""
     glass = """<div class="row">
     <label for="{n}-w">Visible width (inches)<input id="{n}-w" name="width" inputmode="decimal"></label>
@@ -786,6 +786,10 @@ def build_combo(c, s):
 RICH = {c["name"]: c["slug"] for c in CITIES}
 
 
+def town_indexed(name):
+    return name in INDEXED_TOWNS or photo("cities/" + town_slug(name)) is not None
+
+
 def town_href(name):
     return url(RICH.get(name) or town_slug(name))
 
@@ -857,7 +861,7 @@ def build_town(r, name, part):
     schemas = [business_schema(), breadcrumb_schema(trail),
                service_schema(f"Window repair in {name}", slug, name), faq_schema(faqs)]
     write(slug, layout(slug=slug, title=f"Window Repair {name} | Glass, Cranks & Patio Doors", description=desc,
-                       body=body, schemas=schemas))
+                       body=body, schemas=schemas, noindex=not town_indexed(name)))
 
 
 def build_region(r):
@@ -945,7 +949,7 @@ def build_sitemap():
             ([f"our-work/{w['slug']}" for w in WORK] + ["our-work"] if WORK else []) + \
             [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES] + ["service-areas"] + \
             [region_slug(r) for r in REGIONS] + \
-            [town_slug(n) for r in REGIONS for n, _ in r["towns"] if n not in RICH]
+            [town_slug(n) for r in REGIONS for n, _ in r["towns"] if n not in RICH and town_indexed(n)]
     today = date.today().isoformat()
     urls = "\n".join(f"  <url><loc>{SITE['domain']}{url(s)}</loc><lastmod>{today}</lastmod></url>" for s in slugs)
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'

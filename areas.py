@@ -149,3 +149,8 @@ REGIONS = [
 def town_slug(name):
     s = name.lower().replace("&", "and").replace("'", "").replace(".", "")
     return "window-repair-" + "-".join("".join(ch if ch.isalnum() else " " for ch in s).split())
+
+# Small-town pages are hidden from Google (noindex) until they have something unique.
+# A town page is shown to Google when it has a job photo (src/photos/cities/<slug>.jpg)
+# or when its name is listed here, e.g. after a real job or review there.
+INDEXED_TOWNS = set()

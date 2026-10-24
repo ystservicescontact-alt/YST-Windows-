@@ -319,3 +319,5 @@ fieldset.photos legend { font-weight: 700; font-size: 14px; margin-bottom: 6px; 
 .review { margin: 0; padding: 20px 22px; background: var(--soft); border-left: 6px solid var(--yellow); }
 .review cite { display: block; margin-top: 8px; font-style: normal; font-weight: 700; }
 .price-note { background: #FFF6D6; border-left: 6px solid var(--yellow); padding: 14px 18px; color: var(--ink); }
+.footer-bottom a { color: #C9D3E0; }
+.form-note { margin-top: -4px; }

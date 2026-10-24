@@ -141,7 +141,79 @@ BLOG = [
 <p>Send us a photo of the window and the problem. We'll tell you whether it can be repaired, and if it can't, we'll say so. See <a href="/window-replacement/">window replacement</a> or <a href="/contact/">request a quote</a>.</p>
 """,
     },
+    {
+        "slug": "sliding-patio-door-hard-to-open",
+        "title": "Sliding patio door hard to open? 5 causes and how to fix them",
+        "description": "Why sliding patio doors drag, grind or jump the track, what you can fix yourself, and when the rollers need replacing.",
+        "date": "2026-10-24",
+        "body": """
+<p>A sliding patio door should glide with one hand. If you have to pull with your whole body, something is wrong, and forcing it makes it worse. Here are the usual causes, from easiest to hardest.</p>
+<h2>1. A dirty track</h2>
+<p>Sand, grit and leaves collect in the bottom track and jam the rollers. Vacuum the track, then wipe it with a damp cloth. Don't use oil or grease: they collect more dirt.</p>
+<h2>2. Rollers set too low</h2>
+<p>Most doors have adjustment screws at the bottom corners of the moving panel, often behind a small plastic cap. If the door drags on the track, the rollers may have dropped. Raising them a little can make a big difference.</p>
+<h2>3. Worn or broken rollers</h2>
+<p>This is the most common cause. The small wheels under the door flatten, crack or seize after years of use. You'll hear grinding or feel the door bump along. The fix is new rollers: the panel is lifted out, the old roller assemblies are replaced, and the door is set back and adjusted.</p>
+<h2>4. A damaged track</h2>
+<p>If the raised rail the rollers ride on is bent or worn flat, new rollers won't glide properly. A damaged rail can often be repaired or covered with a track cap rather than replacing the door.</p>
+<h2>5. The frame has moved</h2>
+<p>If the house has settled, the frame can go out of square, so the door rubs or won't lock. Adjusting the rollers and the lock keeper usually brings it back.</p>
+<h2>When to call</h2>
+<p>If cleaning the track doesn't help, or the door jumps off the track, call us before it gets worse. Patio door panels are heavy and the glass is large, so lifting them out is a two-person job. See <a href="/patio-door-repair/">patio door repair</a>.</p>
+""",
+    },
+    {
+        "slug": "drafty-windows-where-cold-air-gets-in",
+        "title": "Drafty windows: where the cold air gets in and how to stop it",
+        "description": "Find exactly where cold air leaks into your home around the windows, and the right fix for each spot, from weatherstripping to new glass.",
+        "date": "2026-10-24",
+        "body": """
+<p>A drafty window doesn't always need replacing. Cold air usually comes in at one or two specific spots, and each one has its own fix. Here's how to find them.</p>
+<h2>How to find a draft</h2>
+<p>On a windy day, hold a lit candle or a strip of tissue paper near the window and move it slowly around the edges. Where it flickers or moves, air is getting in. A cheap infrared thermometer also works: cold spots show where air or heat is leaking.</p>
+<h2>1. Between the sash and the frame</h2>
+<p>The most common spot. Weatherstripping flattens, tears or falls off over time. New weatherstripping restores the seal. On casement windows, also check that the lock pulls the sash tight. See <a href="/window-lock-repair/">window lock repair</a>.</p>
+<h2>2. Around the outside of the frame</h2>
+<p>Cracked or missing exterior caulking lets wind and water in between the frame and the wall. The old caulking needs to be cut out and replaced, not covered over. See <a href="/window-caulking/">window caulking</a>.</p>
+<h2>3. Through the glass</h2>
+<p>A single pane or a double pane unit that has lost its seal and insulating gas feels cold to the touch. It isn't a draft, but it makes the room feel drafty. A new sealed unit with Low-E glass fixes it. See <a href="/foggy-window-repair/">foggy window repair</a>.</p>
+<h2>4. A window that doesn't close all the way</h2>
+<p>A bent hinge or a worn crank can leave a casement open a few millimetres. You may not see it, but you'll feel it. See <a href="/window-hinge-repair/">hinge repair</a>.</p>
+<h2>5. Around the interior trim</h2>
+<p>Gaps between the frame and the drywall can let cold air in from the wall cavity. Removing the trim and filling the gap with low-expansion foam fixes it.</p>
+<p class="note">Fix drafts before winter. Exterior caulking needs dry weather above freezing to cure properly. Read our <a href="/winter-ready/">winter window checklist</a>.</p>
+""",
+    },
+    {
+        "slug": "tempered-vs-laminated-glass",
+        "title": "Tempered vs. laminated glass: what your windows and doors need",
+        "description": "The difference between regular, tempered and laminated glass, where each is required, and which to choose for security, safety and noise.",
+        "date": "2026-10-24",
+        "body": """
+<p>When a window or door glass breaks, one of the first questions is what kind of glass it needs. The answer affects safety, security and sometimes what the building code requires.</p>
+<h2>Regular (annealed) glass</h2>
+<p>Standard window glass. It's the least expensive, but it breaks into large, sharp pieces. It's fine for most ordinary windows that aren't near floors, doors or bathtubs.</p>
+<h2>Tempered glass</h2>
+<p>Tempered glass is heat-treated to be about four times stronger than regular glass. When it does break, it shatters into small, blunt pieces that are much less likely to cause injury.</p>
+<ul>
+  <li>Usually required in doors, sidelites and patio doors</li>
+  <li>Usually required in glass close to the floor, near stairs and around bathtubs and showers</li>
+  <li>Can't be cut after it's made, so it's always ordered to the exact size</li>
+</ul>
+<h2>Laminated glass</h2>
+<p>Laminated glass is two layers of glass bonded with a clear plastic interlayer. When it breaks, the pieces stick to the interlayer and the glass stays in the frame.</p>
+<ul>
+  <li><strong>Security:</strong> much harder to break through, so it slows down break-ins</li>
+  <li><strong>Noise:</strong> reduces street and traffic noise</li>
+  <li><strong>UV:</strong> blocks most UV light, which protects floors and furniture from fading</li>
+  <li>Used in skylights and storefronts, and a good choice for ground-floor and basement windows</li>
+</ul>
+<h2>Which do you need?</h2>
+<p>For a broken door or a window near the floor, usually tempered. For security after a break-in, laminated. For a street-facing bedroom, laminated helps with noise. We check what's required and recommend the right glass when we quote. See <a href="/window-glass-replacement/">window glass replacement</a>.</p>
+""",
+    },
 ]
+
 
 # ---------------------------------------------------------------- pages
 EXTRA_PAGES = [
@@ -282,6 +354,52 @@ EXTRA_PAGES = [
   <div class="actions">{call}{text}</div>
 </div></section>
 <section class="section"><div class="wrap quote-forms">{quote_forms}</div></section>""",
+    },
+    {
+        "slug": "privacy-policy",
+        "crumb": "Privacy policy",
+        "title": "Privacy Policy | Window Repair GTA",
+        "description": "How Window Repair GTA collects, uses and protects the personal information you share when you request a quote or contact us.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">Privacy</span>
+  <h1>Privacy policy</h1>
+  <p class="lede">Last updated October 2026. This policy explains what personal information we collect when you contact us, why we collect it and how we protect it.</p>
+</div></section>
+<section class="section"><div class="wrap"><div class="prose">
+  <h2>What we collect</h2>
+  <p>When you fill in a form, call, text or message us, we may collect:</p>
+  <ul>
+    <li>Your name, phone number, email address and city or address</li>
+    <li>Details about your windows or doors and the work you need</li>
+    <li>Photos you send us of your windows, doors or property</li>
+    <li>How you heard about us</li>
+  </ul>
+  <p>If website analytics are turned on, we also collect general information about how visitors use the site, such as pages viewed and the type of device, using cookies. This does not identify you by name.</p>
+  <h2>Why we collect it</h2>
+  <ul>
+    <li>To answer your request and give you a quote</li>
+    <li>To schedule, carry out and invoice the work</li>
+    <li>To provide warranty service</li>
+    <li>To improve our website and services</li>
+  </ul>
+  <p>We only use your information for these purposes. We don't sell or rent it to anyone.</p>
+  <h2>Who we share it with</h2>
+  <p>We share information only with service providers that help us run the business, such as our website host and form provider, email and phone services, and analytics, and only as needed for them to provide their service. We may also share information if the law requires it, or with your insurer if you ask us to help with a claim.</p>
+  <h2>Photos</h2>
+  <p>Photos you send are used to quote and plan your job. We will not publish photos of your property on our website or social media without your permission, and we never publish faces, house numbers or licence plates.</p>
+  <h2>How long we keep it</h2>
+  <p>We keep your information for as long as we need it to provide the service, honour warranties and meet legal and tax requirements, and then delete it.</p>
+  <h2>Your choices and rights</h2>
+  <p>You can ask to see the personal information we hold about you, ask us to correct it, or withdraw your consent and ask us to delete it, subject to legal requirements. To do this, contact us at {phone}.</p>
+  <h2>Security</h2>
+  <p>We take reasonable steps to protect your information from loss, misuse and unauthorized access. No method of sending information over the internet is completely secure.</p>
+  <h2>Changes</h2>
+  <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
+  <h2>Contact</h2>
+  <p>Questions about privacy? Call or text us at {phone}.</p>
+</div></div></section>""",
     },
     {
         "slug": "blog",
