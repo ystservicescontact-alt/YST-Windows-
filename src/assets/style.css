@@ -272,3 +272,49 @@ footer { background: var(--navy); color: #C9D3E0; font-size: 15px; }
 .wa-float { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 10; display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #06371B; font-weight: 800; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px -10px rgba(0,0,0,.45); }
 .wa-float svg { width: 24px; height: 24px; }
 @media (max-width: 760px) { .wa-float { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); padding: 12px; } .wa-float span { display: none; } }
+
+/* Who we work with, signs, promises */
+.who { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.who-card { border: 1px solid var(--line); border-top: 6px solid var(--navy); padding: 22px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--ink); }
+.who-card:hover { border-top-color: var(--yellow); }
+.who-card h3 { font-size: 20px; font-weight: 800; }
+.who-card p { color: var(--muted); font-size: 16px; }
+.who-card .go, .blog-card .go { margin-top: auto; font-weight: 800; font-size: 14px; text-transform: uppercase; }
+.signs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.signs div { background: var(--soft); padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.signs h3 { font-size: 19px; font-weight: 800; }
+.signs p { color: var(--text); font-size: 16px; }
+.promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.promises div { background: var(--white); border: 1px solid var(--line); padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.promises h3 { font-size: 18px; font-weight: 800; display: flex; gap: 8px; }
+.promises h3::before { content: "✓"; color: var(--ok); }
+.promises p { color: var(--text); font-size: 16px; }
+.prose .promises div { background: var(--soft); border: 0; }
+.check12 { counter-reset: c; list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; }
+.check12 li { counter-increment: c; display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; padding: 10px 12px; background: var(--soft); }
+.check12 li::before { content: counter(c); width: 30px; height: 30px; display: grid; place-items: center; background: var(--yellow); color: var(--navy); font-weight: 800; font-size: 14px; }
+.logos { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.logos li { padding: 12px 18px; border: 1px solid var(--line); font-weight: 800; color: var(--muted); }
+
+/* Services grouped */
+.cat + .cat { margin-top: 48px; }
+.cat-title { font-family: var(--display); text-transform: uppercase; font-size: 30px; margin-bottom: 18px; }
+
+/* Quote forms */
+.quote-forms { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.qf { border: 1px solid var(--line); background: var(--white); }
+.qf summary { cursor: pointer; list-style: none; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px; border-left: 6px solid var(--yellow); }
+.qf summary::-webkit-details-marker { display: none; }
+.qf summary span { font-weight: 800; font-size: 20px; }
+.qf summary small { color: var(--muted); font-size: 15px; }
+.qf .form-card { border: 0; border-top: 1px solid var(--line); }
+fieldset.photos { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+fieldset.photos legend { font-weight: 700; font-size: 14px; margin-bottom: 6px; padding: 0; }
+
+/* Blog */
+.blog-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.blog-card { border: 1px solid var(--line); border-top: 6px solid var(--yellow); padding: 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--ink); }
+.blog-card h2 { font-size: 22px; font-weight: 800; line-height: 1.2; }
+.blog-card p { color: var(--muted); font-size: 16px; }
+.review { margin: 0; padding: 20px 22px; background: var(--soft); border-left: 6px solid var(--yellow); }
+.review cite { display: block; margin-top: 8px; font-style: normal; font-weight: 700; }

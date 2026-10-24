@@ -17,6 +17,9 @@ from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug
 from extras import EXTRAS
 from media import photo, pair, gallery_pairs, video_html
+from services_more import CATEGORIES
+from pages_more import (VISIT_FEE, CUSTOMERS, YEARS, CLIENT_LOGOS, ABOUT_STORY, WORK, PROMISES, CHECK_12,
+                        WHO, SIGNS, BLOG, EXTRA_PAGES)
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -52,13 +55,30 @@ ICONS = {
     "shield": _I.format('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
     "tag": _I.format('<path d="M3 12V3h9l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>'),
     "pin": _I.format('<path d="M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>'),
+    "tilt": _I.format('<rect x="4" y="3" width="16" height="18"/><path d="M8 7l4-3 4 3M12 4v8"/>'),
+    "handle": _I.format('<circle cx="7" cy="12" r="3"/><path d="M10 12h10M17 12v4"/>'),
+    "hinge": _I.format('<path d="M5 4v16M5 6l14 5M5 18l14-5"/>'),
+    "lock": _I.format('<rect x="5" y="11" width="14" height="10"/><path d="M8 11V7a4 4 0 018 0v4M12 15v2"/>'),
+    "latch": _I.format('<rect x="4" y="9" width="10" height="6"/><path d="M14 12h6M18 10v4"/>'),
+    "door": _I.format('<path d="M6 21V3h12v18M3 21h18M15 12h.01"/>'),
+    "doorglass": _I.format('<path d="M6 21V3h12v18M3 21h18"/><rect x="9" y="6" width="6" height="8"/>'),
+    "curved": _I.format('<path d="M4 20V12a8 8 0 0116 0v8z"/><path d="M12 4v16M4 14h16"/>'),
+    "wood": _I.format('<rect x="4" y="3" width="16" height="18"/><path d="M8 7c2 1 2 3 0 4M14 13c2 1 2 3 0 4"/>'),
+    "drop": _I.format('<path d="M12 3s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11z"/>'),
+    "skylight": _I.format('<path d="M3 14l9-9 9 9"/><rect x="8" y="10" width="8" height="6"/>'),
     "tools": _I.format('<path d="M14 6a4 4 0 00-5 5l-6 6 3 3 6-6a4 4 0 005-5l-3 3-3-3z"/>'),
 }
 SERVICE_ICON = {
     "foggy-window-repair": "fog", "window-glass-replacement": "broken", "patio-door-repair": "patio",
     "window-crank-repair": "crank", "window-caulking": "caulk", "window-screen-repair": "screen",
     "window-replacement": "replace", "commercial-glass-repair": "commercial", "emergency-glass-repair": "emergency",
+    "tilt-and-turn-window-repair": "tilt", "window-handle-repair": "handle", "window-hinge-repair": "hinge",
+    "window-lock-repair": "lock", "window-latch-repair": "latch", "door-repair": "door", "front-door-glass": "doorglass",
+    "curved-glass-replacement": "curved", "wood-window-repair": "wood", "window-leak-drainage-repair": "drop",
+    "skylight-repair": "skylight",
 }
+FEATURED = SERVICES[:9]
+BY_SLUG = {s["slug"]: s for s in SERVICES}
 WA_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>')
 
 # Options in the quick-quote widget: (value, label, icon)
@@ -258,6 +278,8 @@ def quick_form():
     <label for="h-name">Name<input id="h-name" name="name" autocomplete="name" required></label>
     <label for="h-phone">Mobile<input id="h-phone" name="phone" type="tel" autocomplete="tel" required></label>
   </div>
+<label for="h-urgency">When do you need us?
+    <select id="h-urgency" name="urgency"><option>As soon as possible</option><option>Emergency (broken / not secure)</option><option>Planning ahead</option></select></label>
   <label for="h-photo">Photo <span class="hint">Optional, helps us quote faster</span>
     <input id="h-photo" name="photo" type="file" accept="image/*"></label>
   <button class="btn btn-navy" type="submit">Get my free quote</button>
@@ -288,8 +310,13 @@ def full_form(source):
   </div>
   <label for="q-details">Details <span class="hint">Where in the house, size if you know it</span>
     <textarea id="q-details" name="details"></textarea></label>
-  <label for="q-photo">Photo <span class="hint">Optional, one image up to 8 MB</span>
-    <input id="q-photo" name="photo" type="file" accept="image/*"></label>
+<label for="q-urgency">When do you need us?
+    <select id="q-urgency" name="urgency"><option>As soon as possible</option><option>Emergency (broken / not secure)</option><option>Planning ahead</option></select></label>
+  <fieldset class="photos"><legend>Photos <span class="hint">Optional, up to 3, 8 MB each</span></legend>
+    <input id="q-photo" name="photo" type="file" accept="image/*" aria-label="Photo 1">
+    <input id="q-photo2" name="photo2" type="file" accept="image/*" aria-label="Photo 2">
+    <input id="q-photo3" name="photo3" type="file" accept="image/*" aria-label="Photo 3">
+  </fieldset>
   <label for="q-heard">How did you find us?
     <select id="q-heard" name="heard">
       <option>Google search</option><option>Google Maps</option><option>Friend or neighbour</option>
@@ -302,7 +329,8 @@ def full_form(source):
 # ---------------------------------------------------------------- layout
 def layout(*, slug, title, description, body, schemas=(), noindex=False):
     canonical = SITE["domain"] + url(slug)
-    services = "".join(f'<li><a href="{url(s["slug"])}">{escape(s["name"])}</a></li>' for s in SERVICES)
+    services = "".join(f'<li><a href="{url(s["slug"])}">{escape(s["name"])}</a></li>' for s in FEATURED) + \
+        '<li><a href="/services/"><strong>All services</strong></a></li>'
     half = (len(CITIES) + 1) // 2
     cities_a = "".join(f'<li><a href="{url(c["slug"])}">{escape(c["name"])}</a></li>' for c in CITIES[:half])
     cities_b = "".join(f'<li><a href="{url(c["slug"])}">{escape(c["name"])}</a></li>' for c in CITIES[half:])
@@ -350,7 +378,8 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
   <nav class="nav" aria-label="Main">
     <a href="/services/">Services</a>
     <a href="/service-areas/">Service Areas</a>
-    <a href="/window-brands/">Brands We Fix</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
     <a href="/contact/">Free Estimate</a>
     <a class="nav-phone" href="tel:{SITE['tel']}" data-where="header"><small>Call for a free quote</small><b>{SITE['phone']}</b></a>
   </nav>
@@ -367,7 +396,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']}</div>
 </footer>
@@ -388,10 +417,182 @@ def write(slug, html):
     path.write_text(html, encoding="utf-8")
 
 
+# ---------------------------------------------------------------- extra sections
+def who_html():
+    cards = "".join(f'<a class="who-card" href="{href}"><h3>{escape(t)}</h3><p>{escape(d)}</p><span class="go">{escape(cta)} →</span></a>'
+                    for t, d, href, cta in WHO)
+    return f"""
+<section class="section" id="who"><div class="wrap">
+  <div class="section-head"><div><h2>Who we work with</h2></div></div>
+  <div class="who">{cards}</div>
+</div></section>"""
+
+
+def signs_html():
+    items = "".join(f"<div><h3>{escape(t)}</h3><p>{escape(d)}</p></div>" for t, d in SIGNS)
+    return f"""
+<section class="section" id="signs"><div class="wrap">
+  <div class="section-head"><div><h2>Signs your window needs a repair, not a replacement</h2></div></div>
+  <div class="signs">{items}</div>
+</div></section>"""
+
+
+def promises_list():
+    items = list(PROMISES)
+    if VISIT_FEE:
+        items.append((f"{VISIT_FEE} on-site assessment",
+                      f"An on-site assessment is {VISIT_FEE}, credited toward your repair when you go ahead. Photo quotes are free."))
+    return '<div class="promises">' + "".join(f"<div><h3>{escape(t)}</h3><p>{escape(d)}</p></div>" for t, d in items) + "</div>"
+
+
+def promises_section():
+    return f"""
+<section class="section soft" id="promises"><div class="wrap">
+  <div class="section-head"><div><h2>Our promises</h2></div><a class="more-link" href="/about/">About us →</a></div>
+  {promises_list()}
+</div></section>"""
+
+
+def check12_html():
+    return '<ol class="check12">' + "".join(f"<li>{escape(c)}</li>" for c in CHECK_12) + "</ol>"
+
+
+def logos_html():
+    if not CLIENT_LOGOS:
+        return ""
+    names = "".join(f"<li>{escape(n)}</li>" for n in CLIENT_LOGOS)
+    return f"""
+<section class="section" id="clients"><div class="wrap">
+  <div class="section-head"><div><h2>Businesses we've worked for</h2></div></div>
+  <ul class="logos">{names}</ul>
+  <p class="hint">Names belong to their owners. No affiliation or endorsement is implied.</p>
+</div></section>"""
+
+
+def grouped_cards_html():
+    return "".join(f"""
+<div class="cat"><h2 class="cat-title">{escape(name)}</h2>{cards_html([BY_SLUG[g] for g in group])}</div>"""
+                   for name, group in CATEGORIES)
+
+
+def quote_forms_html():
+    def form(name, title, sub, fields):
+        return f"""
+<details class="qf"{' open' if name == 'glass-quote' else ''}><summary><span>{escape(title)}</span><small>{escape(sub)}</small></summary>
+<form class="form-card" name="{name}" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field"
+      enctype="multipart/form-data" data-where="{name}">
+  <input type="hidden" name="form-name" value="{name}">
+  <p class="hidden-field"><label>Leave this empty <input name="bot-field"></label></p>
+  <div class="row">
+    <label for="{name}-name">Name<input id="{name}-name" name="name" autocomplete="name" required></label>
+    <label for="{name}-phone">Phone<input id="{name}-phone" name="phone" type="tel" autocomplete="tel" required></label>
+  </div>
+  <label for="{name}-city">City<input id="{name}-city" name="city" autocomplete="address-level2"></label>
+  {fields.format(n=name)}
+  <fieldset class="photos"><legend>Photos <span class="hint">Optional, up to 3</span></legend>
+    <input name="photo" type="file" accept="image/*" aria-label="Photo 1">
+    <input name="photo2" type="file" accept="image/*" aria-label="Photo 2">
+    <input name="photo3" type="file" accept="image/*" aria-label="Photo 3">
+  </fieldset>
+  <button class="btn btn-navy" type="submit">Send for a quote</button>
+</form></details>"""
+    glass = """<div class="row">
+    <label for="{n}-w">Visible width (inches)<input id="{n}-w" name="width" inputmode="decimal"></label>
+    <label for="{n}-h">Visible height (inches)<input id="{n}-h" name="height" inputmode="decimal"></label></div>
+  <div class="row">
+    <label for="{n}-panes">Panes<select id="{n}-panes" name="panes"><option>Double</option><option>Triple</option><option>Single</option><option>Not sure</option></select></label>
+    <label for="{n}-issue">Problem<select id="{n}-issue" name="issue"><option>Foggy</option><option>Cracked / broken</option><option>Upgrade</option></select></label></div>
+  <div class="row">
+    <label for="{n}-type">Glass<select id="{n}-type" name="glass"><option>Clear</option><option>Frosted / textured</option><option>Tinted</option><option>Not sure</option></select></label>
+    <label for="{n}-count">How many?<input id="{n}-count" name="count" type="number" min="1" value="1"></label></div>
+  <p class="hint">Not sure how to measure? <a href="/measure-glass/">See our guide</a>, or just send photos.</p>"""
+    hardware = """<div class="row">
+    <label for="{n}-part">Part<select id="{n}-part" name="part"><option>Crank / operator</option><option>Handle</option><option>Hinges</option><option>Lock / latch</option><option>Tilt &amp; turn</option><option>Patio door rollers / lock</option><option>Not sure</option></select></label>
+    <label for="{n}-count">How many windows?<input id="{n}-count" name="count" type="number" min="1" value="1"></label></div>
+  <label for="{n}-brand">Window brand <span class="hint">If you know it</span><input id="{n}-brand" name="brand"></label>
+  <p class="hint">A close-up photo of the crank and hinge arm helps us bring the right part.</p>"""
+    seal = """<div class="row">
+    <label for="{n}-issue">Problem<select id="{n}-issue" name="issue"><option>Drafts</option><option>Water leak</option><option>Old caulking</option><option>Wood rot</option></select></label>
+    <label for="{n}-count">How many windows/doors?<input id="{n}-count" name="count" type="number" min="1" value="1"></label></div>
+  <label for="{n}-floors">Highest floor<select id="{n}-floors" name="floors"><option>Ground floor</option><option>2nd floor</option><option>3rd floor or higher</option></select></label>"""
+    return (form("glass-quote", "Glass quote", "Foggy, cracked or broken glass", glass) +
+            form("hardware-quote", "Hardware quote", "Cranks, hinges, handles, locks, patio doors", hardware) +
+            form("sealing-quote", "Caulking & leaks quote", "Drafts, leaks, caulking, wood", seal) +
+            '<p class="hint" style="margin-top:12px">Something else? Use the <a href="/contact/">general form</a>.</p>')
+
+
+def blog_list_html():
+    return '<div class="blog-list">' + "".join(
+        f'<a class="blog-card" href="/blog/{b["slug"]}/"><h2>{escape(b["title"])}</h2><p>{escape(b["description"])}</p><span class="go">Read →</span></a>'
+        for b in BLOG) + "</div>"
+
+
+def build_blog_posts():
+    for b in BLOG:
+        slug = f"blog/{b['slug']}"
+        trail = [("Home", "/"), ("Blog", "/blog/"), (b["title"], url(slug))]
+        others = "".join(f'<li><a href="/blog/{o["slug"]}/">{escape(o["title"])}</a></li>' for o in BLOG if o is not b)
+        body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">Guide</span>
+  <h1>{escape(b['title'])}</h1>
+  <p class="lede">{escape(b['description'])}</p>
+</div></section>
+<div class="wrap article">
+  <article class="prose">{b['body']}<h2>More guides</h2><ul>{others}</ul></article>
+  {aside_html("")}
+</div>
+{cta_html()}"""
+        schema = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": b["title"],
+                  "description": b["description"], "datePublished": b["date"],
+                  "author": {"@type": "Organization", "name": SITE["name"]},
+                  "publisher": {"@id": SITE["domain"] + "/#business"}, "mainEntityOfPage": SITE["domain"] + url(slug)}
+        write(slug, layout(slug=slug, title=f"{b['title']} | {SITE['name']}", description=b["description"], body=body,
+                           schemas=[business_schema(), breadcrumb_schema(trail), schema]))
+
+
+def build_work():
+    if not WORK:
+        return
+    for w in WORK:
+        slug = f"our-work/{w['slug']}"
+        trail = [("Home", "/"), ("Our work", "/our-work/"), (w["title"], url(slug))]
+        sv = BY_SLUG.get(w.get("service"))
+        pair_html = ""
+        if w.get("before") and w.get("after"):
+            pair_html = '<div class="gallery">' + ba_figure("/photos/" + w["before"], "/photos/" + w["after"], w["title"], w["city"]) + "</div>"
+        review = (f'<blockquote class="review"><p>{escape(w["review"])}</p><cite>{escape(w.get("reviewer", ""))}</cite></blockquote>'
+                  if w.get("review") else "")
+        service_link = f'<p>Service: <a href="{url(sv["slug"])}">{escape(sv["name"])}</a></p>' if sv else ""
+        body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">{escape(w['city'])}</span>
+  <h1>{escape(w['title'])} in {escape(w['city'])}</h1>
+  <p class="lede">{escape(w['summary'])}</p>
+  <div class="actions">{call_btn("work")}{text_btn("work")}</div>
+</div></section>
+<div class="wrap article"><div class="prose">{pair_html}{review}{service_link}</div>{aside_html(w.get("service", ""))}</div>
+{cta_html()}"""
+        write(slug, layout(slug=slug, title=f"{w['title']} in {w['city']} | {SITE['name']}", description=w["summary"],
+                           body=body, schemas=[business_schema(), breadcrumb_schema(trail)]))
+    items = "".join(f'<li><a href="/our-work/{w["slug"]}/">{escape(w["title"])} · {escape(w["city"])}</a></li>' for w in WORK)
+    trail = [("Home", "/"), ("Our work", "/our-work/")]
+    body = f"""
+<section class="page-hero"><div class="wrap">{crumbs_html(trail)}<span class="tag">Our work</span>
+  <h1>Jobs we've completed</h1><p class="lede">Real repairs from homes and businesses around the GTA.</p></div></section>
+<section class="section"><div class="wrap"><ul class="areas">{items}</ul></div></section>{cta_html()}"""
+    write("our-work", layout(slug="our-work", title=f"Our Work | {SITE['name']}",
+                             description="Window and glass repairs we've completed across the GTA.",
+                             body=body, schemas=[business_schema(), breadcrumb_schema(trail)]))
+
+
 # ---------------------------------------------------------------- pages
 def build_home():
     h = HOME
-    checks = "".join(f"<li>{escape(c)}</li>" for c in h["checks"])
+    extra_checks = ([f"{YEARS} years in business"] if YEARS else []) + ([f"{CUSTOMERS} customers"] if CUSTOMERS else [])
+    checks = "".join(f"<li>{escape(c)}</li>" for c in h["checks"] + extra_checks)
     body = f"""
 <section{(' class="hero has-photo" style="--hero-img:url(' + photo("hero") + ')"') if photo("hero") else ' class="hero"'}><div class="wrap">
   <div class="hero-copy">
@@ -407,8 +608,9 @@ def build_home():
 <section class="section" id="services"><div class="wrap">
   <div class="section-head"><div><h2>What we fix</h2><p>Most window problems come down to one worn or broken part. We find it and replace it.</p></div>
     <a class="more-link" href="/services/">All services →</a></div>
-  {cards_html(SERVICES)}
+  {cards_html(FEATURED)}
 </div></section>
+{who_html()}
 <section class="section soft" id="repair-or-replace"><div class="wrap">
   <div class="section-head"><div><h2>Repair or replace?</h2><p>If the frame is solid, repairing the failed part is faster and costs far less.</p></div></div>
   <div class="versus">
@@ -425,7 +627,10 @@ def build_home():
     <li><h3>We fix it</h3><p>We install, clean up and test that the window opens, closes and locks.</p></li>
   </ol>
 </div></section>
+{signs_html()}
+{promises_section()}
 {gallery_html()}
+{logos_html()}
 {team_html()}
 <section class="section soft" id="areas"><div class="wrap">
   <div class="section-head"><div><h2>Service areas</h2><p>We come to you anywhere in the GTA. Don't see your city? Call us.</p></div></div>
@@ -443,8 +648,11 @@ def build_home():
 
 
 def aside_html(current_slug):
-    links = "".join(f'<li><a href="{url(s["slug"])}">{escape(s["name"])}</a></li>'
-                    for s in SERVICES if s["slug"] != current_slug)
+    group = next((g for _, g in CATEGORIES if current_slug in g), [])
+    order = [BY_SLUG[g] for g in group if g != current_slug] + \
+            [s for s in FEATURED if s["slug"] not in group and s["slug"] != current_slug]
+    links = "".join(f'<li><a href="{url(s["slug"])}">{escape(s["name"])}</a></li>' for s in order[:9]) + \
+        '<li><a href="/services/"><strong>All services</strong></a></li>'
     return f"""
 <aside class="aside" aria-label="Get a quote">
   <div class="aside-box">
@@ -703,12 +911,15 @@ def build_areas_index():
 
 
 def build_pages():
-    for p in PAGES:
+    for p in PAGES + EXTRA_PAGES:
         trail = [("Home", "/"), (p["crumb"], url(p["slug"]))]
+        story = f"<h2>Our story</h2><p>{escape(ABOUT_STORY)}</p>" if ABOUT_STORY else ""
         body = p["body"].format(
             crumbs=crumbs_html(trail), phone=SITE["phone"], tel=SITE["tel"], area=SITE["area"],
-            form=full_form(p["slug"]), cards=cards_html(SERVICES), call=call_btn(p["slug"]),
-            text=text_btn(p["slug"]), cta=cta_html(), trust=trust_html())
+            form=full_form(p["slug"]), cards=grouped_cards_html(), call=call_btn(p["slug"]),
+            text=text_btn(p["slug"]), cta=cta_html(), trust=trust_html(), story=story,
+            promises=promises_list(), check12=check12_html(), quote_forms=quote_forms_html(),
+            blog_list=blog_list_html())
         write(p["slug"], layout(slug=p["slug"], title=p["title"], description=p["description"], body=body,
                                 schemas=[business_schema(), breadcrumb_schema(trail)],
                                 noindex=p.get("noindex", False)))
@@ -728,7 +939,9 @@ def build_404():
 
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
-            [p["slug"] for p in PAGES if not p.get("noindex")] + \
+            [p["slug"] for p in PAGES + EXTRA_PAGES if not p.get("noindex")] + \
+            [f"blog/{b['slug']}" for b in BLOG] + \
+            ([f"our-work/{w['slug']}" for w in WORK] + ["our-work"] if WORK else []) + \
             [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES] + ["service-areas"] + \
             [region_slug(r) for r in REGIONS] + \
             [town_slug(n) for r in REGIONS for n, _ in r["towns"] if n not in RICH]
@@ -757,6 +970,8 @@ def main():
             if sv["slug"] in COMBO_SERVICES:
                 build_combo(c, sv)
     build_pages()
+    build_blog_posts()
+    build_work()
     build_areas_index()
     for r in REGIONS:
         build_region(r)

@@ -735,3 +735,7 @@ PAGES = [
 </div></section>""",
     },
 ]
+
+# Extra service pages (hardware parts, doors, special glass, frames)
+from services_more import MORE_SERVICES  # noqa: E402
+SERVICES += MORE_SERVICES
