@@ -14,6 +14,7 @@ from pathlib import Path
 
 from content import SERVICES, CITIES, HOME, PAGES, GALLERY
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
+from areas import REGIONS, town_slug
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -194,7 +195,7 @@ def gallery_html():
 
 def areas_html():
     links = "".join(f'<li><a href="{url(c["slug"])}">{escape(c["name"])}</a></li>' for c in CITIES)
-    extra = "".join(f"<li><span>{escape(n)}</span></li>" for n in HOME["extra_areas"])
+    extra = "".join(f'<li><a href="{town_href(n)}">{escape(n)}</a></li>' for n in HOME["extra_areas"])
     return f'<ul class="areas">{links}{extra}</ul>'
 
 
@@ -306,7 +307,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
   </a>
   <nav class="nav" aria-label="Main">
     <a href="/services/">Services</a>
-    <a href="/#areas">Service Areas</a>
+    <a href="/service-areas/">Service Areas</a>
     <a href="/window-brands/">Brands We Fix</a>
     <a href="/contact/">Free Estimate</a>
     <a class="nav-phone" href="tel:{SITE['tel']}" data-where="header"><small>Call for a free quote</small><b>{SITE['phone']}</b></a>
@@ -324,7 +325,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/window-brands/">Brands we fix</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']}</div>
 </footer>
@@ -387,7 +388,8 @@ def build_home():
   <div class="area-map">
     <iframe title="Map of our service area in the Greater Toronto Area" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
       src="https://www.google.com/maps?q=Greater+Toronto+Area,+ON&amp;z=9&amp;output=embed"></iframe>
-    {areas_html()}
+    <div style="display:flex;flex-direction:column;gap:16px">{areas_html()}
+      <a class="btn btn-navy" href="/service-areas/">See all {sum(len(r["towns"]) for r in REGIONS)}+ areas we serve</a></div>
   </div>
 </div></section>
 {faq_html(h['faqs'], soft=False)}
@@ -512,6 +514,134 @@ def build_combo(c, s):
                        schemas=schemas))
 
 
+# ---------------------------------------------------------------- towns & regions
+RICH = {c["name"]: c["slug"] for c in CITIES}
+
+
+def town_href(name):
+    return url(RICH.get(name) or town_slug(name))
+
+
+def region_slug(r):
+    return f"areas/{r['slug']}"
+
+
+def town_links(names):
+    return "".join(f'<li><a href="{town_href(n)}">{escape(n)}</a></li>' for n in names)
+
+
+def build_town(r, name, part):
+    slug = town_slug(name)
+    where = f"{name}, {part}" if part else name
+    region_names = [n for n, _ in r["towns"] if n != name]
+    i = [n for n, _ in r["towns"]].index(name)
+    nearby = (region_names[i:] + region_names[:i])[:8]
+    trail = [("Home", "/"), ("Service areas", "/service-areas/"), (r["name"], url(region_slug(r))),
+             (name, url(slug))]
+    services = "".join(f'<li><a href="{url(sv["slug"])}">{escape(sv["name"])}</a>: {escape(sv["card"])}</li>'
+                       for sv in SERVICES)
+    faqs = [
+        (f"Do you do window repair in {name}?",
+         f"Yes. {name} is part of our {r['name']} service area. Call or text us and we'll book a time that works."),
+        ("Can you give me a price from a photo?",
+         "Usually, yes. Text us a photo of the whole window and a close-up of the problem. For sealed glass we confirm the exact size when we measure."),
+        ("Do I need a new window or just a repair?",
+         "If the frame is solid, a new sealed unit or a new crank, hinge or roller is usually all you need, at a fraction of the cost of a new window."),
+        ("Which window brands do you repair?",
+         "Most of them, including the windows builders install in new subdivisions. See our brands page or send us a photo of the label."),
+    ]
+    part_line = f" {escape(name)} is {escape(part)}." if part else ""
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">{escape(r['name'])}</span>
+  <h1>Window repair in {escape(name)}</h1>
+  <p class="lede">Foggy glass, broken windows, stripped cranks and sticking patio doors repaired in {escape(where)}. Free estimates and quotes from a photo.</p>
+  <div class="actions">{call_btn("town-hero")}{text_btn("town-hero")}</div>
+</div></section>
+{trust_html()}
+<div class="wrap article">
+  <div class="prose">
+    <h2>Window and glass repair in {escape(name)}</h2>
+    <p>We repair windows and patio doors in homes, condos and businesses across {escape(r['name'])}.{part_line} Most problems come down to one failed part, so we replace the glass or hardware and keep your frame, trim and walls as they are.</p>
+    <div class="local-box">
+      <h2>About windows in {escape(r['name'])}</h2>
+      <p>{escape(r['intro'])}</p>
+    </div>
+    <h2>What we fix in {escape(name)}</h2>
+    <ul>{services}</ul>
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Send a photo.</strong> Text us or use the online form.</li>
+      <li><strong>Get a price.</strong> We quote from the photo or come to measure.</li>
+      <li><strong>We fix it.</strong> New glass or parts, installed and tested.</li>
+    </ol>
+    <h2>Nearby areas we serve</h2>
+    <ul class="areas">{town_links(nearby)}<li><a href="{url(region_slug(r))}">All of {escape(r['name'])}</a></li></ul>
+  </div>
+  {aside_html("")}
+</div>
+{faq_html(faqs)}
+{cta_html()}"""
+    desc = (f"Window and glass repair in {name}: foggy sealed units, broken glass, cranks, hinges and patio doors. "
+            f"Free estimates. Call {SITE['phone']}.")
+    schemas = [business_schema(), breadcrumb_schema(trail),
+               service_schema(f"Window repair in {name}", slug, name), faq_schema(faqs)]
+    write(slug, layout(slug=slug, title=f"Window Repair {name} | Glass, Cranks & Patio Doors", description=desc,
+                       body=body, schemas=schemas))
+
+
+def build_region(r):
+    slug = region_slug(r)
+    trail = [("Home", "/"), ("Service areas", "/service-areas/"), (r["name"], url(slug))]
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">Service area</span>
+  <h1>Window repair in {escape(r['name'])}</h1>
+  <p class="lede">{escape(r['intro'])}</p>
+  <div class="actions">{call_btn("region-hero")}{text_btn("region-hero")}</div>
+</div></section>
+{trust_html()}
+<section class="section"><div class="wrap">
+  <div class="section-head"><div><h2>Towns and cities in {escape(r['name'])}</h2>
+    <p>Pick your community for local details, or just call us.</p></div></div>
+  <ul class="areas">{town_links([n for n, _ in r['towns']])}</ul>
+</div></section>
+<section class="section soft"><div class="wrap">
+  <div class="section-head"><div><h2>What we fix</h2></div></div>
+  {cards_html(SERVICES)}
+</div></section>
+{cta_html()}"""
+    write(slug, layout(slug=slug, title=f"Window Repair {r['name']} | {SITE['name']}",
+                       description=f"Window, glass and patio door repair across {r['name']}. Free estimates, quotes from a photo.",
+                       body=body, schemas=[business_schema(), breadcrumb_schema(trail)]))
+
+
+def build_areas_index():
+    trail = [("Home", "/"), ("Service areas", "/service-areas/")]
+    blocks = "".join(f"""
+<section class="section{' soft' if i % 2 else ''}"><div class="wrap">
+  <div class="section-head"><div><h2>{escape(r['name'])}</h2></div>
+    <a class="more-link" href="{url(region_slug(r))}">About {escape(r['name'])} →</a></div>
+  <ul class="areas">{town_links([n for n, _ in r['towns']])}</ul>
+</div></section>""" for i, r in enumerate(REGIONS))
+    total = sum(len(r["towns"]) for r in REGIONS)
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">{total}+ communities</span>
+  <h1>Our service areas</h1>
+  <p class="lede">We repair windows, glass and patio doors across Toronto, the GTA, Hamilton, Niagara, Waterloo, Barrie and the communities in between.</p>
+  <div class="actions">{call_btn("areas-hero")}{text_btn("areas-hero")}</div>
+</div></section>
+{blocks}
+{cta_html()}"""
+    write("service-areas", layout(slug="service-areas", title=f"Service Areas | {SITE['name']}",
+                                  description="Every city and town where we repair windows, glass and patio doors: Toronto, York, Peel, Halton, Durham, Hamilton, Niagara, Waterloo, Barrie and more.",
+                                  body=body, schemas=[business_schema(), breadcrumb_schema(trail)]))
+
+
 def build_pages():
     for p in PAGES:
         trail = [("Home", "/"), (p["crumb"], url(p["slug"]))]
@@ -539,7 +669,9 @@ def build_404():
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
             [p["slug"] for p in PAGES if not p.get("noindex")] + \
-            [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES]
+            [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES] + ["service-areas"] + \
+            [region_slug(r) for r in REGIONS] + \
+            [town_slug(n) for r in REGIONS for n, _ in r["towns"] if n not in RICH]
     today = date.today().isoformat()
     urls = "\n".join(f"  <url><loc>{SITE['domain']}{url(s)}</loc><lastmod>{today}</lastmod></url>" for s in slugs)
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -565,6 +697,12 @@ def main():
             if sv["slug"] in COMBO_SERVICES:
                 build_combo(c, sv)
     build_pages()
+    build_areas_index()
+    for r in REGIONS:
+        build_region(r)
+        for n, part in r["towns"]:
+            if n not in RICH:
+                build_town(r, n, part)
     build_404()
     build_sitemap()
     print(f"Built {len(list(OUT.rglob('*.html')))} pages into {OUT}")
