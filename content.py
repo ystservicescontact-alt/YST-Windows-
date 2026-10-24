@@ -270,13 +270,13 @@ SERVICES = [
     {
         "slug": "emergency-glass-repair",
         "name": "Emergency Glass Repair",
-        "card": "Broken window after a break-in or storm? We secure the opening and replace the glass.",
-        "spec": "Board-up · Same-day when available",
-        "title": "Emergency Glass & Window Repair Toronto & GTA | Window Repair GTA",
-        "description": "Broken window or door glass that can't wait? We secure the opening and replace the glass for homes and businesses across the GTA. Call now.",
-        "eyebrow": "Urgent repairs",
-        "h1": "Emergency glass and window repair",
-        "lede": "A broken window after a break-in, storm or accident needs to be secured fast. Call us, and we'll cover the opening and come back with new glass.",
+        "card": "Broken window after a break-in or storm? We're available 24/7 to secure the opening and replace the glass.",
+        "spec": "24/7 · Board-up · Same-day glass",
+        "title": "24/7 Emergency Glass & Window Repair Toronto & GTA | Window Repair GTA",
+        "description": "Broken window or door glass that can't wait? Available 24/7. We secure the opening and replace the glass for homes and businesses across the GTA. Call now.",
+        "eyebrow": "Available 24/7",
+        "h1": "24/7 emergency glass and window repair",
+        "lede": "A broken window after a break-in, storm or accident needs to be secured fast. We're available 24/7, day or night. Call us, and we'll cover the opening and come back with new glass.",
         "body": """
 <h2>What to do right now</h2>
 <ol>
@@ -530,6 +530,8 @@ HOME = {
          "Usually not. If the frame is in good condition we replace only the glass or the broken part."),
         ("Can you give me a price from a photo?",
          "Often, yes. Text us a photo of the whole window and a close-up of the problem. For sealed units we confirm the exact size when we measure."),
+        ("Do you offer emergency service?",
+         "Yes. We're available 24/7 for broken windows and glass after a break-in, storm or accident. We secure the opening first, then replace the glass."),
         ("Which areas do you serve?",
          "Toronto and the GTA, including Mississauga, Brampton, Vaughan, Markham, Richmond Hill, North York, Scarborough, Etobicoke, Oakville, Newmarket and Durham Region."),
         ("Do you work on all brands?",
