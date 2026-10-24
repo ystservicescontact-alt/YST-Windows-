@@ -157,8 +157,8 @@ def cta_html():
 
 
 def trust_html():
-    items = [("tag", "Free estimates"), ("tools", "Repair first, replace only if needed"),
-             ("shield", "All window brands"), ("pin", "All of the GTA")]
+    items = [("shield", "Fully insured"), ("tools", "1-year workmanship warranty"),
+             ("emergency", "Same-day appointments"), ("tag", "Free estimates")]
     return '<section class="trust" aria-label="Why choose us"><div class="wrap">' + "".join(
         f"<div>{ICONS[i]}<span>{t}</span></div>" for i, t in items) + "</div></section>"
 
@@ -338,7 +338,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <a class="skip" href="#main">Skip to content</a>
 <div class="topbar"><div class="wrap">
   <span><span class="hide-sm">Window &amp; glass repair · </span>Toronto, Mississauga, Brampton, Vaughan, Markham &amp; the GTA</span>
-  <span class="hide-sm">{hours}<b>Free estimates</b></span>
+  <span class="hide-sm">{hours}<b>Fully insured · 1-year warranty · Same-day appointments</b></span>
 </div></div>
 <header class="site-header"><div class="wrap">
   <a class="logo" href="/" aria-label="{SITE['name']} home">
