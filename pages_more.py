@@ -19,13 +19,12 @@ WORK = []
 
 # ---------------------------------------------------------------- promises (approved by the owner)
 PROMISES = [
-    ("The price we quote is the price you pay", "Once your quote is confirmed, the price doesn't change on site. No surprises."),
     ("Save 50–70% compared with replacement", "Repairing the failed glass or part typically costs 50–70% less than replacing the whole window."),
-    ("10-year seal warranty on new glass", "New sealed glass units we install in vinyl frames carry a 10-year warranty against seal failure."),
+    ("5-year seal warranty on new glass in vinyl windows", "New sealed glass units we install in vinyl frames carry a 5-year warranty against seal failure."),
     ("1-year workmanship warranty", "Every repair is backed by our 1-year workmanship warranty."),
     ("Price match", "Have a written quote from another licensed company for the same work? Show us and we'll match it."),
     ("No travel or after-hours surcharge", "No extra charge for travel anywhere in our service area, and no after-hours surcharge for emergencies."),
-    ("Insured and WSIB covered", "We are fully insured and WSIB covered, so you're protected while we work in your home or business."),
+    ("Fully insured", "We are fully insured, so you're protected while we work in your home or business."),
     ("12-point window check", "Every visit includes a 12-point check of your window, so you know about any other problem before it gets worse."),
 ]
 
@@ -150,7 +149,7 @@ EXTRA_PAGES = [
         "slug": "about",
         "crumb": "About us",
         "title": "About Us | Window Repair GTA",
-        "description": "Window Repair GTA is a repair-first window and glass company serving Toronto and the GTA. Insured, WSIB covered, with a 1-year workmanship warranty.",
+        "description": "Window Repair GTA is a repair-first window and glass company serving Toronto and the GTA. Fully insured, with a 1-year workmanship warranty.",
         "body": """
 <section class="page-hero"><div class="wrap">
   {crumbs}
@@ -176,13 +175,13 @@ EXTRA_PAGES = [
         "slug": "property-managers",
         "crumb": "Property managers",
         "title": "Window Repair for Property Managers & Landlords | Window Repair GTA",
-        "description": "Window, glass and patio door repairs for property managers and landlords across the GTA: repeat work, multiple units, clear invoices, insured and WSIB covered.",
+        "description": "Window, glass and patio door repairs for property managers and landlords across the GTA: repeat work, multiple units, clear invoices, fully insured.",
         "body": """
 <section class="page-hero"><div class="wrap">
   {crumbs}
   <span class="tag">Property managers & landlords</span>
   <h1>Window repairs across your units and buildings</h1>
-  <p class="lede">One contact for foggy glass, broken cranks, balcony doors and broken windows across your portfolio. Insured, WSIB covered, with clear invoices for every unit.</p>
+  <p class="lede">One contact for foggy glass, broken cranks, balcony doors and broken windows across your portfolio. Fully insured, with clear invoices for every unit.</p>
   <div class="actions">{call}<a class="btn btn-outline" href="/quote/">Request a quote</a></div>
 </div></section>
 {trust}
