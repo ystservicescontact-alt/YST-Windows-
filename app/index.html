@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YST Dispatch</title>
+<meta name="description" content="Sorts the day's jobs by technician skills and area, and builds each tech's route.">
+<meta name="theme-color" content="#14201D">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dispatch">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--SHELL-->
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Dispatch</span>
+    </div>
+    <div class="day">
+      <button class="icon-btn" data-act="day" data-step="-1" aria-label="Previous day">&#8249;</button>
+      <label class="date-wrap"><span class="sr">Day</span><input type="date" id="date"></label>
+      <button class="icon-btn" data-act="day" data-step="1" aria-label="Next day">&#8250;</button>
+    </div>
+  </header>
+  <main id="view" class="view" tabindex="-1"></main>
+  <nav class="tabbar" aria-label="Sections">
+    <button class="tab" data-act="tab" data-tab="plan"><span class="tab-ico ico-plan" aria-hidden="true"></span>Schedule</button>
+    <button class="tab" data-act="tab" data-tab="jobs"><span class="tab-ico ico-jobs" aria-hidden="true"></span>Jobs</button>
+    <button class="tab" data-act="tab" data-tab="team"><span class="tab-ico ico-team" aria-hidden="true"></span>Team</button>
+    <button class="tab" data-act="tab" data-tab="settings"><span class="tab-ico ico-set" aria-hidden="true"></span>Settings</button>
+  </nav>
+</div>
+<dialog id="sheet" class="sheet" aria-labelledby="sheet-title"></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<input type="file" id="csv-file" accept=".csv,text/csv" hidden>
+<!--/SHELL-->
+<script src="data.js"></script>
+<script src="scheduler.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
