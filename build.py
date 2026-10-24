@@ -15,6 +15,7 @@ from pathlib import Path
 from content import SERVICES, CITIES, HOME, PAGES, GALLERY
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug
+from extras import EXTRAS
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -436,8 +437,20 @@ def build_article(page, trail, schemas, extra_html=""):
                                body=body, schemas=schemas))
 
 
+def extras_html(slug, city=None, price_only=False):
+    e = EXTRAS.get(slug)
+    if not e:
+        return ""
+    where = f" in {escape(city)}" if city else ""
+    factors = "".join(f"<li>{escape(f)}</li>" for f in e["price_factors"])
+    return (f"<h2>What affects the price{where}</h2><p>Every window is different. The price depends on:</p>"
+            f'<ul class="ticks">{factors}</ul><p>Text us a photo of your window and we\'ll give you a free quote, '
+            f"usually the same day.</p>" + ("" if price_only else e["html"]))
+
+
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
+    more = extras_html(s["slug"])
     if s["slug"] in COMBO_SERVICES:
         short = COMBO_SERVICES[s["slug"]]["short"]
         links = "".join(f'<li><a href="{url(combo_slug(c["slug"], s["slug"]))}">{escape(short)} {escape(c["name"])}</a></li>'
@@ -445,7 +458,7 @@ def build_service(s):
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p><ul class=\"areas\">{links}</ul>"
     else:
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
-    build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])], extra)
+    build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])], more + extra)
 
 
 def build_city(c):
@@ -488,6 +501,7 @@ def build_combo(c, s):
     <h2>{escape(cs['short'])} in {escape(city)}: what we do</h2>
     <p>{escape(cs['what'])}</p>
     <ul class="ticks">{bullets}</ul>
+    {extras_html(s["slug"], city, price_only=True)}
     <h2>Why {escape(city)} homeowners call us</h2>
     <div class="why">{why}</div>
     <div class="local-box">

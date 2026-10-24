@@ -255,3 +255,6 @@ footer { background: var(--navy); color: #C9D3E0; font-size: 15px; }
 .why p { font-size: 16px; }
 .local-box { background: #EEF3FA; padding: 24px 26px; display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 .local-box h2 { margin-top: 0; }
+.prose .tips { list-style: none; padding: 0; counter-reset: t; display: flex; flex-direction: column; gap: 12px; }
+.prose .tips li { counter-increment: t; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+.prose .tips li::before { content: counter(t); width: 34px; height: 34px; display: grid; place-items: center; background: var(--navy); color: var(--white); font-weight: 800; }
