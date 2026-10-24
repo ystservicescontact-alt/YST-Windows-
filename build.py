@@ -365,7 +365,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']}</div>
 </footer>

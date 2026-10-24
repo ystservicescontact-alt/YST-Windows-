@@ -289,6 +289,7 @@ SERVICES = [
 <p>We remove the loose glass, secure the opening with board or temporary glazing so your home or business is closed and weatherproof, and measure for the permanent glass. Then we come back and install it.</p>
 <h2>Homes and businesses</h2>
 <p>We handle broken house windows, patio doors, storefronts and office glass. For businesses, see <a href="/commercial-glass-repair/">commercial glass repair</a>.</p>
+<p>Making an insurance claim? See <a href="/insurance-claims/">how we help with insurance claims</a>.</p>
 """,
         "faqs": [
             ("How fast can you come?",
@@ -621,6 +622,94 @@ PAGES = [
       <li><strong>Crank and handle:</strong> the hardware is sometimes stamped with the brand or part number.</li>
     </ul>
     <p>Can't find it? No problem. Send us a photo and we'll identify the parts we need.</p>
+  </div>
+</div></section>
+{cta}""",
+    },
+    {
+        "slug": "insurance-claims",
+        "crumb": "Insurance claims",
+        "title": "Broken Window Insurance Claims in Toronto & the GTA | Window Repair GTA",
+        "description": "Broken window from a break-in, storm or accident? How to handle a home insurance claim for window and glass repair, and the photos, quote and invoice we provide.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">Insurance claims</span>
+  <h1>Broken window? Help with your insurance claim</h1>
+  <p class="lede">After a break-in, storm or accident, we secure the opening, fix the glass and give you the photos, written quote and invoice your insurance company asks for.</p>
+  <div class="actions">{call}{text}</div>
+</div></section>
+{trust}
+<section class="section"><div class="wrap">
+  <div class="prose">
+    <h2>What to do first</h2>
+    <ol class="tips">
+      <li><strong>Stay safe.</strong> Keep people and pets away from broken glass.</li>
+      <li><strong>Break-in?</strong> Call the police and get a report number before you touch anything.</li>
+      <li><strong>Take photos</strong> of the damage from inside and outside, before anything is cleaned up.</li>
+      <li><strong>Call us to secure the opening.</strong> A board-up keeps weather and intruders out and is usually part of the claim.</li>
+      <li><strong>Call your insurance company</strong> and ask what they need from you.</li>
+    </ol>
+    <h2>What we give you for your claim</h2>
+    <ul class="ticks">
+      <li>A written, itemized quote for the repair</li>
+      <li>Photos of the damage before we start</li>
+      <li>Photos of the finished repair</li>
+      <li>An itemized invoice for the board-up and the permanent repair</li>
+      <li>Details of the glass we used (size, type, tempered or laminated)</li>
+    </ul>
+    <h2>What insurance usually covers</h2>
+    <p>Every policy is different, so always check with your insurer. In general, home and business policies often cover <strong>sudden and accidental damage</strong>, such as:</p>
+    <ul>
+      <li>Break-ins and vandalism</li>
+      <li>Storm damage, falling branches and hail</li>
+      <li>Accidents, like a ball through the window</li>
+    </ul>
+    <p>Policies usually <strong>don't</strong> cover wear and tear, such as foggy glass from a failed seal, worn cranks or old caulking. Those repairs are usually affordable without a claim.</p>
+    <p class="note">Check your deductible. If the repair costs less than your deductible, it's often better to pay for it directly. Ask us for a quote first so you can decide.</p>
+    <h2>Businesses and property managers</h2>
+    <p>For storefronts and commercial buildings, we can secure the opening quickly and provide documents for owners, tenants and insurers. See <a href="/commercial-glass-repair/">commercial glass repair</a> and <a href="/emergency-glass-repair/">emergency glass repair</a>.</p>
+  </div>
+</div></section>
+{cta}""",
+    },
+    {
+        "slug": "winter-ready",
+        "crumb": "Winter-ready windows",
+        "title": "Get Your Windows Ready for Winter: GTA Checklist | Window Repair GTA",
+        "description": "A simple checklist to get your windows and patio doors ready for a Toronto winter: seals, caulking, weatherstripping, cranks and condensation.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">Fall checklist</span>
+  <h1>Get your windows ready for winter</h1>
+  <p class="lede">A GTA winter finds every weak seal, gap and worn crank. Fifteen minutes with this checklist in the fall can save you a cold, drafty house and a bigger repair in January.</p>
+  <div class="actions">{call}{text}</div>
+</div></section>
+{trust}
+<section class="section"><div class="wrap">
+  <div class="prose">
+    <h2>Your winter checklist</h2>
+    <ol class="tips">
+      <li><strong>Look for fog between the panes.</strong> If a window is foggy or hazy inside the glass, the seal has failed and the window insulates poorly. Replace the sealed unit before the cold sets in. <a href="/foggy-window-repair/">Foggy window repair</a></li>
+      <li><strong>Check the outside caulking.</strong> Cracked, gapped or missing caulking lets in cold air and water. Exterior caulking needs dry weather above freezing to cure, so do it in early fall. <a href="/window-caulking/">Window caulking</a></li>
+      <li><strong>Check the weatherstripping.</strong> Close each window on a strip of paper. If it slides out easily, the seal isn't tight.</li>
+      <li><strong>Test every crank and lock.</strong> A casement that doesn't pull tight lets in drafts. Replace stripped cranks and bent hinges now, not when they freeze. <a href="/window-crank-repair/">Window crank repair</a></li>
+      <li><strong>Lubricate moving parts.</strong> A silicone spray on hinges and operators helps stop them seizing in the cold.</li>
+      <li><strong>Clean the patio door track.</strong> Vacuum out grit so the door closes and seals properly. <a href="/patio-door-repair/">Patio door repair</a></li>
+      <li><strong>Swap screens and storm windows</strong> where you have them, and repair any torn screens before storing them.</li>
+    </ol>
+    <h2>Condensation on the inside of the glass</h2>
+    <p>Water or frost on the room side of the glass in winter is usually caused by high indoor humidity, not a broken window. It's worst on the coldest days and in bathrooms, kitchens and bedrooms.</p>
+    <ul>
+      <li>Run bathroom and kitchen fans during and after showers and cooking</li>
+      <li>Lower your humidifier setting when it's very cold outside</li>
+      <li>Open blinds and curtains during the day so warm air reaches the glass</li>
+    </ul>
+    <p>If the moisture is <strong>between</strong> the panes and can't be wiped off, that's a failed seal, and the fix is a new sealed unit.</p>
+    <h2>Don't force a frozen window</h2>
+    <p>If a casement freezes shut, don't force the crank. That's the most common way crank gears get stripped. Let the sun or the room warm it up, or call us.</p>
+    <p class="note">Book fall repairs early. Glass is made to order, and the weeks before the first cold snap are the busiest time of year.</p>
   </div>
 </div></section>
 {cta}""",
