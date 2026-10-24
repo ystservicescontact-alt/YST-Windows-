@@ -13,6 +13,7 @@ from html import escape
 from pathlib import Path
 
 from content import SERVICES, CITIES, HOME, PAGES, GALLERY
+from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -435,15 +436,80 @@ def build_article(page, trail, schemas, extra_html=""):
 
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
-    extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
+    if s["slug"] in COMBO_SERVICES:
+        short = COMBO_SERVICES[s["slug"]]["short"]
+        links = "".join(f'<li><a href="{url(combo_slug(c["slug"], s["slug"]))}">{escape(short)} {escape(c["name"])}</a></li>'
+                        for c in CITIES)
+        extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p><ul class=\"areas\">{links}</ul>"
+    else:
+        extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
     build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])], extra)
 
 
 def build_city(c):
     trail = [("Home", "/"), (f"Window repair {c['name']}", url(c["slug"]))]
-    items = "".join(f'<li><a href="{url(s["slug"])}">{escape(s["name"])}</a></li>' for s in SERVICES)
+    items = "".join(
+        f'<li><a href="{url(combo_slug(c["slug"], s["slug"]) if s["slug"] in COMBO_SERVICES else s["slug"])}">'
+        f'{escape(s["name"])}{" in " + escape(c["name"]) if s["slug"] in COMBO_SERVICES else ""}</a></li>' for s in SERVICES)
     extra = f"<h2>Our services in {escape(c['name'])}</h2><ul>{items}</ul>"
     build_article(c, trail, [service_schema(f"Window repair in {c['name']}", c["slug"], c["name"])], extra)
+
+
+def build_combo(c, s):
+    cs = COMBO_SERVICES[s["slug"]]
+    loc = CITY_LOCAL[c["name"]]
+    city = c["name"]
+    slug = combo_slug(c["slug"], s["slug"])
+    title_name = f"{cs['short']} in {city}"
+    trail = [("Home", "/"), (f"Window repair {city}", url(c["slug"])), (cs["short"], url(slug))]
+    bullets = "".join(f"<li>{escape(b)}</li>" for b in cs["bullets"])
+    why = "".join(f'<div><h3>{escape(t)}</h3><p>{escape(d)}</p></div>' for t, d in WHY)
+    others = "".join(
+        f'<li><a href="{url(combo_slug(c["slug"], k))}">{escape(v["short"])} in {escape(city)}</a></li>'
+        for k, v in COMBO_SERVICES.items() if k != s["slug"])
+    same_service = "".join(
+        f'<li><a href="{url(combo_slug(o["slug"], s["slug"]))}">{escape(o["name"])}</a></li>'
+        for o in CITIES if o["slug"] != c["slug"])
+    faqs = [(q.format(city=city), a.format(city=city)) for q, a in cs["faqs"]]
+    nearby = ", ".join(loc["nearby"])
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">{escape(city)}, ON</span>
+  <h1>{escape(title_name)}</h1>
+  <p class="lede">{escape(cs['lede'])}</p>
+  <div class="actions">{call_btn("combo-hero")}{text_btn("combo-hero")}</div>
+</div></section>
+{trust_html()}
+<div class="wrap article">
+  <div class="prose">
+    <h2>{escape(cs['short'])} in {escape(city)}: what we do</h2>
+    <p>{escape(cs['what'])}</p>
+    <ul class="ticks">{bullets}</ul>
+    <h2>Why {escape(city)} homeowners call us</h2>
+    <div class="why">{why}</div>
+    <div class="local-box">
+      <h2>Serving {escape(city)} and nearby</h2>
+      <p>{escape(loc['local'])}</p>
+      <p>We also serve {escape(nearby)}. See our <a href="{url(c['slug'])}">{escape(city)} service area page</a>
+        or learn more about <a href="{url(s['slug'])}">{escape(s['name'].lower())}</a>.</p>
+    </div>
+    <h2>Other repairs in {escape(city)}</h2>
+    <ul>{others}</ul>
+  </div>
+  {aside_html(s['slug'])}
+</div>
+{faq_html(faqs)}
+<section class="section"><div class="wrap">
+  <div class="section-head"><div><h2>{escape(cs['short'])} in other cities</h2></div></div>
+  <ul class="areas">{same_service}</ul>
+</div></section>
+{cta_html()}"""
+    desc = (f"{cs['short']} in {city}, ON. {cs['lede'].split('.')[0]}. Free estimates, quotes from a photo. "
+            f"Call {SITE['phone']}.")
+    schemas = [business_schema(), breadcrumb_schema(trail), service_schema(title_name, slug, city), faq_schema(faqs)]
+    write(slug, layout(slug=slug, title=f"{title_name} | {SITE['name']}", description=desc, body=body,
+                       schemas=schemas))
 
 
 def build_pages():
@@ -472,7 +538,8 @@ def build_404():
 
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
-            [p["slug"] for p in PAGES if not p.get("noindex")]
+            [p["slug"] for p in PAGES if not p.get("noindex")] + \
+            [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES]
     today = date.today().isoformat()
     urls = "\n".join(f"  <url><loc>{SITE['domain']}{url(s)}</loc><lastmod>{today}</lastmod></url>" for s in slugs)
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -494,6 +561,9 @@ def main():
         build_service(s)
     for c in CITIES:
         build_city(c)
+        for sv in SERVICES:
+            if sv["slug"] in COMBO_SERVICES:
+                build_combo(c, sv)
     build_pages()
     build_404()
     build_sitemap()

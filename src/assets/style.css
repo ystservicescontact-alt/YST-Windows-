@@ -243,3 +243,15 @@ footer { background: var(--navy); color: #C9D3E0; font-size: 15px; }
   .call-bar a { min-height: 60px; border-radius: 0; font-size: 15px; padding: 0 12px; white-space: nowrap; }
   body { padding-bottom: 60px; }
 }
+
+/* Service-in-city pages */
+.prose .ticks { list-style: none; padding: 0; }
+.prose .ticks li::before { content: "✓"; color: var(--ok); font-weight: 800; margin-right: 10px; }
+.why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 600px) { .why { grid-template-columns: 1fr; } }
+.why div { background: var(--soft); padding: 18px 20px; border-left: 0; display: flex; flex-direction: column; gap: 6px; }
+.why h3 { font-size: 18px; color: var(--ink); }
+.why h3::before { content: "✓ "; color: var(--ok); }
+.why p { font-size: 16px; }
+.local-box { background: #EEF3FA; padding: 24px 26px; display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+.local-box h2 { margin-top: 0; }
