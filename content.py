@@ -606,7 +606,7 @@ PAGES = [
 <section class="section"><div class="wrap">
   <div class="section-head"><div><h2>Window and door manufacturers</h2><p>Common brands we see in GTA homes and condos.</p></div></div>
   <ul class="areas brands">
-    <li><span>Andersen</span></li><li><span>Pella</span></li><li><span>Marvin</span></li><li><span>JELD-WEN</span></li>
+    <li><a href="/fapim-window-repair/">FAPIM (Italy)</a></li><li><span>Andersen</span></li><li><span>Pella</span></li><li><span>Marvin</span></li><li><span>JELD-WEN</span></li>
     <li><span>Loewen</span></li><li><span>Kohltech</span></li><li><span>Royalwood</span></li><li><span>Golden Windows</span></li>
     <li><span>NorthStar</span></li><li><span>Euroline</span></li><li><span>Fenplast</span></li><li><span>Thermotech</span></li>
     <li><span>Lux Windows</span></li><li><span>Laflamme</span></li><li><span>Ply Gem</span></li><li><span>Pollard</span></li>

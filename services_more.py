@@ -2,6 +2,63 @@
 
 MORE_SERVICES = [
     {
+        "slug": "fapim-window-repair",
+        "name": "FAPIM Window Repair",
+        "card": "Italian FAPIM windows in GTA condos repaired with genuine parts imported from Italy.",
+        "spec": "Genuine Italian parts · Stays · Handles · Locks",
+        "title": "FAPIM Window Repair Toronto & Mississauga | Genuine Italian Parts | Window Repair GTA",
+        "description": "FAPIM window won't close, lock or stay open? We repair Italian FAPIM windows in Toronto and Mississauga condos with genuine parts imported from Italy.",
+        "eyebrow": "FAPIM specialists",
+        "h1": "FAPIM window repair with genuine Italian parts",
+        "lede": "FAPIM windows are Italian-made and common in condos in Downtown Toronto and Mississauga. Parts are hard to find in Canada. We import genuine FAPIM parts from Italy, so we can fix the window properly instead of patching it.",
+        "body": """
+<h2>What is FAPIM?</h2>
+<p>FAPIM is an Italian manufacturer of hardware for aluminum windows and doors, based in Altopascio, Tuscany. The name stands for <em>Fabbrica Accessori Per Infissi Metallici</em>, "factory of accessories for metal windows and doors". It was founded in 1974, has a catalogue of around 18,000 parts and exports most of its production to more than 100 countries.</p>
+<h2>Why FAPIM windows are in GTA condos</h2>
+<p>Many condo towers in Downtown Toronto and Mississauga are built with aluminum window walls and curtain walls. FAPIM makes a hardware line for exactly these systems, called <strong>Vista</strong>, with arms sized in inches and tested to the North American AAMA standard. You'll typically find it on the opening vents of condo windows: the top-hung or awning panels that push out at the bottom.</p>
+<img class="prose-img tall" src="/photos/fapim/fapim-stay-arm.jpg" alt="FAPIM stay arm on a condo window in Downtown Toronto" loading="lazy">
+<h2>The parts in a FAPIM condo window</h2>
+<ul>
+  <li><strong>Stay arms (friction hinges):</strong> stainless steel arms on each side of the vent that let it open and hold its position. They come in lengths from about 14 to 28 inches, and larger windows use six-bar arms instead of four-bar.</li>
+  <li><strong>Handle and cremone:</strong> a die-cast aluminum handle with a gear inside that drives locking rods along the frame.</li>
+  <li><strong>Keepers and corner locks:</strong> the parts on the frame that the locking points hook into, with shims for adjustment.</li>
+  <li><strong>Opening limiters:</strong> safety stops that keep the vent from opening too far on high floors.</li>
+</ul>
+<h2>Common FAPIM problems</h2>
+<ul>
+  <li><strong>The vent won't stay open or drops shut:</strong> the friction sliders in the stay arms are worn.</li>
+  <li><strong>A bent or twisted arm:</strong> wind caught the open vent. The window may not close square or may rub.</li>
+  <li><strong>The handle turns but doesn't lock:</strong> worn gear, spring or rack in the handle, or keepers out of adjustment.</li>
+  <li><strong>Drafts and whistling:</strong> the vent no longer pulls tight against the seals.</li>
+  <li><strong>Loose or missing screws</strong> on the arm brackets, which is dangerous on a high floor.</li>
+</ul>
+<h2>Why genuine FAPIM parts matter</h2>
+<p>FAPIM hardware is made to exact sizes for specific aluminum profiles. Generic arms and handles from North American suppliers often don't match the length, the screw positions or the profile, so the window ends up patched, misaligned or unsafe. FAPIM has no local parts distribution in Canada, so we import genuine FAPIM parts from Italy and install them so the window works as it was designed.</p>
+<h2>How to tell if your window is FAPIM</h2>
+<ol class="tips">
+  <li><strong>Open the vent</strong> and look at the metal arm on the side or the bracket where it meets the frame.</li>
+  <li><strong>Look for the FAPIM name</strong> stamped into the metal.</li>
+  <li><strong>Measure the arm</strong> when the window is closed, in inches, if you can do it safely.</li>
+  <li><strong>Text us a photo</strong> of the arm and the handle. We'll identify the parts.</li>
+</ol>
+<h2>Where we repair FAPIM windows</h2>
+<p>Mostly in condo towers in <a href="/fapim-window-repair-toronto/">Downtown Toronto</a> and <a href="/fapim-window-repair-mississauga/">Mississauga</a>, and anywhere else in the GTA.</p>
+<h2>Condo repairs</h2>
+<p>We work in condo buildings every week: we book the elevator, follow building rules, protect your floors and clean up. FAPIM repairs are done from inside the unit, usually in one visit once the parts are here.</p>
+<p class="note">Never lean out of or force a high-rise vent that has dropped or won't close. Keep it closed if you can, and call us.</p>
+""",
+        "faqs": [
+            ("Where can I get FAPIM window parts in Toronto?",
+             "FAPIM parts are hard to find in Canada. We import genuine FAPIM parts directly from Italy and install them."),
+            ("My FAPIM window won't stay open. Can it be fixed?",
+             "Yes. This usually means the friction stay arms are worn or bent. We replace them with genuine FAPIM stays."),
+            ("Do you repair FAPIM windows in Mississauga condos?",
+             "Yes. We repair FAPIM windows in condos across Mississauga, Downtown Toronto and the rest of the GTA."),
+            ("How long does a FAPIM repair take?",
+             "Once we've identified the parts, the repair itself usually takes one visit. If parts need to come from Italy, we'll tell you the timeline when we quote."),
+        ],
+    },
+    {
         "slug": "tilt-and-turn-window-repair",
         "name": "Tilt & Turn Window Repair",
         "card": "European tilt and turn windows that won't lock, tilt or close tight. Handles, gears and hinges repaired.",
@@ -318,7 +375,7 @@ MORE_SERVICES = [
 # Service groups for the services page and home page
 CATEGORIES = [
     ("Glass", ["foggy-window-repair", "window-glass-replacement", "curved-glass-replacement", "front-door-glass", "skylight-repair"]),
-    ("Hardware", ["window-crank-repair", "window-handle-repair", "window-hinge-repair", "window-lock-repair", "window-latch-repair", "tilt-and-turn-window-repair"]),
+    ("Hardware", ["fapim-window-repair", "window-crank-repair", "window-handle-repair", "window-hinge-repair", "window-lock-repair", "window-latch-repair", "tilt-and-turn-window-repair"]),
     ("Doors", ["patio-door-repair", "door-repair"]),
     ("Seals, leaks & frames", ["window-caulking", "window-leak-drainage-repair", "wood-window-repair", "window-screen-repair"]),
     ("Replacement, commercial & emergency", ["window-replacement", "commercial-glass-repair", "emergency-glass-repair"]),

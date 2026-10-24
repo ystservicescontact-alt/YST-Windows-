@@ -62,6 +62,30 @@ SIGNS = [
 # ---------------------------------------------------------------- blog
 BLOG = [
     {
+        "slug": "fapim-windows-toronto-condos",
+        "title": "FAPIM windows in Toronto condos: what they are and how to fix them",
+        "description": "Many GTA condo windows use FAPIM hardware from Italy. How to recognize it, why the vents stop staying open or locking, and why genuine parts matter.",
+        "date": "2026-10-24",
+        "body": """
+<p>If you live in a condo in Downtown Toronto or Mississauga and your window vent won't stay open, drops shut or won't lock, there's a good chance it has FAPIM hardware. Here's what that means.</p>
+<h2>Who makes FAPIM?</h2>
+<p>FAPIM is an Italian company from Tuscany that has made hardware for aluminum windows and doors since 1974. The name is an Italian acronym for "factory of accessories for metal windows and doors". It sells to more than 100 countries, and its Vista line is designed for the aluminum curtain walls and window walls used in high-rise buildings.</p>
+<h2>How to recognize it</h2>
+<p>Open the vent and look at the metal arms on the sides. FAPIM arms are stainless steel and the FAPIM name is usually stamped on the arm or the bracket. The handle is typically a die-cast aluminum lever that locks the vent at several points.</p>
+<h2>Why these windows fail</h2>
+<ul>
+  <li><strong>Worn friction arms:</strong> the arms hold the vent open by friction. When they wear, the vent drops shut or won't stay put.</li>
+  <li><strong>Wind damage:</strong> a gust catching an open vent on a high floor can bend an arm.</li>
+  <li><strong>Handle wear:</strong> the gear and spring inside the handle wear, so it turns without locking.</li>
+  <li><strong>Adjustment:</strong> keepers and corner locks drift, so the vent doesn't pull tight against the seals.</li>
+</ul>
+<h2>Why generic parts don't work well</h2>
+<p>FAPIM arms come in specific lengths (from about 14 to 28 inches) and fit specific aluminum profiles. Generic North American arms often don't match the length or screw positions, so the vent sits crooked or doesn't seal. On a high floor, a poorly fitted arm is a safety risk.</p>
+<h2>Getting it fixed</h2>
+<p>FAPIM parts aren't stocked by local distributors in Canada. We import genuine FAPIM parts from Italy and install them from inside your unit. See <a href="/fapim-window-repair/">FAPIM window repair</a>, or the local pages for <a href="/fapim-window-repair-toronto/">Toronto</a> and <a href="/fapim-window-repair-mississauga/">Mississauga</a>.</p>
+""",
+    },
+    {
         "slug": "condensation-between-window-panes",
         "title": "Why is there condensation between my window panes?",
         "description": "Fog or moisture between double pane glass means the seal has failed. What causes it, whether it can be fixed, and what it costs compared with a new window.",
@@ -400,6 +424,70 @@ EXTRA_PAGES = [
   <h2>Contact</h2>
   <p>Questions about privacy? Call or text us at {phone}.</p>
 </div></div></section>""",
+    },
+    {
+        "slug": "fapim-window-repair-toronto",
+        "crumb": "FAPIM windows Toronto",
+        "title": "FAPIM Window Repair Toronto | Genuine Italian Parts | Window Repair GTA",
+        "description": "FAPIM condo window repair in Toronto: stay arms, handles and locks replaced with genuine parts imported from Italy. Insured and WSIB covered.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">FAPIM specialists · Toronto</span>
+  <h1>FAPIM window repair in Toronto</h1>
+  <p class="lede">Condo vent that won't stay open, won't lock or lets in wind? We repair FAPIM windows in Toronto condos with genuine parts imported from Italy.</p>
+  <div class="actions">{call}{text}</div>
+</div></section>
+{trust}
+<section class="section"><div class="wrap"><div class="prose">
+  <h2>FAPIM windows in Toronto condos</h2>
+  <p>Many of Toronto's condo towers, especially downtown and in midtown, are built with aluminum window walls. The opening vents on those windows often use FAPIM hardware from Italy: stainless steel stay arms, a cremone handle and locking points around the frame. After years of use, wind and freeze and thaw cycles, the arms wear and the locks slip out of adjustment.</p>
+  <h2>What we fix</h2>
+  <ul class="ticks">
+    <li>Stay arms that no longer hold the vent open, or that are bent</li>
+    <li>Handles and cremones that turn but don't lock</li>
+    <li>Keepers and corner locks out of adjustment, causing drafts</li>
+    <li>Opening limiters and loose arm brackets</li>
+  </ul>
+  <h2>Genuine parts from Italy</h2>
+  <p>FAPIM has no local parts distribution in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
+  <h2>Buildings and areas we serve</h2>
+  <p>Downtown Toronto, CityPlace, Liberty Village, King West, the Financial District, St. Lawrence, Yonge and Bloor, Yorkville, Midtown and Yonge and Eglinton, North York Centre and condos across the city.</p>
+  <p class="note">Text us a photo of the arm (where the FAPIM name is stamped) and the handle. We'll tell you which parts you need.</p>
+</div></div></section>
+{cta}""",
+    },
+    {
+        "slug": "fapim-window-repair-mississauga",
+        "crumb": "FAPIM windows Mississauga",
+        "title": "FAPIM Window Repair Mississauga | Genuine Italian Parts | Window Repair GTA",
+        "description": "FAPIM condo window repair in Mississauga: stay arms, handles and locks replaced with genuine parts imported from Italy. Insured and WSIB covered.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">FAPIM specialists · Mississauga</span>
+  <h1>FAPIM window repair in Mississauga</h1>
+  <p class="lede">FAPIM condo windows in Mississauga repaired with genuine Italian parts: stay arms, handles, cremones and locks.</p>
+  <div class="actions">{call}{text}</div>
+</div></section>
+{trust}
+<section class="section"><div class="wrap"><div class="prose">
+  <h2>FAPIM windows in Mississauga condos</h2>
+  <p>Mississauga's condo towers, especially around Square One and the City Centre, include many buildings with aluminum window walls and FAPIM hardware on the opening vents. When the stay arms wear out or the handle stops locking, the window can't be opened safely or lets in drafts and noise.</p>
+  <h2>What we fix</h2>
+  <ul class="ticks">
+    <li>Stay arms that no longer hold the vent open, or that are bent</li>
+    <li>Handles and cremones that turn but don't lock</li>
+    <li>Keepers and corner locks out of adjustment, causing drafts</li>
+    <li>Opening limiters and loose arm brackets</li>
+  </ul>
+  <h2>Genuine parts from Italy</h2>
+  <p>FAPIM has no local parts distribution in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
+  <h2>Buildings and areas we serve</h2>
+  <p>Mississauga City Centre and Square One, Port Credit, Erin Mills, Cooksville, Hurontario corridor, Lakeview and condos across Mississauga.</p>
+  <p class="note">Text us a photo of the arm (where the FAPIM name is stamped) and the handle. We'll tell you which parts you need.</p>
+</div></div></section>
+{cta}""",
     },
     {
         "slug": "blog",

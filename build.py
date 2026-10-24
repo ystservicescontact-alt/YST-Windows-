@@ -73,7 +73,7 @@ SERVICE_ICON = {
     "tilt-and-turn-window-repair": "tilt", "window-handle-repair": "handle", "window-hinge-repair": "hinge",
     "window-lock-repair": "lock", "window-latch-repair": "latch", "door-repair": "door", "front-door-glass": "doorglass",
     "curved-glass-replacement": "curved", "wood-window-repair": "wood", "window-leak-drainage-repair": "drop",
-    "skylight-repair": "skylight",
+    "skylight-repair": "skylight", "fapim-window-repair": "tilt",
 }
 FEATURED = SERVICES[:9]
 BY_SLUG = {s["slug"]: s for s in SERVICES}
@@ -419,6 +419,21 @@ def write(slug, html):
 
 
 # ---------------------------------------------------------------- extra sections
+def fapim_html():
+    img = photo("services/fapim-window-repair")
+    media = f'<img src="{img}" alt="FAPIM condo window repaired in Downtown Toronto" loading="lazy">' if img else ""
+    return f"""
+<section class="section soft" id="fapim"><div class="wrap feature">
+  <div class="feature-media">{media}</div>
+  <div class="feature-copy">
+    <span class="tag">FAPIM specialists</span>
+    <h2>Italian FAPIM windows, fixed with genuine parts from Italy</h2>
+    <p>FAPIM windows are common in condos in Downtown Toronto and Mississauga, and their parts are hard to find in Canada. We're one of the few companies in the GTA that import genuine FAPIM parts from Italy, so we can repair the window completely.</p>
+    <div class="actions"><a class="btn btn-yellow" href="/fapim-window-repair/">FAPIM window repair</a>{text_btn("fapim")}</div>
+  </div>
+</div></section>"""
+
+
 def who_html():
     cards = "".join(f'<a class="who-card" href="{href}"><h3>{escape(t)}</h3><p>{escape(d)}</p><span class="go">{escape(cta)} →</span></a>'
                     for t, d, href, cta in WHO)
@@ -612,6 +627,7 @@ def build_home():
     <a class="more-link" href="/services/">All services →</a></div>
   {cards_html(FEATURED)}
 </div></section>
+{fapim_html()}
 {who_html()}
 <section class="section soft" id="repair-or-replace"><div class="wrap">
   <div class="section-head"><div><h2>Repair or replace?</h2><p>If the frame is solid, repairing the failed part is faster and costs far less.</p></div></div>

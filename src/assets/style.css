@@ -334,3 +334,12 @@ h1, h2, h3, .display { font-synthesis: none; }
 .footer-logo svg { width: 52px; height: 52px; flex: none; }
 .footer-logo b { font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 1.5px; color: var(--white); line-height: .9; }
 .footer-logo b em { font-style: normal; color: var(--red-on-navy); }
+
+/* Feature block (FAPIM) */
+.feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
+@media (max-width: 860px) { .feature { grid-template-columns: 1fr; gap: 24px; } }
+.feature-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-bottom: 6px solid var(--red-bright); }
+.feature-copy { display: flex; flex-direction: column; gap: 16px; }
+.feature-copy h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4vw, 50px); line-height: 1; }
+.feature-copy p { color: var(--text); font-size: 18px; }
+.prose-img.tall { aspect-ratio: 3 / 4; max-width: 440px; }

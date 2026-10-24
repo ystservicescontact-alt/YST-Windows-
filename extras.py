@@ -86,6 +86,7 @@ EXTRAS = {
 <ul class="ticks">
   <li><strong>AmesburyTruth</strong> (formerly Truth Hardware), the most common in Canadian casements</li>
   <li><strong>Roto</strong>, common on European-style and tilt-and-turn windows</li>
+  <li><strong>FAPIM</strong>, Italian hardware common in GTA condos. We import genuine FAPIM parts. See <a href="/fapim-window-repair/">FAPIM window repair</a></li>
   <li><strong>Maxim</strong>, found on many older vinyl windows</li>
   <li><strong>Encore</strong>, common in builder-grade homes</li>
   <li><strong>Entrygard</strong> and other operator systems</li>
