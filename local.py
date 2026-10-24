@@ -63,7 +63,7 @@ COMBO_SERVICES = {
         ],
         "faqs": [
             ("How much does window crank repair cost in {city}?",
-             "It depends on the operator and whether hinges need replacing too. Send us a photo of the crank and hinge and we'll quote it."),
+             "Most crank replacements cost $150–$400, depending on the type of crank operator. Condo windows usually cost more because the work is more complex. Send us a photo of the crank and we'll give you an exact price."),
             ("My crank spins but the window doesn't move. What's wrong?",
              "The gears inside the operator are stripped. The fix is a new operator, not a new window."),
             ("Can you get parts for older windows?",

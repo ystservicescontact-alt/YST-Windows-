@@ -63,10 +63,12 @@ EXTRAS = {
 """,
     },
     "window-crank-repair": {
+        "price": "Most crank replacements cost $150–$400, depending on the type of crank operator. Condo windows usually cost more because the work is harder to access and more complex.",
         "price_factors": [
             "Which parts need replacing: operator, handle, hinges or locks",
             "How many windows need work",
-            "Brand and age of the hardware",
+            "Brand, type and age of the crank operator",
+            "Condo or high-rise windows, which are harder to access",
             "Whether parts are standard or need to be special-ordered",
         ],
         "html": """

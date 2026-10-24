@@ -694,7 +694,8 @@ def extras_html(slug, city=None, price_only=False):
         return ""
     where = f" in {escape(city)}" if city else ""
     factors = "".join(f"<li>{escape(f)}</li>" for f in e["price_factors"])
-    return (f"<h2>What affects the price{where}</h2><p>Every window is different. The price depends on:</p>"
+    price = f'<p class="price-note"><strong>{escape(e["price"])}</strong></p>' if e.get("price") else ""
+    return (f"<h2>What affects the price{where}</h2>{price}<p>Every window is different. The price depends on:</p>"
             f'<ul class="ticks">{factors}</ul><p>Text us a photo of your window and we\'ll give you a free quote, '
             f"usually the same day.</p>" + ("" if price_only else e["html"]))
 

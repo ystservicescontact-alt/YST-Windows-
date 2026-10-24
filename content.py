@@ -116,7 +116,7 @@ SERVICES = [
     {
         "slug": "window-crank-repair",
         "name": "Window Crank & Hardware Repair",
-        "card": "Casement cranks, hinges, locks and handles that are stiff, stripped or broken.",
+        "card": "Casement cranks, hinges, locks and handles that are stiff, stripped or broken. Cranks from $150.",
         "spec": "Cranks · Hinges · Locks · Tilt latches",
         "title": "Window Crank, Hinge & Lock Repair Toronto & GTA | Window Repair GTA",
         "description": "Window crank stripped or window won't close? We replace crank operators, hinges, locks and handles across Toronto and the GTA.",
@@ -139,6 +139,8 @@ SERVICES = [
 <p>Window hardware varies by brand and year. We identify your operator and hinges and bring matching or compatible parts. Sending a photo of the crank and hinge ahead of time often lets us fix it in a single visit.</p>
 """,
         "faqs": [
+            ("How much does window crank replacement cost?",
+             "Most crank replacements cost $150–$400, depending on the type of crank operator. Condo windows usually cost more because the work is harder to access and more complex. Send us a photo for an exact price."),
             ("My crank turns but the window doesn't move. What's wrong?",
              "The gears inside the operator are stripped. The fix is a new crank operator, not a new window."),
             ("Can you fix a window that won't close all the way?",

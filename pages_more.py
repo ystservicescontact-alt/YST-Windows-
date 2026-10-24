@@ -106,7 +106,7 @@ BLOG = [
 <h2>Why cranks fail</h2>
 <p>Cold weather is hard on window hardware. Forcing a window that's frozen shut strips the gears, and rust and dirt seize the mechanism. After 15 to 20 years of daily use, operators simply wear out.</p>
 <h2>The fix</h2>
-<p>Replacing a crank operator usually takes under an hour. We identify the hardware, often made by AmesburyTruth, Roto, Maxim or Encore, fit a matching or compatible part, and check the hinges and lock while we're there. See <a href="/window-crank-repair/">window crank repair</a> and <a href="/window-hinge-repair/">hinge repair</a>.</p>
+<p>Replacing a crank operator usually takes under an hour and typically costs $150–$400, depending on the type of operator. Condo windows usually cost more because the work is more complex. We identify the hardware, often made by AmesburyTruth, Roto, Maxim or Encore, fit a matching or compatible part, and check the hinges and lock while we're there. See <a href="/window-crank-repair/">window crank repair</a> and <a href="/window-hinge-repair/">hinge repair</a>.</p>
 <h2>Keep it working</h2>
 <ol>
   <li>Spray hinges and moving parts with silicone once a year.</li>
