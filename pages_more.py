@@ -24,7 +24,7 @@ PROMISES = [
     ("1-year workmanship warranty", "Every repair is backed by our 1-year workmanship warranty."),
     ("Price match", "Have a written quote from another licensed company for the same work? Show us and we'll match it."),
     ("No travel or after-hours surcharge", "No extra charge for travel anywhere in our service area, and no after-hours surcharge for emergencies."),
-    ("Fully insured", "We are fully insured, so you're protected while we work in your home or business."),
+    ("Fully insured and WSIB covered", "We are fully insured and covered by WSIB, Ontario's workplace safety insurance, so you're protected while we work in your home or business."),
     ("12-point window check", "Every visit includes a 12-point check of your window, so you know about any other problem before it gets worse."),
 ]
 
@@ -221,7 +221,7 @@ EXTRA_PAGES = [
         "slug": "about",
         "crumb": "About us",
         "title": "About Us | Window Repair GTA",
-        "description": "Window Repair GTA is a repair-first window and glass company serving Toronto and the GTA. Fully insured, with a 1-year workmanship warranty.",
+        "description": "Window Repair GTA is a repair-first window and glass company serving Toronto and the GTA. Fully insured, WSIB covered, with a 1-year workmanship warranty.",
         "body": """
 <section class="page-hero"><div class="wrap">
   {crumbs}
@@ -247,13 +247,13 @@ EXTRA_PAGES = [
         "slug": "property-managers",
         "crumb": "Property managers",
         "title": "Window Repair for Property Managers & Landlords | Window Repair GTA",
-        "description": "Window, glass and patio door repairs for property managers and landlords across the GTA: repeat work, multiple units, clear invoices, fully insured.",
+        "description": "Window, glass and patio door repairs for property managers and landlords across the GTA: repeat work, multiple units, clear invoices, insured and WSIB covered.",
         "body": """
 <section class="page-hero"><div class="wrap">
   {crumbs}
   <span class="tag">Property managers & landlords</span>
   <h1>Window repairs across your units and buildings</h1>
-  <p class="lede">One contact for foggy glass, broken cranks, balcony doors and broken windows across your portfolio. Fully insured, with clear invoices for every unit.</p>
+  <p class="lede">One contact for foggy glass, broken cranks, balcony doors and broken windows across your portfolio. Insured and WSIB covered, with clear invoices for every unit. WSIB clearance certificate available on request.</p>
   <div class="actions">{call}<a class="btn btn-outline" href="/quote/">Request a quote</a></div>
 </div></section>
 {trust}

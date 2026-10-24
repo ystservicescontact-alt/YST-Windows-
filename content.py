@@ -521,7 +521,7 @@ HOME = {
     "tag": "Repair first. Replace only if needed.",
     "h1": "Foggy or broken windows? We replace the glass, not the whole window.",
     "lede": "Sealed glass units, cranks, hinges, locks and patio door rollers for homes and businesses across the GTA. Most repairs cost a fraction of a new window.",
-    "checks": ["Fully insured", "1-year warranty", "Same-day appointments", "Free estimates"],
+    "checks": ["Insured & WSIB covered", "1-year warranty", "Same-day appointments", "Free estimates"],
     "extra_areas": ["Burlington", "Milton", "Pickering", "Ajax", "Whitby", "Oshawa", "Aurora", "Thornhill"],
     "faqs": [
         ("Why is there fog between my window panes?",
@@ -539,7 +539,7 @@ HOME = {
         ("Do you work on all brands?",
          "Yes. We repair windows and patio doors from most manufacturers, in homes, condos and commercial buildings."),
         ("Are you insured, and is the work guaranteed?",
-         "Yes. We are fully insured, and our workmanship is backed by a 1-year warranty."),
+         "Yes. We are fully insured and WSIB covered, and our workmanship is backed by a 1-year warranty."),
         ("Can you come the same day?",
          "Often, yes. We offer same-day appointments when the schedule allows. Call us and we'll give you the earliest time."),
     ],

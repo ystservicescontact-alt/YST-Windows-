@@ -177,7 +177,7 @@ def cta_html():
 
 
 def trust_html():
-    items = [("shield", "Fully insured"), ("tools", "1-year workmanship warranty"),
+    items = [("shield", "Insured & WSIB covered"), ("tools", "1-year workmanship warranty"),
              ("emergency", "Same-day appointments"), ("tag", "Free estimates")]
     return '<section class="trust" aria-label="Why choose us"><div class="wrap">' + "".join(
         f"<div>{ICONS[i]}<span>{t}</span></div>" for i, t in items) + "</div></section>"
@@ -358,6 +358,8 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <meta property="og:url" content="{canonical}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#0F1B33">
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
 {ga}
@@ -367,12 +369,12 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <a class="skip" href="#main">Skip to content</a>
 <div class="topbar"><div class="wrap">
   <span><span class="hide-sm">Window &amp; glass repair · </span>Toronto, Mississauga, Brampton, Vaughan, Markham &amp; the GTA</span>
-  <span class="hide-sm">{hours}<b>Fully insured · 1-year warranty · Same-day appointments · 24/7 emergency</b></span>
+  <span class="hide-sm">{hours}<b>Insured &amp; WSIB covered · 1-year warranty · Same-day · 24/7 emergency</b></span>
 </div></div>
 <header class="site-header"><div class="wrap">
   <a class="logo" href="/" aria-label="{SITE['name']} home">
-    <span class="logo-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-    <span class="logo-text"><b>{SITE['name']}</b><small>Glass · Hardware · Patio Doors</small></span>
+    <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 38) scale(1.3)"><path d="M50 5 L58 22 L68 17 L64 40 L78 28 L82 36 L95 33 L89 47 L96 51 L72 70 L76 78 L54 75 L54 95 L46 95 L46 75 L24 78 L28 70 L4 51 L11 47 L5 33 L18 36 L22 28 L36 40 L32 17 L42 22 Z" fill="#E5262E"/></g><rect x="74" y="16" width="120" height="178" fill="#FFFFFF" fill-opacity="0.5" stroke="#0F1B33" stroke-width="9"/><path d="M74 105 H194" stroke="#0F1B33" stroke-width="10"/><path d="M134 16 V105" stroke="#0F1B33" stroke-width="5"/><rect x="79" y="110" width="110" height="79" fill="#5AD3F7" fill-opacity="0.18"/></svg></span>
+    <span class="logo-text"><b>Window Repair <em>GTA</em></b><small>Greater Toronto Area · Canada</small></span>
   </a>
   <nav class="nav" aria-label="Main">
     <a href="/services/">Services</a>
@@ -389,7 +391,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <footer>
   <div class="wrap footer-grid">
     <div>
-      <h2>{SITE['name']}</h2>
+      <div class="footer-logo"><svg aria-hidden="true" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 38) scale(1.3)"><path d="M50 5 L58 22 L68 17 L64 40 L78 28 L82 36 L95 33 L89 47 L96 51 L72 70 L76 78 L54 75 L54 95 L46 95 L46 75 L24 78 L28 70 L4 51 L11 47 L5 33 L18 36 L22 28 L36 40 L32 17 L42 22 Z" fill="#E5262E"/></g><rect x="74" y="16" width="120" height="178" fill="#0F1B33" fill-opacity="0.55" stroke="#FFFFFF" stroke-width="9"/><path d="M74 105 H194" stroke="#FFFFFF" stroke-width="10"/><path d="M134 16 V105" stroke="#FFFFFF" stroke-width="5"/><rect x="79" y="110" width="110" height="79" fill="#5AD3F7" fill-opacity="0.18"/></svg><b>Window Repair <em>GTA</em></b></div>
       <p>Window, glass and patio door repair for homes and businesses across {SITE['area']}.</p>
       <p style="margin-top:14px"><a class="f-phone" href="tel:{SITE['tel']}" data-where="footer">{SITE['phone']}</a></p>
     </div>
