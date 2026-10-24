@@ -306,6 +306,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
   <nav class="nav" aria-label="Main">
     <a href="/services/">Services</a>
     <a href="/#areas">Service Areas</a>
+    <a href="/window-brands/">Brands We Fix</a>
     <a href="/contact/">Free Estimate</a>
     <a class="nav-phone" href="tel:{SITE['tel']}" data-where="header"><small>Call for a free quote</small><b>{SITE['phone']}</b></a>
   </nav>
@@ -322,7 +323,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/window-brands/">Brands we fix</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']}</div>
 </footer>
@@ -382,7 +383,11 @@ def build_home():
 {gallery_html()}
 <section class="section soft" id="areas"><div class="wrap">
   <div class="section-head"><div><h2>Service areas</h2><p>We come to you anywhere in the GTA. Don't see your city? Call us.</p></div></div>
-  {areas_html()}
+  <div class="area-map">
+    <iframe title="Map of our service area in the Greater Toronto Area" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Greater+Toronto+Area,+ON&amp;z=9&amp;output=embed"></iframe>
+    {areas_html()}
+  </div>
 </div></section>
 {faq_html(h['faqs'], soft=False)}
 {cta_html()}"""

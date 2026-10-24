@@ -584,6 +584,51 @@ PAGES = [
 </div>""",
     },
     {
+        "slug": "window-brands",
+        "crumb": "Brands we fix",
+        "title": "Window Brands We Repair in Toronto & the GTA | Window Repair GTA",
+        "description": "We repair windows and patio doors from most manufacturers and GTA home builders: foggy glass, cranks, hinges, locks and rollers. Free estimates.",
+        "body": """
+<section class="page-hero"><div class="wrap">
+  {crumbs}
+  <span class="tag">All window brands</span>
+  <h1>Window brands we repair</h1>
+  <p class="lede">We fix glass, hardware and patio doors on windows from most manufacturers, in homes built by most GTA builders. Don't see yours? Text us a photo of the window and the label on the frame.</p>
+  <div class="actions">{call}{text}</div>
+</div></section>
+{trust}
+<section class="section"><div class="wrap">
+  <div class="section-head"><div><h2>Window and door manufacturers</h2><p>Common brands we see in GTA homes and condos.</p></div></div>
+  <ul class="areas brands">
+    <li><span>Andersen</span></li><li><span>Pella</span></li><li><span>Marvin</span></li><li><span>JELD-WEN</span></li>
+    <li><span>Loewen</span></li><li><span>Kohltech</span></li><li><span>Royalwood</span></li><li><span>Golden Windows</span></li>
+    <li><span>NorthStar</span></li><li><span>Euroline</span></li><li><span>Fenplast</span></li><li><span>Thermotech</span></li>
+    <li><span>Lux Windows</span></li><li><span>Laflamme</span></li><li><span>Ply Gem</span></li><li><span>Pollard</span></li>
+    <li><span>All Weather Windows</span></li><li><span>Gienow</span></li><li><span>Inline Fiberglass</span></li><li><span>Builder-grade vinyl</span></li>
+  </ul>
+</div></section>
+<section class="section soft"><div class="wrap">
+  <div class="section-head"><div><h2>Homes by GTA builders</h2><p>Builders often install the same window lines across a whole subdivision, so we know their common problems.</p></div></div>
+  <ul class="areas brands">
+    <li><span>Mattamy Homes</span></li><li><span>Great Gulf</span></li><li><span>Tribute Communities</span></li><li><span>Fieldgate Homes</span></li>
+    <li><span>Minto</span></li><li><span>Arista Homes</span></li><li><span>Greenpark</span></li><li><span>Lindvest</span></li>
+    <li><span>Monarch</span></li><li><span>Daniels</span></li><li><span>Paradise Developments</span></li><li><span>Regal Crest Homes</span></li>
+  </ul>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="prose">
+    <h2>How to find your window brand</h2>
+    <ul>
+      <li><strong>Spacer bar:</strong> look at the metal or plastic strip between the panes. It's often printed with the glass maker, a date code and sometimes the window brand.</li>
+      <li><strong>Frame label:</strong> open the window and check the side or top of the frame for a sticker or etched logo.</li>
+      <li><strong>Crank and handle:</strong> the hardware is sometimes stamped with the brand or part number.</li>
+    </ul>
+    <p>Can't find it? No problem. Send us a photo and we'll identify the parts we need.</p>
+  </div>
+</div></section>
+{cta}""",
+    },
+    {
         "slug": "thanks",
         "crumb": "Thank you",
         "noindex": True,
