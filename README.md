@@ -1,4 +1,4 @@
-# YST Dispatch
+# Icarus Dispatch
 
 Sorts the day's jobs by technician skills and area, and builds each tech's route.
 It runs as a website and installs on a phone like an app (Add to Home Screen).

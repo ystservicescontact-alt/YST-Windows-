@@ -1,6 +1,6 @@
 {
-  "name": "YST Dispatch",
-  "short_name": "Dispatch",
+  "name": "Icarus Dispatch",
+  "short_name": "Icarus",
   "description": "Sorts the day's jobs by technician skills and area, and builds each tech's route.",
   "start_url": "./#plan",
   "scope": "./",
