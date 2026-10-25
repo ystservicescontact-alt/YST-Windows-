@@ -1,0 +1,21 @@
+{
+  "name": "icarus-dispatch",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Icarus Dispatch: sorts the day's jobs by technician skills and area, and builds each tech's route.",
+  "scripts": {
+    "sync": "cap sync",
+    "android:apk": "cap sync android && cd android && ./gradlew assembleDebug",
+    "android:release": "cap sync android && cd android && ./gradlew bundleRelease",
+    "ios:open": "cap sync ios && cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app-launcher": "^8.0.1",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/ios": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3"
+  }
+}

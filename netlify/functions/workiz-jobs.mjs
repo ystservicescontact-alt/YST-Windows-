@@ -1,31 +1,36 @@
 // Pulls one day's open jobs from Workiz (API v1) and returns them in the app's simple shape.
-// Needs WORKIZ_API_TOKEN in Netlify environment variables. The token never reaches the browser.
+// Needs WORKIZ_API_TOKEN and APP_ACCESS_KEY in Netlify environment variables. The token never reaches the browser.
 // Not yet tested against a live Workiz account: field names follow Workiz's v1 job records
 // and are read defensively, so check the first pull and adjust normalize() if needed.
 const BASE = 'https://api.workiz.com/api/v1';
 
+import { reply, preflight, authorized } from '../lib/http.mjs';
+
 export default async (req) => {
+  const pre = preflight(req);
+  if (pre) return pre;
+  if (!authorized(req)) return reply(req, { error: 'unauthorized' }, 401);
   const token = process.env.WORKIZ_API_TOKEN;
-  if (!token) return Response.json({ error: 'not-connected' }, { status: 503 });
+  if (!token) return reply(req, { error: 'not-connected' }, 503);
   const date = new URL(req.url).searchParams.get('date') || new Date().toISOString().slice(0, 10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return Response.json({ error: 'bad-date' }, { status: 400 });
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return reply(req, { error: 'bad-date' }, 400);
 
   const rows = [];
   try {
     for (let offset = 0; offset < 1000; offset += 100) {
       const r = await fetch(`${BASE}/${token}/job/all/?start_date=${date}&offset=${offset}&records=100&only_open=true`);
-      if (!r.ok) return Response.json({ error: `workiz-${r.status}` }, { status: 502 });
+      if (!r.ok) return reply(req, { error: `workiz-${r.status}` }, 502);
       const body = await r.json();
       const page = Array.isArray(body.data) ? body.data : Array.isArray(body) ? body : [];
       rows.push(...page);
       if (page.length < 100) break;
     }
   } catch (e) {
-    return Response.json({ error: 'workiz-unreachable' }, { status: 502 });
+    return reply(req, { error: 'workiz-unreachable' }, 502);
   }
 
   const jobs = rows.map(normalize).filter(j => !j.date || j.date === date);
-  return Response.json({ date, jobs });
+  return reply(req, { date, jobs });
 };
 
 const num = v => (v === null || v === undefined || v === '' ? null : Number(v));

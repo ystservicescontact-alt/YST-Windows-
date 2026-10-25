@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Icarus Dispatch</string>
+    <string name="title_activity_main">Icarus Dispatch</string>
+    <string name="package_name">ca.icarus.dispatch</string>
+    <string name="custom_url_scheme">ca.icarus.dispatch</string>
+</resources>

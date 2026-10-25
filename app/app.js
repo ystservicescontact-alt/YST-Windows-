@@ -14,9 +14,27 @@
   const TABS = ['plan', 'jobs', 'team', 'settings'];
 
   const DEFAULT_SETTINGS = {
-    speedKmh: 40, balance: 0.3, returnHome: true, arrivalWindow: 120,
+    speedKmh: 40, balance: 0.3, returnHome: true, arrivalWindow: 120, serverUrl: '', accessKey: '',
     durations: JSON.parse(JSON.stringify(DEFAULT_DURATIONS)),
   };
+
+  // True inside the installed phone app (Capacitor), false in a browser.
+  const NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+
+  // The phone app has no server of its own, so its /api calls go to the website address from Settings.
+  function api(path, opts = {}) {
+    const base = NATIVE ? String(S.settings.serverUrl || ICARUS_SERVER || '').trim().replace(/\/+$/, '') : '';
+    if (NATIVE && !base) return Promise.reject(new Error('no-server'));
+    const headers = { ...(opts.headers || {}) };
+    if (S.settings.accessKey) headers['x-icarus-key'] = S.settings.accessKey;
+    return fetch(base + path, { ...opts, headers });
+  }
+
+  function openExternal(url) {
+    const L = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AppLauncher;
+    if (L && L.openUrl) L.openUrl({ url }).catch(() => window.open(url, '_blank'));
+    else window.open(url, '_blank');
+  }
 
   const S = { tab: 'plan', date: isoDate(new Date()), techs: [], jobs: [], settings: null, plan: null, server: null };
 
@@ -56,9 +74,9 @@
   function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
   async function geocode(address, city, postal) {
     const q = [address, city, postal, 'Ontario, Canada'].filter(Boolean).join(', ');
-    if (S.server && S.server.google) {
+    if (S.server && S.server.google && S.server.keyOk !== false) {
       try {
-        const r = await fetch('/api/geocode?q=' + enc(q));
+        const r = await api('/api/geocode?q=' + enc(q));
         if (r.ok) { const d = await r.json(); if (d.lat != null) return { lat: d.lat, lng: d.lng, precise: true, city: d.city || city }; }
       } catch (e) { /* fall back */ }
     }
@@ -71,7 +89,7 @@
 
   async function checkServer() {
     try {
-      const r = await fetch('/api/status', { cache: 'no-store' });
+      const r = await api('/api/status', { cache: 'no-store' });
       S.server = r.ok ? await r.json() : { workiz: false, google: false, offline: true };
     } catch (e) { S.server = { workiz: false, google: false, offline: true }; }
     if (S.tab === 'settings') render();
@@ -168,7 +186,7 @@
           <div class="addr">${esc(j.client)} · ${esc(place(j))}${j.precise === false ? ' <span class="flag">(approx.)</span>' : ''}</div>
           <div class="meta">${esc(meta.join(' · '))}${s.lateBy ? ` · <span class="late">${dur(s.lateBy)} late</span>` : ''}</div>
           <div class="acts"><a class="btn small" href="${esc(navUrl(j))}" target="_blank" rel="noopener">Navigate</a>
-          ${j.phone ? `<span class="btn small mono" title="Phone">${esc(j.phone)}</span>` : ''}
+          ${j.phone ? `<a class="btn small mono" href="tel:${esc(String(j.phone).replace(/[^0-9+]/g, ''))}" title="Call">${esc(j.phone)}</a>` : ''}
           <button class="btn small" data-act="edit-job" data-id="${esc(j.id)}">Edit</button></div>
         </div></li>`);
     });
@@ -288,8 +306,11 @@
     const durRows = CATEGORIES.map(c => `<tr><th>${esc(c.label)}</th>${WORK.map(w => `<td><input type="number" min="10" step="5" id="d-${w.id}-${c.id}" data-act="dur" data-w="${w.id}" data-c="${c.id}" value="${esc(st.durations[w.id][c.id])}" aria-label="${esc(c.label)} ${esc(w.label)} minutes"></td>`).join('')}</tr>`).join('');
     return `<div class="page-head"><div><h1>Settings</h1></div></div>
     <section class="card set-group"><h2>Connections</h2>
-      ${status(sv && sv.workiz, 'Workiz connected', sv && sv.offline ? 'Workiz: available once the app is online on Netlify' : 'Workiz not connected')}
+      ${status(sv && sv.workiz, 'Workiz connected', sv && sv.offline ? (NATIVE ? 'Workiz: add the website address below' : 'Workiz: available once the app is online on Netlify') : 'Workiz not connected')}
       ${status(sv && sv.google, 'Google Maps address lookup on', 'Google Maps lookup off: addresses are placed by town')}
+      ${sv && sv.keySet && !sv.keyOk ? '<div class="status off"><i></i>Access key missing or wrong</div>' : ''}
+      ${NATIVE || st.serverUrl ? `<label class="field"><span>Website address</span><input id="s-server" type="url" inputmode="url" autocomplete="off" placeholder="https://your-site.netlify.app" value="${esc(st.serverUrl)}" data-act="set-text" data-k="serverUrl"><span class="hint">The phone app gets Workiz jobs through your Icarus website.</span></label>` : ''}
+      <label class="field"><span>Access key</span><input id="s-key" type="password" autocomplete="off" value="${esc(st.accessKey)}" data-act="set-text" data-k="accessKey"><span class="hint">The same key as APP_ACCESS_KEY on Netlify. It keeps customer data private.</span></label>
       <div class="btn-row"><button class="btn small" data-act="help-connect">How to connect</button></div>
     </section>
     <section class="card set-group"><h2>Planning</h2>
@@ -438,12 +459,13 @@
   function connectHelp(reason) {
     const offline = S.server && S.server.offline;
     openSheet(`<div class="sheet-body">${sheetHead('Connect Workiz')}
-      ${reason ? `<p class="note"><b>${offline ? 'This preview can\'t reach Workiz.' : 'Workiz isn\'t connected yet.'}</b> ${offline ? 'Workiz is pulled once the app runs on its own site (Netlify). Until then, use Import CSV.' : ''}</p>` : ''}
+      ${reason ? `<p class="note"><b>${reason === 'unauthorized' ? 'The access key is missing or wrong.' : offline ? 'Workiz can\'t be reached from here.' : 'Workiz isn\'t connected yet.'}</b> ${reason === 'unauthorized' ? 'Enter the access key in Settings.' : offline ? (NATIVE ? 'Add your Icarus website address in Settings.' : 'Workiz is pulled once the app runs on its own site (Netlify). Until then, use Import CSV.') : ''}</p>` : ''}
       <h3>Pull jobs straight from Workiz</h3>
       <ol class="steps">
         <li>In Workiz, open <b>Feature Center / Marketplace</b> and turn on the <b>Developer API</b> add-on. Workiz may limit it to certain plans.</li>
         <li>Go to <b>Settings → Integrations → Developer</b> and copy the API token.</li>
-        <li>In Netlify, open the site → <b>Site configuration → Environment variables</b>, add <code>WORKIZ_API_TOKEN</code> with the token, and redeploy.</li>
+        <li>In Netlify, open the site → <b>Site configuration → Environment variables</b>, add <code>WORKIZ_API_TOKEN</code> with the token, and <code>APP_ACCESS_KEY</code> with a long password of your choice. Redeploy.</li>
+        <li>In this app, open <b>Settings</b> and enter the same access key${NATIVE ? ' and your website address' : ''}.</li>
       </ol>
       <h3>Exact addresses on the map</h3>
       <ol class="steps"><li>Create a Google Maps key with the <b>Geocoding API</b> turned on (Google Cloud Console).</li>
@@ -555,7 +577,7 @@
   async function pullWorkiz() {
     toast('Checking Workiz…');
     try {
-      const r = await fetch('/api/workiz-jobs?date=' + enc(S.date), { cache: 'no-store' });
+      const r = await api('/api/workiz-jobs?date=' + enc(S.date), { cache: 'no-store' });
       const d = await r.json().catch(() => null);
       if (!r.ok || !d || d.error) throw new Error((d && d.error) || 'not-connected');
       removeSample();
@@ -597,6 +619,8 @@
   }
 
   document.addEventListener('click', e => {
+    const link = e.target.closest('a[target="_blank"]');
+    if (link && NATIVE) { e.preventDefault(); openExternal(link.href); return; }
     const b = e.target.closest('[data-act]');
     if (!b || b.tagName === 'SELECT' || (b.tagName === 'INPUT' && b.type !== 'button')) return;
     const act = b.dataset.act, id = b.dataset.id;
@@ -639,6 +663,9 @@
       const k = el.dataset.k;
       S.settings[k] = el.type === 'checkbox' ? el.checked : Number(el.value);
       save();
+    } else if (act === 'set-text') {
+      S.settings[el.dataset.k] = el.value.trim();
+      save(); checkServer();
     } else if (act === 'dur') {
       const n = Number(el.value);
       if (n > 0) { S.settings.durations[el.dataset.w][el.dataset.c] = n; save(); }
@@ -674,7 +701,7 @@
     if (TABS.includes(h)) S.tab = h;
     render();
     checkServer();
-    if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude|claudeusercontent/.test(location.host)) {
+    if (!NATIVE && 'serviceWorker' in navigator && location.protocol === 'https:' && !/claude|claudeusercontent/.test(location.host)) {
       navigator.serviceWorker.register('sw.js').catch(() => {});
     }
   }

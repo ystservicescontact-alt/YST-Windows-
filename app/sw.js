@@ -1,6 +1,6 @@
 // Keeps the app opening without a connection. Live data (/api/...) always goes to the network.
 const CACHE = 'dispatch-v1';
-const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'data.js', 'scheduler.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
+const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'config.js', 'data.js', 'scheduler.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

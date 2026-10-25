@@ -1,0 +1,19 @@
+{
+  "appId": "ca.icarus.dispatch",
+  "appName": "Icarus Dispatch",
+  "webDir": "app",
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "initialViewportFitValueHint": "cover",
+      "style": "DARK"
+    }
+  },
+  "android": {
+    "backgroundColor": "#14201D"
+  },
+  "ios": {
+    "backgroundColor": "#14201D",
+    "contentInset": "never"
+  }
+}
