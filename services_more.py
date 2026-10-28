@@ -344,6 +344,43 @@ MORE_SERVICES = [
         ],
     },
     {
+        "slug": "storm-door-repair",
+        "name": "Storm & Screen Doors",
+        "card": "Storm doors that slam, sag or won't latch, repaired. New storm and screen doors installed.",
+        "spec": "Closers · Latches · Glass & screen panels · Install",
+        "title": "Storm Door Repair & Installation Toronto & GTA | Window Repair GTA",
+        "description": "Storm door slamming, sagging or not latching? We repair closers, latches, sweeps and glass and screen panels, and install new storm and screen doors across Toronto and the GTA.",
+        "eyebrow": "Storm & screen doors",
+        "h1": "Storm door repair and installation",
+        "lede": "A storm door protects your front door from Toronto winters and lets in a breeze in summer. When it slams, sags or won't latch, we fix it. When it's past fixing, we install a new one.",
+        "body": """
+<h2>Storm door problems we fix</h2>
+<ul>
+  <li><strong>Slams shut or won't close:</strong> a worn or badly adjusted door closer (the pneumatic cylinder at the top or bottom)</li>
+  <li><strong>Blows open in the wind:</strong> a missing or broken wind chain, or a weak closer</li>
+  <li><strong>Won't latch or lock:</strong> a worn handle set, latch or strike</li>
+  <li><strong>Sags or drags:</strong> loose hinges or a bent hinge rail</li>
+  <li><strong>Drafts at the bottom:</strong> a worn door sweep or expander</li>
+  <li><strong>Broken glass or torn screen</strong> in the door panel</li>
+</ul>
+<h2>Glass and screen panels</h2>
+<p>Many storm doors have interchangeable panels: glass for winter, screen for summer. We replace cracked glass panels and torn screens, and fix panels that won't stay in place. Some doors have a retractable screen built in; we repair those too.</p>
+<h2>New storm and screen doors</h2>
+<p>If the frame is bent or the door is beyond repair, we measure the opening and install a new storm or screen door, including full-view, half-view and retractable screen models. We fit it square, adjust the closer and seal it so it doesn't rattle or leak.</p>
+<h2>Retractable screens</h2>
+<p>A retractable screen rolls away when you don't need it, so it doesn't block your view or your entry door. A good choice for front doors, patio doors and French doors. See also <a href="/window-screen-repair/">window and door screens</a>.</p>
+<p class="note">Storm door slamming every time? Before replacing the closer, check the adjustment screw at the end of the cylinder. Turning it slows or speeds up how fast the door closes.</p>
+""",
+        "faqs": [
+            ("Can you fix a storm door that slams shut?",
+             "Usually yes. It's normally the door closer: we adjust it or replace it so the door closes gently and latches."),
+            ("Do you install new storm doors?",
+             "Yes. We measure the opening and install new storm and screen doors, including retractable screen models."),
+            ("Can you replace the glass in my storm door?",
+             "Yes. We replace glass panels and screen panels in most storm doors."),
+        ],
+    },
+    {
         "slug": "skylight-repair",
         "name": "Skylight Repair",
         "card": "Leaking, foggy or cracked skylight glass repaired or replaced without a full tear-out.",
@@ -376,7 +413,7 @@ MORE_SERVICES = [
 CATEGORIES = [
     ("Glass", ["foggy-window-repair", "window-glass-replacement", "curved-glass-replacement", "front-door-glass", "skylight-repair"]),
     ("Hardware", ["fapim-window-repair", "window-crank-repair", "window-handle-repair", "window-hinge-repair", "window-lock-repair", "window-latch-repair", "tilt-and-turn-window-repair"]),
-    ("Doors", ["patio-door-repair", "door-repair"]),
+    ("Doors", ["patio-door-repair", "door-repair", "storm-door-repair"]),
     ("Seals, leaks & frames", ["window-caulking", "window-leak-drainage-repair", "wood-window-repair", "window-screen-repair"]),
     ("Replacement, commercial & emergency", ["window-replacement", "commercial-glass-repair", "emergency-glass-repair"]),
 ]

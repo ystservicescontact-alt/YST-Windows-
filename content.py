@@ -199,6 +199,7 @@ SERVICES = [
   <li>Pet-resistant mesh for homes with cats and dogs</li>
 </ul>
 <h2>Add it to another repair</h2>
+<p>For storm doors and retractable screen doors, see <a href="/storm-door-repair/">storm and screen doors</a>.</p>
 <p>Screens are quick, so we often do them during a glass or hardware visit. Mention them when you request your estimate.</p>
 """,
         "faqs": [
