@@ -344,14 +344,74 @@ MORE_SERVICES = [
         ],
     },
     {
+        "slug": "storm-doors",
+        "name": "New Storm Doors",
+        "card": "Heavy-duty aluminum storm doors made in Toronto, measured, supplied and installed.",
+        "spec": "Full View · Hi-View · Tri-Lite · Self-Storing",
+        "title": "Storm Doors Toronto & GTA: Supply & Installation | Window Repair GTA",
+        "description": "New storm doors supplied and installed across Toronto and the GTA. Heavy-duty aluminum, tempered glass, made in Toronto. Full View, Hi-View, One-Lite, Tri-Lite and Self-Storing models in 8 colours.",
+        "eyebrow": "New storm doors",
+        "h1": "Storm doors, supplied and installed",
+        "lede": "A storm door adds a second barrier against wind, rain and snow, lets in light, and protects your front door. We supply heavy-duty aluminum storm doors made in Toronto and install them made to measure.",
+        "body": """
+<h2>Why add a storm door</h2>
+<ul class="ticks">
+  <li><strong>Less heat loss:</strong> a second door keeps wind and cold off your entry door in winter</li>
+  <li><strong>Protects your front door</strong> from rain, snow and sun, so it lasts longer</li>
+  <li><strong>Light and fresh air:</strong> see outside, or swap to a screen for a summer breeze</li>
+  <li><strong>Extra security</strong> with an optional key lock and deadbolt</li>
+</ul>
+<h2>Built for Canadian winters</h2>
+<p>The storm doors we install are made in Toronto by Varga Windows, a local aluminum manufacturer. Standard features include:</p>
+<ul class="ticks">
+  <li>1½-inch or 2-inch thick heavy-duty aluminum frames</li>
+  <li>Tempered safety glass</li>
+  <li>Double weatherstripping against drafts</li>
+  <li>Heavy crossbars and strong corners so the door stays rigid and square</li>
+  <li>Heavy-duty door closer</li>
+  <li>Heavy-duty, non-corrosive, self-lubricating hinges</li>
+  <li>Inserts that stop at different heights for ventilation, removable from inside for cleaning</li>
+</ul>
+<h2>Styles</h2>
+<div class="why">
+  <div><h3>Full View</h3><p>One large glass panel for the most light and the clearest view of your front door. Swap the glass for a screen panel in summer.</p></div>
+  <div><h3>Hi-View</h3><p>Glass on top with a solid kick panel below, which stands up to kids, pets and boots.</p></div>
+  <div><h3>One-Lite</h3><p>A single glass opening in a classic frame.</p></div>
+  <div><h3>Tri-Lite</h3><p>Three glass sections for a traditional look.</p></div>
+  <div><h3>Self-Storing</h3><p>Glass and screen are stored inside the door. Slide the glass down to let in air, with no panels to swap or store.</p></div>
+  <div><h3>Decorative glass</h3><p>Sandblasted and decorative glass options for more privacy and a custom look.</p></div>
+</div>
+<h2>Colours, handles and locks</h2>
+<p>Available in <strong>white, black, sandalwood, ivory, pearl grey, chocolate brown, mill and commercial brown</strong>. Choose from different handles, sweeps and glass options, with DX pull handles and an optional colour-matched key lock and deadbolt. Embossed stucco kick panels are available on some styles.</p>
+<h2>How installation works</h2>
+<ol class="tips">
+  <li><strong>We measure</strong> your door opening and help you choose the style, colour and hardware.</li>
+  <li><strong>Your door is made</strong> to fit your opening.</li>
+  <li><strong>We remove the old storm door</strong> if you have one, and take it away.</li>
+  <li><strong>We install and adjust it</strong>: the frame square, the closer set so the door closes gently, and the weatherstripping sealed.</li>
+</ol>
+<p>Have a storm door that just needs fixing? See <a href="/storm-door-repair/">storm door repair</a>.</p>
+""",
+        "faqs": [
+            ("How long does it take to get a new storm door?",
+             "We measure first and the door is made to fit your opening. We'll give you the timeline with your quote. Installation itself usually takes a few hours."),
+            ("Do you take away my old storm door?",
+             "Yes. We remove your old storm door and take it away when we install the new one."),
+            ("Which storm door style is best?",
+             "Full View gives the most light and view. Self-Storing is the easiest for ventilation because the screen is built in. Hi-View is the toughest choice for busy entrances with kids and pets."),
+            ("What colours are available?",
+             "White, black, sandalwood, ivory, pearl grey, chocolate brown, mill and commercial brown."),
+        ],
+    },
+    {
         "slug": "storm-door-repair",
-        "name": "Storm & Screen Doors",
-        "card": "Storm doors that slam, sag or won't latch, repaired. New storm and screen doors installed.",
-        "spec": "Closers · Latches · Glass & screen panels · Install",
-        "title": "Storm Door Repair & Installation Toronto & GTA | Window Repair GTA",
+        "name": "Storm Door Repair",
+        "card": "Storm and screen doors that slam, sag or won't latch, usually fixed in one visit.",
+        "spec": "Closers · Handles · Glass & screen inserts · Alignment",
+        "title": "Storm Door Repair Toronto & GTA | Window Repair GTA",
         "description": "Storm door slamming, sagging or not latching? We repair closers, latches, sweeps and glass and screen panels, and install new storm and screen doors across Toronto and the GTA.",
         "eyebrow": "Storm & screen doors",
-        "h1": "Storm door repair and installation",
+        "h1": "Storm door repair",
         "lede": "A storm door protects your front door from Toronto winters and lets in a breeze in summer. When it slams, sags or won't latch, we fix it. When it's past fixing, we install a new one.",
         "body": """
 <h2>Storm door problems we fix</h2>
@@ -363,10 +423,12 @@ MORE_SERVICES = [
   <li><strong>Drafts at the bottom:</strong> a worn door sweep or expander</li>
   <li><strong>Broken glass or torn screen</strong> in the door panel</li>
 </ul>
+<h2>Brands and styles we repair</h2>
+<p>We repair full-view, self-storing, ventilating and retractable-screen storm doors from most brands, including Andersen, Larson and Forever, and doors made by local Ontario manufacturers. Most repairs are done in one visit, and we give you a clear price before any work starts.</p>
 <h2>Glass and screen panels</h2>
 <p>Many storm doors have interchangeable panels: glass for winter, screen for summer. We replace cracked glass panels and torn screens, and fix panels that won't stay in place. Some doors have a retractable screen built in; we repair those too.</p>
-<h2>New storm and screen doors</h2>
-<p>If the frame is bent or the door is beyond repair, we measure the opening and install a new storm or screen door, including full-view, half-view and retractable screen models. We fit it square, adjust the closer and seal it so it doesn't rattle or leak.</p>
+<h2>Repair or replace?</h2>
+<p>If the frame is bent, the corners have separated or the door is badly corroded, a new door is usually better value. We'll tell you honestly. See <a href="/storm-doors/">new storm doors</a>, made in Toronto and installed made to measure.</p>
 <h2>Retractable screens</h2>
 <p>A retractable screen rolls away when you don't need it, so it doesn't block your view or your entry door. A good choice for front doors, patio doors and French doors. See also <a href="/window-screen-repair/">window and door screens</a>.</p>
 <p class="note">Storm door slamming every time? Before replacing the closer, check the adjustment screw at the end of the cylinder. Turning it slows or speeds up how fast the door closes.</p>
@@ -413,7 +475,7 @@ MORE_SERVICES = [
 CATEGORIES = [
     ("Glass", ["foggy-window-repair", "window-glass-replacement", "curved-glass-replacement", "front-door-glass", "skylight-repair"]),
     ("Hardware", ["fapim-window-repair", "window-crank-repair", "window-handle-repair", "window-hinge-repair", "window-lock-repair", "window-latch-repair", "tilt-and-turn-window-repair"]),
-    ("Doors", ["patio-door-repair", "door-repair", "storm-door-repair"]),
+    ("Doors", ["patio-door-repair", "door-repair", "storm-doors", "storm-door-repair"]),
     ("Seals, leaks & frames", ["window-caulking", "window-leak-drainage-repair", "wood-window-repair", "window-screen-repair"]),
     ("Replacement, commercial & emergency", ["window-replacement", "commercial-glass-repair", "emergency-glass-repair"]),
 ]

@@ -73,7 +73,7 @@ SERVICE_ICON = {
     "tilt-and-turn-window-repair": "tilt", "window-handle-repair": "handle", "window-hinge-repair": "hinge",
     "window-lock-repair": "lock", "window-latch-repair": "latch", "door-repair": "door", "front-door-glass": "doorglass",
     "curved-glass-replacement": "curved", "wood-window-repair": "wood", "window-leak-drainage-repair": "drop",
-    "skylight-repair": "skylight", "fapim-window-repair": "tilt", "storm-door-repair": "door",
+    "skylight-repair": "skylight", "fapim-window-repair": "tilt", "storm-door-repair": "door", "storm-doors": "doorglass",
 }
 BY_SLUG_ALL = {s["slug"]: s for s in SERVICES}
 FEATURED = [BY_SLUG_ALL["fapim-window-repair"]] + SERVICES[:9] + \
