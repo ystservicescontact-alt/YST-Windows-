@@ -17,7 +17,7 @@ from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
 from media import photo, pair, gallery_pairs, video_html
-from services_more import CATEGORIES
+from services_more import CATEGORIES, STORM_MODELS
 from pages_more import (VISIT_FEE, CUSTOMERS, YEARS, CLIENT_LOGOS, ABOUT_STORY, WORK, PROMISES, CHECK_12,
                         WHO, SIGNS, BLOG, EXTRA_PAGES)
 
@@ -567,7 +567,8 @@ def build_blog_posts():
                   "description": b["description"], "datePublished": b["date"],
                   "author": {"@type": "Organization", "name": SITE["name"]},
                   "publisher": {"@id": SITE["domain"] + "/#business"}, "mainEntityOfPage": SITE["domain"] + url(slug)}
-        write(slug, layout(slug=slug, title=f"{b['title']} | {SITE['name']}", description=b["description"], body=body,
+        page_title = b["title"] if len(b["title"]) > 48 else f"{b['title']} | {SITE['name']}"
+        write(slug, layout(slug=slug, title=page_title, description=b["description"], body=body,
                            schemas=[business_schema(), breadcrumb_schema(trail), schema]))
 
 
@@ -720,6 +721,15 @@ def extras_html(slug, city=None, price_only=False):
             f"usually the same day.</p>" + ("" if price_only else e["html"]))
 
 
+def storm_models_html():
+    cards = ""
+    for key, name, desc in STORM_MODELS:
+        img = photo(f"storm/{key}")
+        media = f'<img src="{img}" alt="{escape(name)} storm door" loading="lazy">' if img else ICONS["doorglass"]
+        cards += f'<div class="model"><div class="card-media">{media}</div><div class="card-body"><h3>{escape(name)}</h3><p>{escape(desc)}</p></div></div>'
+    return f'<div class="models">{cards}</div>'
+
+
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
     more = extras_html(s["slug"])
@@ -730,6 +740,8 @@ def build_service(s):
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p><ul class=\"areas\">{links}</ul>"
     else:
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
+    if "{storm_models}" in s["body"]:
+        s = dict(s, body=s["body"].replace("{storm_models}", storm_models_html()))
     build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])],
                   media_block(s["slug"], s["name"]) + more + extra)
 
@@ -795,7 +807,7 @@ def build_combo(c, s):
   <ul class="areas">{same_service}</ul>
 </div></section>
 {cta_html()}"""
-    desc = (f"{cs['short']} in {city}, ON. {cs['lede'].split('.')[0]}. Free estimates, quotes from a photo. "
+    desc = (f"{cs['short']} in {city}, ON. Free estimates and quotes from a photo. Insured & WSIB covered. "
             f"Call {SITE['phone']}.")
     schemas = [business_schema(), breadcrumb_schema(trail), service_schema(title_name, slug, city), faq_schema(faqs)]
     write(slug, layout(slug=slug, title=f"{title_name} | {SITE['name']}", description=desc, body=body,

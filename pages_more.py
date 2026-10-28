@@ -82,7 +82,7 @@ BLOG = [
 <h2>Why generic parts don't work well</h2>
 <p>FAPIM arms come in specific lengths (from about 14 to 28 inches) and fit specific aluminum profiles. Generic North American arms often don't match the length or screw positions, so the vent sits crooked or doesn't seal. On a high floor, a poorly fitted arm is a safety risk.</p>
 <h2>Getting it fixed</h2>
-<p>FAPIM parts aren't stocked by local distributors in Canada. We import genuine FAPIM parts from Italy and install them from inside your unit. See <a href="/fapim-window-repair/">FAPIM window repair</a>, or the local pages for <a href="/fapim-window-repair-toronto/">Toronto</a> and <a href="/fapim-window-repair-mississauga/">Mississauga</a>.</p>
+<p>FAPIM parts are hard to find in Canada. We import genuine FAPIM parts from Italy and install them from inside your unit. See <a href="/fapim-window-repair/">FAPIM window repair</a>, or the local pages for <a href="/fapim-window-repair-toronto/">Toronto</a> and <a href="/fapim-window-repair-mississauga/">Mississauga</a>.</p>
 """,
     },
     {
@@ -306,7 +306,7 @@ EXTRA_PAGES = [
     {
         "slug": "real-estate-agents",
         "crumb": "Real estate agents",
-        "title": "Window Repair for Real Estate Agents | Pre-Listing & Inspection Fixes | Window Repair GTA",
+        "title": "Window Repair for Real Estate Agents | Window Repair GTA",
         "description": "Foggy glass, broken cranks and sticking doors fixed fast before listing or closing. Window repairs for real estate agents and sellers across the GTA.",
         "body": """
 <section class="page-hero"><div class="wrap">
@@ -428,7 +428,7 @@ EXTRA_PAGES = [
     {
         "slug": "fapim-window-repair-toronto",
         "crumb": "FAPIM windows Toronto",
-        "title": "FAPIM Window Repair Toronto | Genuine Italian Parts | Window Repair GTA",
+        "title": "FAPIM Window Repair Toronto | Genuine Italian Parts",
         "description": "FAPIM condo window repair in Toronto: stay arms, handles and locks replaced with genuine parts imported from Italy. Insured and WSIB covered.",
         "body": """
 <section class="page-hero"><div class="wrap">
@@ -450,7 +450,7 @@ EXTRA_PAGES = [
     <li>Opening limiters and loose arm brackets</li>
   </ul>
   <h2>Genuine parts from Italy</h2>
-  <p>FAPIM has no local parts distribution in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
+  <p>FAPIM parts are hard to find in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
   <h2>Buildings and areas we serve</h2>
   <p>Downtown Toronto, CityPlace, Liberty Village, King West, the Financial District, St. Lawrence, Yonge and Bloor, Yorkville, Midtown and Yonge and Eglinton, North York Centre and condos across the city.</p>
   <p class="note">Text us a photo of the arm (where the FAPIM name is stamped) and the handle. We'll tell you which parts you need.</p>
@@ -460,7 +460,7 @@ EXTRA_PAGES = [
     {
         "slug": "fapim-window-repair-mississauga",
         "crumb": "FAPIM windows Mississauga",
-        "title": "FAPIM Window Repair Mississauga | Genuine Italian Parts | Window Repair GTA",
+        "title": "FAPIM Window Repair Mississauga | Genuine Italian Parts",
         "description": "FAPIM condo window repair in Mississauga: stay arms, handles and locks replaced with genuine parts imported from Italy. Insured and WSIB covered.",
         "body": """
 <section class="page-hero"><div class="wrap">
@@ -482,7 +482,7 @@ EXTRA_PAGES = [
     <li>Opening limiters and loose arm brackets</li>
   </ul>
   <h2>Genuine parts from Italy</h2>
-  <p>FAPIM has no local parts distribution in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
+  <p>FAPIM parts are hard to find in Canada, and generic hardware rarely fits these aluminum profiles. We import genuine FAPIM parts from Italy, so your window is repaired properly instead of patched. Read more about <a href="/fapim-window-repair/">FAPIM window repair</a>.</p>
   <h2>Buildings and areas we serve</h2>
   <p>Mississauga City Centre and Square One, Port Credit, Erin Mills, Cooksville, Hurontario corridor, Lakeview and condos across Mississauga.</p>
   <p class="note">Text us a photo of the arm (where the FAPIM name is stamped) and the handle. We'll tell you which parts you need.</p>

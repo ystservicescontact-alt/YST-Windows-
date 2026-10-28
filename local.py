@@ -148,7 +148,7 @@ WHY = [
     ("Repair, not replace", "We fix the part that failed. A new sealed unit or operator costs a fraction of a new window."),
     ("Quotes from a photo", "Text us a photo and we can usually give you a price without a visit."),
     ("All window brands", "We work on most major brands and Canadian manufacturers, old and new."),
-    ("Insured, with a 1-year warranty", "We are fully insured, and our workmanship is backed by a 1-year warranty."),
+    ("Insured, WSIB covered, 1-year warranty", "We are fully insured and WSIB covered, and our workmanship is backed by a 1-year warranty."),
 ]
 
 

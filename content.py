@@ -518,7 +518,7 @@ CITIES = [
 # ---------------------------------------------------------------- home
 HOME = {
     "title": "Window Repair Toronto & GTA | Foggy Glass, Broken Windows, Patio Doors",
-    "description": "Window and glass repair across Toronto and the GTA: foggy sealed units, broken glass, window cranks, hinges and patio doors. Repair first, replace only when needed. Free estimates.",
+    "description": "Window and glass repair across Toronto and the GTA: foggy glass, broken glass, cranks, hinges and patio doors. Repair first. Insured & WSIB covered. Free estimates.",
     "tag": "Repair first. Replace only if needed.",
     "h1": "Foggy or broken windows? We replace the glass, not the whole window.",
     "lede": "Sealed glass units, cranks, hinges, locks and patio door rollers for homes and businesses across the GTA. Most repairs cost a fraction of a new window.",
@@ -552,7 +552,7 @@ PAGES = [
     {
         "slug": "services",
         "crumb": "Services",
-        "title": "Window & Glass Repair Services in Toronto & the GTA | Window Repair GTA",
+        "title": "Window & Glass Repair Services Toronto & GTA | Window Repair GTA",
         "description": "All our window, glass and door repair services in Toronto and the GTA: foggy glass, broken glass, cranks, patio doors, caulking, screens, replacement and commercial.",
         "body": """
 <section class="page-hero"><div class="wrap">
@@ -638,7 +638,7 @@ PAGES = [
     {
         "slug": "insurance-claims",
         "crumb": "Insurance claims",
-        "title": "Broken Window Insurance Claims in Toronto & the GTA | Window Repair GTA",
+        "title": "Broken Window Insurance Claims Toronto & GTA | Window Repair GTA",
         "description": "Broken window from a break-in, storm or accident? How to handle a home insurance claim for window and glass repair, and the photos, quote and invoice we provide.",
         "body": """
 <section class="page-hero"><div class="wrap">

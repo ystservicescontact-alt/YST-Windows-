@@ -6,7 +6,7 @@ MORE_SERVICES = [
         "name": "FAPIM Window Repair",
         "card": "Italian FAPIM windows in GTA condos repaired with genuine parts imported from Italy.",
         "spec": "Genuine Italian parts · Stays · Handles · Locks",
-        "title": "FAPIM Window Repair Toronto & Mississauga | Genuine Italian Parts | Window Repair GTA",
+        "title": "FAPIM Window Repair Toronto & Mississauga | Window Repair GTA",
         "description": "FAPIM window won't close, lock or stay open? We repair Italian FAPIM windows in Toronto and Mississauga condos with genuine parts imported from Italy.",
         "eyebrow": "FAPIM specialists",
         "h1": "FAPIM window repair with genuine Italian parts",
@@ -33,7 +33,7 @@ MORE_SERVICES = [
   <li><strong>Loose or missing screws</strong> on the arm brackets, which is dangerous on a high floor.</li>
 </ul>
 <h2>Why genuine FAPIM parts matter</h2>
-<p>FAPIM hardware is made to exact sizes for specific aluminum profiles. Generic arms and handles from North American suppliers often don't match the length, the screw positions or the profile, so the window ends up patched, misaligned or unsafe. FAPIM has no local parts distribution in Canada, so we import genuine FAPIM parts from Italy and install them so the window works as it was designed.</p>
+<p>FAPIM hardware is made to exact sizes for specific aluminum profiles. Generic arms and handles from North American suppliers often don't match the length, the screw positions or the profile, so the window ends up patched, misaligned or unsafe. FAPIM parts are hard to find in Canada, so we import genuine FAPIM parts from Italy and install them so the window works as it was designed.</p>
 <h2>How to tell if your window is FAPIM</h2>
 <ol class="tips">
   <li><strong>Open the vent</strong> and look at the metal arm on the side or the bracket where it meets the frame.</li>
@@ -203,7 +203,7 @@ MORE_SERVICES = [
         "name": "Entry & Commercial Door Repair",
         "card": "Front doors, French doors and commercial doors that stick, drop or won't lock.",
         "spec": "Hinges · Locks · Closers · Alignment",
-        "title": "Door Repair Toronto & GTA: Entry, French & Commercial Doors | Window Repair GTA",
+        "title": "Entry & Commercial Door Repair Toronto | Window Repair GTA",
         "description": "Front door, French door or commercial door sticking, dropping or not locking? We repair hinges, locks, closers and alignment across Toronto and the GTA.",
         "eyebrow": "Doors",
         "h1": "Entry and commercial door repair",
@@ -266,7 +266,7 @@ MORE_SERVICES = [
         "name": "Curved & Shaped Glass",
         "card": "Arched, half-round, trapezoid and custom-shaped sealed units made to fit.",
         "spec": "Arches · Half-rounds · Trapezoids · Custom",
-        "title": "Curved & Shaped Window Glass Replacement Toronto & GTA | Window Repair GTA",
+        "title": "Curved & Shaped Glass Replacement Toronto | Window Repair GTA",
         "description": "Foggy or broken arched, half-round or custom-shaped window glass? We make and install shaped sealed units across Toronto and the GTA.",
         "eyebrow": "Shaped glass",
         "h1": "Curved and shaped glass replacement",
@@ -346,14 +346,15 @@ MORE_SERVICES = [
     {
         "slug": "storm-doors",
         "name": "New Storm Doors",
-        "card": "Heavy-duty aluminum storm doors made in Toronto, measured, supplied and installed.",
+        "card": "Heavy-duty aluminum storm doors made in Toronto, supplied and installed. From $1,200.",
         "spec": "Full View · Hi-View · Tri-Lite · Self-Storing",
         "title": "Storm Doors Toronto & GTA: Supply & Installation | Window Repair GTA",
-        "description": "New storm doors supplied and installed across Toronto and the GTA. Heavy-duty aluminum, tempered glass, made in Toronto. Full View, Hi-View, One-Lite, Tri-Lite and Self-Storing models in 8 colours.",
+        "description": "New storm doors made in Toronto, supplied and installed across the GTA. Full View, Hi-View, Tri-Lite and Self-Storing in 8 colours. From $1,200 installed.",
         "eyebrow": "New storm doors",
         "h1": "Storm doors, supplied and installed",
         "lede": "A storm door adds a second barrier against wind, rain and snow, lets in light, and protects your front door. We supply heavy-duty aluminum storm doors made in Toronto and install them made to measure.",
         "body": """
+<p class="price-note"><strong>A new storm door, supplied and installed, typically costs $1,200–$1,600 depending on the style, size, glass and hardware.</strong></p>
 <h2>Why add a storm door</h2>
 <ul class="ticks">
   <li><strong>Less heat loss:</strong> a second door keeps wind and cold off your entry door in winter</li>
@@ -362,7 +363,7 @@ MORE_SERVICES = [
   <li><strong>Extra security</strong> with an optional key lock and deadbolt</li>
 </ul>
 <h2>Built for Canadian winters</h2>
-<p>The storm doors we install are made in Toronto by Varga Windows, a local aluminum manufacturer. Standard features include:</p>
+<p>The storm doors we install are made in Toronto from heavy-duty aluminum. Standard features include:</p>
 <ul class="ticks">
   <li>1½-inch or 2-inch thick heavy-duty aluminum frames</li>
   <li>Tempered safety glass</li>
@@ -373,14 +374,7 @@ MORE_SERVICES = [
   <li>Inserts that stop at different heights for ventilation, removable from inside for cleaning</li>
 </ul>
 <h2>Styles</h2>
-<div class="why">
-  <div><h3>Full View</h3><p>One large glass panel for the most light and the clearest view of your front door. Swap the glass for a screen panel in summer.</p></div>
-  <div><h3>Hi-View</h3><p>Glass on top with a solid kick panel below, which stands up to kids, pets and boots.</p></div>
-  <div><h3>One-Lite</h3><p>A single glass opening in a classic frame.</p></div>
-  <div><h3>Tri-Lite</h3><p>Three glass sections for a traditional look.</p></div>
-  <div><h3>Self-Storing</h3><p>Glass and screen are stored inside the door. Slide the glass down to let in air, with no panels to swap or store.</p></div>
-  <div><h3>Decorative glass</h3><p>Sandblasted and decorative glass options for more privacy and a custom look.</p></div>
-</div>
+{storm_models}
 <h2>Colours, handles and locks</h2>
 <p>Available in <strong>white, black, sandalwood, ivory, pearl grey, chocolate brown, mill and commercial brown</strong>. Choose from different handles, sweeps and glass options, with DX pull handles and an optional colour-matched key lock and deadbolt. Embossed stucco kick panels are available on some styles.</p>
 <h2>How installation works</h2>
@@ -393,6 +387,8 @@ MORE_SERVICES = [
 <p>Have a storm door that just needs fixing? See <a href="/storm-door-repair/">storm door repair</a>.</p>
 """,
         "faqs": [
+            ("How much does a new storm door cost?",
+             "A new storm door, supplied and installed, typically costs $1,200–$1,600 depending on the style, size, glass and hardware. We give you an exact price after measuring."),
             ("How long does it take to get a new storm door?",
              "We measure first and the door is made to fit your opening. We'll give you the timeline with your quote. Installation itself usually takes a few hours."),
             ("Do you take away my old storm door?",
@@ -409,7 +405,7 @@ MORE_SERVICES = [
         "card": "Storm and screen doors that slam, sag or won't latch, usually fixed in one visit.",
         "spec": "Closers · Handles · Glass & screen inserts · Alignment",
         "title": "Storm Door Repair Toronto & GTA | Window Repair GTA",
-        "description": "Storm door slamming, sagging or not latching? We repair closers, latches, sweeps and glass and screen panels, and install new storm and screen doors across Toronto and the GTA.",
+        "description": "Storm door slamming, sagging or not latching? We repair closers, handles, sweeps, glass and screen inserts across Toronto and the GTA. Free estimates.",
         "eyebrow": "Storm & screen doors",
         "h1": "Storm door repair",
         "lede": "A storm door protects your front door from Toronto winters and lets in a breeze in summer. When it slams, sags or won't latch, we fix it. When it's past fixing, we install a new one.",
@@ -478,4 +474,14 @@ CATEGORIES = [
     ("Doors", ["patio-door-repair", "door-repair", "storm-doors", "storm-door-repair"]),
     ("Seals, leaks & frames", ["window-caulking", "window-leak-drainage-repair", "wood-window-repair", "window-screen-repair"]),
     ("Replacement, commercial & emergency", ["window-replacement", "commercial-glass-repair", "emergency-glass-repair"]),
+]
+
+# Storm door models we install (made in Toronto). Photo slot: src/photos/storm/<key>.jpg
+STORM_MODELS = [
+    ("full-view", "Full View", "One large glass panel for the most light and the clearest view of your front door. Swap the glass for a screen panel in summer."),
+    ("hi-view", "Hi-View", "Glass on top with a solid kick panel below, which stands up to kids, pets and boots."),
+    ("one-lite", "One-Lite", "A single glass opening in a classic frame."),
+    ("tri-lite", "Tri-Lite", "Three glass sections for a traditional look."),
+    ("self-storing", "Self-Storing", "Glass and screen are stored inside the door. Slide the glass down to let in air, with no panels to swap or store."),
+    ("decorative", "Decorative glass", "Sandblasted and decorative glass options for more privacy and a custom look."),
 ]
