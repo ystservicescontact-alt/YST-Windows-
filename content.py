@@ -292,9 +292,12 @@ SERVICES = [
 <p>We remove the loose glass, secure the opening with board or temporary glazing so your home or business is closed and weatherproof, and measure for the permanent glass. Then we come back and install it.</p>
 <h2>Homes and businesses</h2>
 <p>We handle broken house windows, patio doors, storefronts and office glass. For businesses, see <a href="/commercial-glass-repair/">commercial glass repair</a>.</p>
+<p class="price-note"><strong>After-hours calls: emergency calls after 10 PM have a $100 call-out fee.</strong></p>
 <p>Making an insurance claim? See <a href="/insurance-claims/">how we help with insurance claims</a>.</p>
 """,
         "faqs": [
+            ("Is there an extra charge at night?",
+             "Emergency calls after 10 PM have a $100 after-hours call-out fee. Before 10 PM there's no extra charge for the visit."),
             ("How fast can you come?",
              "It depends on the day and your location. Call us and we'll give you a real arrival time."),
             ("Can you help with an insurance claim?",
@@ -534,7 +537,7 @@ HOME = {
         ("Can you give me a price from a photo?",
          "Often, yes. Text us a photo of the whole window and a close-up of the problem. For sealed units we confirm the exact size when we measure."),
         ("Do you offer emergency service?",
-         "Yes. We're available 24/7 for broken windows and glass after a break-in, storm or accident. We secure the opening first, then replace the glass."),
+         "Yes. We're available 24/7 for broken windows and glass after a break-in, storm or accident. We secure the opening first, then replace the glass. Calls after 10 PM have a $100 after-hours call-out fee."),
         ("Which areas do you serve?",
          "Toronto and the GTA, including Mississauga, Brampton, Vaughan, Markham, Richmond Hill, North York, Scarborough, Etobicoke, Oakville, Newmarket and Durham Region."),
         ("Do you work on all brands?",

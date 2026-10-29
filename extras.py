@@ -147,7 +147,7 @@ EXTRAS = {
         "price_factors": [
             "Board-up materials and size of the opening",
             "Glass size and type for the permanent fix",
-            "Time of day",
+            "Time of day: calls after 10 PM have a $100 after-hours call-out fee",
         ],
         "html": "",
     },

@@ -23,7 +23,7 @@ PROMISES = [
     ("5-year seal warranty on new glass in vinyl windows", "New sealed glass units we install in vinyl frames carry a 5-year warranty against seal failure."),
     ("1-year workmanship warranty", "Every repair is backed by our 1-year workmanship warranty."),
     ("Price match", "Have a written quote from another licensed company for the same work? Show us and we'll match it."),
-    ("No travel or after-hours surcharge", "No extra charge for travel anywhere in our service area, and no after-hours surcharge for emergencies."),
+    ("No travel charge in the GTA", "No extra charge for travel anywhere in the Greater Toronto Area."),
     ("Fully insured and WSIB covered", "We are fully insured and covered by WSIB, Ontario's workplace safety insurance, so you're protected while we work in your home or business."),
     ("12-point window check", "Every visit includes a 12-point check of your window, so you know about any other problem before it gets worse."),
 ]
