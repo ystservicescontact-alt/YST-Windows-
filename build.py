@@ -385,6 +385,28 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     <a href="/blog/">Blog</a>
     <a href="/contact/">Free Estimate</a>
     <a class="nav-phone" href="tel:{SITE['tel']}" data-where="header"><small>Call for a free quote</small><b>{SITE['phone']}</b></a>
+    <details class="mnav">
+      <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+      <div class="mnav-panel">
+        <ul class="mnav-main">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services/">All services</a></li>
+          <li><a href="/fapim-window-repair/">FAPIM windows</a></li>
+          <li><a href="/foggy-window-repair/">Foggy glass</a></li>
+          <li><a href="/window-crank-repair/">Cranks &amp; hardware</a></li>
+          <li><a href="/patio-door-repair/">Patio doors</a></li>
+          <li><a href="/storm-doors/">Storm doors</a></li>
+          <li><a href="/emergency-glass-repair/">24/7 emergency</a></li>
+          <li><a href="/service-areas/">Service areas</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+        <div class="mnav-cta">
+          <a class="btn btn-yellow" href="tel:{SITE['tel']}" data-where="menu">Call {SITE['phone']}</a>
+          <a class="btn btn-navy" href="/quote/">Get a free quote</a>
+        </div>
+      </div>
+    </details>
   </nav>
 </div></header>
 <main id="main">
