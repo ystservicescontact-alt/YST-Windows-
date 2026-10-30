@@ -22,7 +22,7 @@ EXTS = (".jpg", ".jpeg", ".png", ".webp")
 VIDEOS = {}
 
 # Captions for gallery pairs, keyed by number: {"01": ("Foggy picture window", "Mississauga")}
-GALLERY_CAPTIONS = {}
+GALLERY_CAPTIONS = {"01": ("Foggy glass replacement", "Mississauga")}
 
 
 def photo(name):
