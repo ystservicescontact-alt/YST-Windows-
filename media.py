@@ -9,6 +9,7 @@ these exact names (jpg, jpeg, png or webp), then run python3 build.py.
   services/<service-slug>-before.jpg + -after.jpg   before/after pair on the service page
   cities/<town-page-slug>.jpg       a job photo on that town's page
   gallery/<NN>-before.jpg + <NN>-after.jpg          extra before/after pairs (home page)
+  jobs/<job-key>/<NN>-before.jpg + <NN>-after.jpg   before/after jobs on a service page (see JOB_PAGES)
 
 Videos are YouTube links: add the video ID to VIDEOS below.
 """
@@ -59,3 +60,33 @@ def video_html(key, title):
         return ""
     return (f'<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{vid}" title="{title}" '
             f'loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>')
+
+
+# Job folders under src/photos/jobs/ and the service page each one shows on.
+JOB_PAGES = {
+    "window-hinge-repair": ("window-hinge-repair", "Hinge replacement"),
+    "commercial-door-glass": ("commercial-glass-repair", "Commercial door glass"),
+    "window-glass-replacement": ("window-glass-replacement", "Glass replacement"),
+    "condo-glass": ("window-glass-replacement", "Condo glass replacement"),
+}
+
+# Captions for job pairs: {("condo-glass", "01"): ("3 panes replaced", "Toronto")}
+JOB_CAPTIONS = {}
+
+
+def job_pairs(service_slug):
+    """Before/after pairs from every job folder that maps to this service page."""
+    out = []
+    for key, (page, default_title) in JOB_PAGES.items():
+        if page != service_slug:
+            continue
+        d = PHOTOS / "jobs" / key
+        if not d.exists():
+            continue
+        nums = sorted({f.name.split("-")[0] for f in d.iterdir() if "-before" in f.name})
+        for n in nums:
+            p = pair(f"jobs/{key}/{n}")
+            if p:
+                title, city = JOB_CAPTIONS.get((key, n), (default_title, ""))
+                out.append({"before": p[0], "after": p[1], "title": title, "city": city})
+    return out

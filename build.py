@@ -16,7 +16,7 @@ from content import SERVICES, CITIES, HOME, PAGES
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
-from media import photo, pair, gallery_pairs, video_html
+from media import photo, pair, gallery_pairs, job_pairs, video_html, PHOTOS, EXTS
 from services_more import CATEGORIES, STORM_MODELS
 from pages_more import (VISIT_FEE, CUSTOMERS, YEARS, CLIENT_LOGOS, ABOUT_STORY, WORK, PROMISES, CHECK_12,
                         WHO, SIGNS, BLOG, EXTRA_PAGES)
@@ -203,6 +203,19 @@ def ba_figure(before, after, title, city=""):
 </figure>"""
 
 
+def folder_grid(folder, skip_text, alt, heading):
+    """All photos in src/photos/<folder>/ not already used in skip_text, as a grid."""
+    d = PHOTOS / folder
+    if not d.exists():
+        return ""
+    imgs = [f"/photos/{folder}/{f.name}" for f in sorted(d.iterdir())
+            if f.suffix.lower() in EXTS and f"/photos/{folder}/{f.name}" not in skip_text]
+    if not imgs:
+        return ""
+    cells = "".join(f'<img src="{i}" alt="{escape(alt)}" loading="lazy">' for i in imgs)
+    return f'<h2>{escape(heading)}</h2><div class="photo-grid">{cells}</div>'
+
+
 def media_block(service_slug, title):
     """Service photo, before/after pair and video, if any exist."""
     out = ""
@@ -212,6 +225,10 @@ def media_block(service_slug, title):
     p = pair(f"services/{service_slug}")
     if p:
         out += f'<div class="gallery">{ba_figure(p[0], p[1], title)}</div>'
+    jobs = job_pairs(service_slug)
+    if jobs:
+        figs = "".join(ba_figure(j["before"], j["after"], j["title"], j["city"]) for j in jobs)
+        out += f'<h2>Recent jobs</h2><div class="gallery">{figs}</div>'
     return out + video_html(service_slug, title)
 
 
@@ -764,8 +781,11 @@ def build_service(s):
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
     if "{storm_models}" in s["body"]:
         s = dict(s, body=s["body"].replace("{storm_models}", storm_models_html()))
+    jobs = ""
+    if s["slug"] == "fapim-window-repair":
+        jobs = folder_grid("fapim", s["body"], "FAPIM window repair job in a GTA condo", "More FAPIM jobs")
     build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])],
-                  media_block(s["slug"], s["name"]) + more + extra)
+                  media_block(s["slug"], s["name"]) + jobs + more + extra)
 
 
 def build_city(c):
@@ -774,6 +794,10 @@ def build_city(c):
         f'<li><a href="{url(combo_slug(c["slug"], s["slug"]) if s["slug"] in COMBO_SERVICES else s["slug"])}">'
         f'{escape(s["name"])}{" in " + escape(c["name"]) if s["slug"] in COMBO_SERVICES else ""}</a></li>' for s in SERVICES)
     extra = f"<h2>Our services in {escape(c['name'])}</h2><ul>{items}</ul>"
+    img = photo("cities/" + town_slug(c["name"]))
+    if img:
+        extra = (f'<img class="prose-img" src="{img}" alt="Window repair job in {escape(c["name"])}" loading="lazy">'
+                 + extra)
     build_article(c, trail, [service_schema(f"Window repair in {c['name']}", c["slug"], c["name"])], extra)
 
 

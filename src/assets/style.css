@@ -372,3 +372,6 @@ h1, h2, h3, .display { font-synthesis: none; }
 }
 @media (max-width: 560px) { .nav { gap: 12px; } }
 @media (prefers-reduced-motion: reduce) { .mnav summary span { transition: none; } }
+
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 8px 0 24px; }
+.photo-grid img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; border-bottom: 4px solid var(--red-bright); }
