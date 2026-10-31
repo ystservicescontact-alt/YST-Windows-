@@ -226,8 +226,9 @@ SERVICES = [
   <li>You want a different style, size or opening</li>
 </ul>
 <p>If only the glass or hardware has failed, a <a href="/foggy-window-repair/">glass</a> or <a href="/window-crank-repair/">hardware repair</a> is usually the better value. We'll show you both options.</p>
-<h2>Windows we install</h2>
-<p>Casement, awning, single and double hung, sliders, picture windows and bay and bow windows, in vinyl and other frame materials. Glass options include double or triple pane, Low-E coatings and argon fill, chosen for the GTA's cold winters and hot summers.</p>
+<h2>Window styles we install</h2>
+{window_styles}
+<p>All styles come in vinyl and other frame materials. Glass options include double or triple pane, Low-E coatings and argon fill, chosen for the GTA's cold winters and hot summers. Not sure which style fits your opening? Send us a photo and we'll suggest one.</p>
 <h2>How installation works</h2>
 <p>We measure every opening, order the windows to size, and install them with proper insulation, flashing and exterior caulking. We finish the interior trim and clean up.</p>
 <p class="note">Ontario and federal energy programs change often. Ask us about any rebate currently available for window upgrades before you buy.</p>

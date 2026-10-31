@@ -16,6 +16,7 @@ from content import SERVICES, CITIES, HOME, PAGES
 from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
+from window_styles import window_styles_html
 from media import photo, pair, gallery_pairs, job_pairs, video_html, PHOTOS, EXTS
 from services_more import CATEGORIES, STORM_MODELS
 from pages_more import (VISIT_FEE, CUSTOMERS, YEARS, CLIENT_LOGOS, ABOUT_STORY, WORK, PROMISES, CHECK_12,
@@ -779,6 +780,8 @@ def build_service(s):
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p><ul class=\"areas\">{links}</ul>"
     else:
         extra = f"<h2>Where we do this work</h2><p>Anywhere in {SITE['area']}, including:</p>{areas_html()}"
+    if "{window_styles}" in s["body"]:
+        s = dict(s, body=s["body"].replace("{window_styles}", window_styles_html()))
     if "{storm_models}" in s["body"]:
         s = dict(s, body=s["body"].replace("{storm_models}", storm_models_html()))
     jobs = ""

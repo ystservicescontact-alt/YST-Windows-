@@ -28,3 +28,25 @@
   document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) menu.open = false; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
 })();
+
+// Window style cards: tap to open/close; on phones, each card opens once as it scrolls into view.
+(function () {
+  var cards = document.querySelectorAll('.wstyle');
+  if (!cards.length) return;
+  cards.forEach(function (c) {
+    c.addEventListener('click', function () { c.classList.toggle('open'); });
+    c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.classList.toggle('open'); } });
+  });
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+  if (still || !touch || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var c = en.target; io.unobserve(c);
+      setTimeout(function () { c.classList.add('open'); }, 300);
+      setTimeout(function () { c.classList.remove('open'); }, 2100);
+    });
+  }, { threshold: 0.6 });
+  cards.forEach(function (c) { io.observe(c); });
+})();
