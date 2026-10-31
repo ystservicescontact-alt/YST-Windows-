@@ -654,7 +654,7 @@ def build_home():
     extra_checks = ([f"{YEARS} years in business"] if YEARS else []) + ([f"{CUSTOMERS} customers"] if CUSTOMERS else [])
     checks = "".join(f"<li>{escape(c)}</li>" for c in h["checks"] + extra_checks)
     body = f"""
-<section{(' class="hero has-photo" style="--hero-img:url(' + photo("hero") + ')"') if photo("hero") else ' class="hero"'}><div class="wrap">
+<section{(' class="hero has-photo"><img class="hero-bg" src="' + photo("hero") + '" alt="Technician repairing a window" fetchpriority="high"') if photo("hero") else ' class="hero"'}><div class="wrap">
   <div class="hero-copy">
     <span class="tag">{escape(h['tag'])}</span>
     <h1>{escape(h['h1'])}</h1>
