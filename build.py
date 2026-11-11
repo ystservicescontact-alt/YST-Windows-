@@ -86,9 +86,15 @@ WA_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor
 # Options in the quick-quote widget: (value, label, icon)
 QUICK_OPTIONS = [
     ("Foggy glass", "Foggy between panes", "fog"),
-    ("Broken glass", "Cracked or broken", "broken"),
-    ("Crank / hinge / lock", "Won't open or close", "crank"),
+    ("Broken glass", "Cracked or broken glass", "broken"),
+    ("Crank / hinge / handle / lock", "Won't open, close or lock", "crank"),
     ("Patio door", "Patio door sticks", "patio"),
+    ("FAPIM window", "FAPIM condo window", "tilt"),
+    ("Storm or screen door", "Storm or screen door", "doorglass"),
+    ("Door repair", "Door repair", "door"),
+    ("Leaks / drafts / caulking", "Leaks or drafts", "drop"),
+    ("New windows", "New windows", "replace"),
+    ("Something else", "Something else", "tools"),
 ]
 
 
@@ -309,7 +315,13 @@ def quick_form():
 
 
 def full_form(source):
-    problems = "".join(f"<option>{escape(s['name'])}</option>" for s in SERVICES) + "<option>Something else</option>"
+    groups = ""
+    for cat, slugs in CATEGORIES:
+        opts = "".join(f'<option{" selected" if sl == source else ""}>{escape(BY_SLUG_ALL[sl]["name"])}</option>'
+                       for sl in slugs if sl in BY_SLUG_ALL)
+        groups += f'<optgroup label="{escape(cat)}">{opts}</optgroup>'
+    problems = '<option value="" disabled selected hidden>Choose the type of job</option>' if source not in BY_SLUG_ALL else ""
+    problems += groups + "<option>Something else</option>"
     return f"""
 <form class="form-card" name="quote" method="POST" action="/thanks/" data-netlify="true"
       netlify-honeypot="bot-field" enctype="multipart/form-data" data-where="contact">
@@ -325,7 +337,7 @@ def full_form(source):
     <label for="q-city">City<input id="q-city" name="city" autocomplete="address-level2" placeholder="e.g. Mississauga"></label>
   </div>
   <div class="row">
-    <label for="q-problem">What's wrong?<select id="q-problem" name="problem">{problems}</select></label>
+    <label for="q-problem">Type of job<select id="q-problem" name="problem" required>{problems}</select></label>
     <label for="q-count">How many windows?<input id="q-count" name="count" type="number" min="1" value="1" inputmode="numeric"></label>
   </div>
   <label for="q-details">Details <span class="hint">Where in the house, size if you know it</span>

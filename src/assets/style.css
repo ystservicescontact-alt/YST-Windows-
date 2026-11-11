@@ -540,3 +540,9 @@ input, select, textarea { border-radius: var(--r-sm); }
 .stats b { font-size: clamp(24px, 3.2vw, 34px); }
 .calc-out b { font-size: 32px; }
 .steps li::before { font-family: var(--display); font-size: 20px; }
+/* Quick form: 10 job types, kept compact */
+.choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.choice span { min-height: 50px; padding: 8px 10px; font-size: 14px; gap: 8px; }
+.choice svg { width: 22px; height: 22px; }
+@media (max-width: 420px) { .choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } .choice span { font-size: 13px; padding: 8px; } }
+.hero.has-photo .quick .btn-outline { color: var(--navy); background: transparent; box-shadow: inset 0 0 0 2px var(--navy); text-shadow: none; }
