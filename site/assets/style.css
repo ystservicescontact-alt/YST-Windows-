@@ -16,7 +16,8 @@
   --tile: #DCE3EB;
   --white: #ffffff;
   --ok: #157F4B;
-  --display: "Bebas Neue", "Archivo Narrow", Impact, sans-serif;
+  --display: "Plus Jakarta Sans", "Archivo", system-ui, sans-serif;
+  --logo: "Bebas Neue", "Archivo Narrow", Impact, sans-serif;
   --body: Archivo, Arial, sans-serif;
   color-scheme: light;
 }
@@ -54,7 +55,7 @@ a { color: var(--navy); }
 .logo-mark { width: 56px; height: 56px; flex: none; }
 .logo-mark svg { width: 100%; height: 100%; display: block; }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-text b { font-family: var(--display); font-weight: 400; font-size: 32px; letter-spacing: 1.5px; line-height: .9; }
+.logo-text b { font-family: var(--logo); font-weight: 400; font-size: 32px; letter-spacing: 1.5px; line-height: .9; }
 .logo-text b em { font-style: normal; color: var(--red-bright); }
 .logo-text small { font-family: Montserrat, var(--body); font-size: 10px; font-weight: 700; letter-spacing: 3px; color: var(--muted); margin-top: 4px; text-transform: uppercase; }
 .nav { display: flex; align-items: center; gap: 26px; font-weight: 600; font-size: 15px; }
@@ -338,7 +339,7 @@ fieldset.photos legend { font-weight: 700; font-size: 14px; margin-bottom: 6px; 
 h1, h2, h3, .display { font-synthesis: none; }
 .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .footer-logo svg { width: 52px; height: 52px; flex: none; }
-.footer-logo b { font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 1.5px; color: var(--white); line-height: .9; }
+.footer-logo b { font-family: var(--logo); font-weight: 400; font-size: 30px; letter-spacing: 1.5px; color: var(--white); line-height: .9; }
 .footer-logo b em { font-style: normal; color: var(--red-on-navy); }
 
 /* Feature block (FAPIM) */
@@ -522,3 +523,20 @@ input, select, textarea { border-radius: var(--r-sm); }
 .promises div { border-radius: var(--r-lg); box-shadow: var(--shadow); }
 .logos li { border-radius: 999px; }
 .mnav summary { border-radius: var(--r-md); }
+
+/* Softer headings: Plus Jakarta Sans, sentence case, sized for a wider font */
+.display, .hero h1, .page-hero h1, .quick h2, .section-head h2, .versus h3, .cta h2, .prose h2, .aside-box h2, .cat-title, .feature-copy h2, .mnav-main a, .stats b, .calc-out b {
+  text-transform: none; letter-spacing: -0.02em; font-weight: 800;
+}
+.hero h1, .page-hero h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.08; }
+.section-head h2 { font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; }
+.cta h2 { font-size: clamp(24px, 3vw, 34px); line-height: 1.15; }
+.prose h2 { font-size: 26px; line-height: 1.2; }
+.feature-copy h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; }
+.quick h2 { font-size: 22px; }
+.aside-box h2, .versus h3 { font-size: 21px; }
+.cat-title { font-size: 24px; }
+.mnav-main a { font-size: 20px; letter-spacing: 0; }
+.stats b { font-size: clamp(24px, 3.2vw, 34px); }
+.calc-out b { font-size: 32px; }
+.steps li::before { font-family: var(--display); font-size: 20px; }
