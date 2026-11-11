@@ -50,3 +50,30 @@
   }, { threshold: 0.6 });
   cards.forEach(function (c) { io.observe(c); });
 })();
+
+// Price estimator on the cost guide: size band from width x height, plus glass options and quantity.
+(function () {
+  var box = document.querySelector('.calc[data-cost]');
+  if (!box) return;
+  var d = JSON.parse(box.getAttribute('data-cost'));
+  var out = box.querySelector('[data-out]'), note = box.querySelector('[data-note]');
+  function fmt(n) { n = Math.round(n / 5) * 5; return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function calc() {
+    var w = parseFloat(box.querySelector('[name=w]').value), h = parseFloat(box.querySelector('[name=h]').value);
+    var q = Math.max(1, parseInt(box.querySelector('[name=q]').value, 10) || 1);
+    if (!(w > 0 && h > 0)) { out.textContent = '—'; note.textContent = 'Enter the width and height.'; return; }
+    var sq = w * h / 144;
+    if (sq > 50) { out.textContent = 'Custom quote'; note.textContent = sq.toFixed(1) + ' sq ft: send us a photo for an exact price.'; return; }
+    var i = sq <= 10 ? 0 : sq <= 20 ? 1 : sq <= 30 ? 2 : 3;
+    var t = d.tiers[i], pct = 0;
+    box.querySelectorAll('.opt input:checked').forEach(function (c) {
+      d.addons.forEach(function (a) { if (a[0] === c.value) pct += a[2]; });
+    });
+    var lo = t[0] * (1 + pct / 100) * q, hi = t[1] ? t[1] * (1 + pct / 100) * q : null;
+    out.textContent = hi ? fmt(lo) + '–' + fmt(hi) : fmt(lo) + '+';
+    note.textContent = sq.toFixed(1) + ' sq ft per unit' + (q > 1 ? ' × ' + q + ' units' : '') + ' · before HST';
+  }
+  box.addEventListener('input', calc);
+  box.addEventListener('change', calc);
+  calc();
+})();

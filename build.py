@@ -17,6 +17,7 @@ from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
 from window_styles import window_styles_html
+from cost_guide import ready as cost_ready
 from media import photo, pair, gallery_pairs, job_pairs, video_html, PHOTOS, EXTS
 from services_more import CATEGORIES, STORM_MODELS
 from pages_more import (VISIT_FEE, CUSTOMERS, YEARS, CLIENT_LOGOS, ABOUT_STORY, WORK, PROMISES, CHECK_12,
@@ -1023,13 +1024,125 @@ def build_404():
                                          description="Page not found.", body=body, noindex=True), encoding="utf-8")
 
 
+# ---------------------------------------------------------------- cost guide
+def money(n):
+    return f"${n:,.0f}"
+
+
+def build_cost_guide():
+    import json
+    from cost_guide import SLUG, TIERS, ADDONS, TERMS, FACTORS, ASK_BEFORE, CHECKS, TIPS, WHY, faqs, ready
+    ok = ready()
+    year = date.today().year
+    month = date.today().strftime("%B %Y")
+    trail = [("Home", "/"), ("Services", "/services/"), ("Glass replacement cost", url(SLUG))]
+
+    def price(t):
+        lo, hi = t[4], t[5]
+        if lo is None:
+            return "$—"
+        return f"{money(lo)}–{money(hi)}" if hi else f"{money(lo)}+"
+
+    rows = "".join(f'<tr><th scope="row">{escape(n)}<small>{escape(band)}</small></th><td>{escape(ex)}</td>'
+                   f'<td class="price">{price(t)}</td></tr>' for t in TIERS for _k, n, band, ex, _lo, _hi in [t])
+    rows += '<tr><th scope="row">Oversized or custom<small>Arches, circles, 50+ sq ft</small></th><td>Shaped and very large glass</td><td class="price">Custom quote</td></tr>'
+    smallest = TIERS[0][4]
+    pic = TIERS[-1][4]
+    stats = (f'<div class="stats"><div><b>{money(smallest) if smallest else "$—"}</b><span>Starting price, small window</span></div>'
+             f'<div><b>{money(pic) + "+" if pic else "$—"}</b><span>Picture windows</span></div>'
+             f'<div><b>A fraction</b><span>of the cost of a new window</span></div></div>')
+    addon_rows = "".join(f'<tr><th scope="row">{escape(n)}</th><td>{escape(d)}</td><td class="price">{("+" + str(v) + "%") if v is not None else "Ask us"}</td></tr>'
+                         for _k, n, d, v in ADDONS)
+    factor_cards = "".join(f'<div class="factor"><h3>{escape(t)}</h3><span>{escape(s)}</span><p>{escape(d)}</p></div>'
+                           for t, s, d in FACTORS)
+    extra_terms = []
+    for key, label in (("floor", "Floor and access"), ("qty", "Several units"), ("grilles", "Grilles between panes")):
+        if TERMS[key]:
+            extra_terms.append(f"<li><b>{label}:</b> {escape(TERMS[key])}</li>")
+    terms_html = f'<ul class="terms">{"".join(extra_terms)}</ul>' if extra_terms else ""
+    inc = ""
+    if TERMS["included"]:
+        inc += "<h3>Included in the price</h3><ul class=\"checks-list\">" + "".join(f"<li>{escape(x)}</li>" for x in TERMS["included"]) + "</ul>"
+    if TERMS["excluded"]:
+        inc += "<h3>Not included</h3><ul>" + "".join(f"<li>{escape(x)}</li>" for x in TERMS["excluded"]) + "</ul>"
+    inc_section = f'<section id="included"><h2>What the price includes</h2>{inc}</section>' if inc else ""
+    ask = "".join(f"<div><h3>{escape(q)}</h3><p>{escape(a)}</p></div>" for q, a in ASK_BEFORE)
+    checks = "".join(f"<li>{escape(c)}</li>" for c in CHECKS)
+    tips = "".join(f"<li>{t}</li>" for t in TIPS)
+    why = "".join(f"<li>{escape(w)}</li>" for w in WHY)
+
+    calc = ""
+    if ok:
+        data = {"tiers": [[t[4], t[5]] for t in TIERS],
+                "addons": [[k, n, v] for k, n, _d, v in ADDONS if v is not None]}
+        boxes = "".join(f'<label class="opt"><input type="checkbox" value="{k}"> {escape(n)} (+{v}%)</label>'
+                        for k, n, v in data["addons"])
+        calc = f"""
+<section id="estimate" class="calc" data-cost='{escape(json.dumps(data))}'>
+  <h2>Estimate your price</h2>
+  <p>Enter the glass size in inches. This is an estimate before HST; we confirm the exact price in writing.</p>
+  <div class="calc-grid">
+    <label>Width (in)<input type="number" inputmode="decimal" min="6" max="200" name="w" value="30"></label>
+    <label>Height (in)<input type="number" inputmode="decimal" min="6" max="200" name="h" value="40"></label>
+    <label>How many<input type="number" inputmode="numeric" min="1" max="50" name="q" value="1"></label>
+  </div>
+  <div class="opts">{boxes}</div>
+  <div class="calc-out" aria-live="polite"><span>Estimated price</span><b data-out>—</b><small data-note></small></div>
+  <div class="actions">{call_btn("calc")}{text_btn("calc")}</div>
+</section>"""
+
+    toc = [("prices", "Price table"), ("estimate", "Estimate your price") if ok else None, ("factors", "What changes the price"),
+           ("glass", "Glass options"), ("included", "What's included") if inc else None, ("ask", "Questions to ask"),
+           ("choose", "Choosing a company"), ("save", "Ways to save"), ("faq", "FAQ")]
+    toc_html = "".join(f'<li><a href="#{a}">{escape(t)}</a></li>' for x in toc if x for a, t in [x])
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">{year} price guide</span>
+  <h1>Glass replacement cost in Toronto and the GTA ({year})</h1>
+  <p class="lede">Our own prices for replacing foggy or broken sealed glass, by window size, with every add-on listed. No surprises on the invoice.</p>
+  {stats}
+  <div class="actions">{call_btn("page-hero")}{text_btn("page-hero")}</div>
+</div></section>
+{trust_html()}
+<div class="wrap article cost">
+  <div class="prose">
+    <p class="updated">Updated {month}. Prices are for replacing the sealed glass unit only, in your existing frame. New windows are a different service: see <a href="/window-replacement/">window replacement</a>.</p>
+    <nav class="toc" aria-label="On this page"><b>On this page</b><ol>{toc_html}</ol></nav>
+    <section id="prices"><h2>Glass replacement prices by size</h2>
+      <div class="table-wrap"><table class="price-table"><thead><tr><th scope="col">Size</th><th scope="col">Typical window</th><th scope="col">Price</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="note">Supply and installation of a clear double-pane sealed unit, before HST. Glass options and access are extra, as listed below.</p>
+    </section>
+    {calc}
+    <section id="factors"><h2>What changes the price</h2><div class="factors">{factor_cards}</div>{terms_html}</section>
+    <section id="glass"><h2>Glass options and what they add</h2>
+      <div class="table-wrap"><table class="price-table"><thead><tr><th scope="col">Option</th><th scope="col">What it does</th><th scope="col">Adds</th></tr></thead><tbody>{addon_rows}</tbody></table></div>
+    </section>
+    {inc_section}
+    <section id="ask"><h2>Questions to ask before you sign</h2><div class="ask">{ask}</div></section>
+    <section id="choose"><h2>How to choose a glass company</h2><p>Before you book anyone, make sure you get:</p><ul class="checks-list">{checks}</ul></section>
+    <section id="save"><h2>Ways to pay less</h2><ol class="tips">{tips}</ol></section>
+    <section><h2>Why homeowners call us</h2><ul class="checks-list">{why}</ul>
+      <p>Not sure what size you have? <a href="/foggy-window-repair/">Foggy window repair</a> and <a href="/window-glass-replacement/">glass replacement</a> explain the job step by step.</p></section>
+    <section><h2>How we set these prices</h2><p>These are our own {year} prices for glass-only replacement across the GTA. Your exact price depends on the measured size and the glass you choose. We confirm it in writing before we order anything.</p></section>
+  </div>
+  {aside_html(SLUG)}
+</div>
+<div id="faq">{faq_html(faqs())}</div>
+{cta_html()}"""
+    schemas = [business_schema(), breadcrumb_schema(trail), faq_schema(faqs())]
+    write(SLUG, layout(slug=SLUG, title=f"Glass Replacement Cost Toronto & GTA ({year} Prices) | Window Repair GTA",
+                       description="What sealed glass replacement costs in Toronto and the GTA: prices by window size, glass options, access, and questions to ask before you sign.",
+                       body=body, schemas=schemas, noindex=not ok))
+
+
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
             [p["slug"] for p in PAGES + EXTRA_PAGES if not p.get("noindex")] + \
             [f"blog/{b['slug']}" for b in BLOG] + \
             ([f"our-work/{w['slug']}" for w in WORK] + ["our-work"] if WORK else []) + \
             [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES] + ["service-areas"] + \
-            [region_slug(r) for r in REGIONS] + \
+            [region_slug(r) for r in REGIONS] + (["glass-replacement-cost"] if cost_ready() else []) + \
             [town_slug(n) for r in REGIONS for n, _ in r["towns"] if n not in RICH and town_indexed(n)]
     today = date.today().isoformat()
     urls = "\n".join(f"  <url><loc>{SITE['domain']}{url(s)}</loc><lastmod>{today}</lastmod></url>" for s in slugs)
@@ -1064,6 +1177,7 @@ def main():
         for n, part in r["towns"]:
             if n not in RICH:
                 build_town(r, n, part)
+    build_cost_guide()
     build_404()
     build_sitemap()
     print(f"Built {len(list(OUT.rglob('*.html')))} pages into {OUT}")

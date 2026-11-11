@@ -409,3 +409,54 @@ h1, h2, h3, .display { font-synthesis: none; }
 .wstyle:is(:hover, :focus-visible, .open) .ws-left-s { transform: translateX(-85%); }
 .wstyle:is(:hover, :focus-visible, .open) .ws-shine path { transform: translateX(70px); }
 @media (prefers-reduced-motion: reduce) { .wstyle svg g, .wstyle .ws-shine path { transition: none; } }
+
+/* Glass replacement cost guide */
+.page-hero .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 760px; }
+.stats div { background: var(--white); border-top: 4px solid var(--red-bright); padding: 14px 16px; }
+.stats b { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(28px, 4vw, 40px); line-height: 1; color: var(--navy); }
+.stats span { display: block; font-size: 14px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 560px) { .page-hero .stats { grid-template-columns: 1fr 1fr; } .stats div:last-child { grid-column: 1 / -1; } }
+.cost .updated { color: var(--muted); font-size: 15px; }
+.cost section { scroll-margin-top: 90px; }
+.toc { border: 1px solid var(--line); background: var(--soft); padding: 16px 20px; margin: 18px 0 28px; }
+.toc ol { margin: 8px 0 0; padding-inline-start: 20px; columns: 2; column-gap: 28px; }
+.toc li { margin: 4px 0; break-inside: avoid; }
+@media (max-width: 560px) { .toc ol { columns: 1; } }
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.price-table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 460px; }
+.price-table th, .price-table td { text-align: start; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.price-table thead th { background: var(--navy); color: var(--white); font-size: 14px; text-transform: uppercase; letter-spacing: .4px; }
+.price-table tbody th small { display: block; font-weight: 500; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.price-table .price { font-weight: 800; color: var(--navy); white-space: nowrap; }
+.price-table tbody tr:nth-child(even) { background: var(--soft); }
+.factors { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 14px 0; }
+.factor { border: 1px solid var(--line); border-top: 4px solid var(--red-bright); padding: 16px; background: var(--white); }
+.factor h3 { margin: 0; font-size: 19px; }
+.factor span { display: block; color: var(--red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .4px; margin: 4px 0 8px; }
+.factor p { margin: 0; font-size: 15px; }
+.terms { list-style: none; padding: 0; }
+.terms li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.ask { display: grid; gap: 12px; }
+.ask div { border-inline-start: 4px solid var(--navy); padding: 4px 0 4px 16px; }
+.ask h3 { margin: 0 0 4px; font-size: 18px; }
+.ask p { margin: 0; }
+.checks-list { list-style: none; padding: 0; }
+.checks-list li { position: relative; padding: 6px 0 6px 28px; }
+.checks-list li::before { content: "✓"; position: absolute; left: 0; top: 6px; color: var(--ok); font-weight: 800; }
+.calc { background: var(--navy); color: var(--white); padding: 24px; margin: 28px 0; border-top: 6px solid var(--red-bright); }
+.calc h2 { color: var(--white); margin-top: 0; }
+.calc p { color: rgba(255,255,255,.85); }
+.calc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.calc-grid label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 14px; }
+.calc input[type=number] { font: inherit; font-size: 18px; padding: 10px 12px; border: 0; min-height: 48px; width: 100%; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 16px; }
+.opt { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.opt input { width: 20px; height: 20px; }
+.calc-out { background: var(--white); color: var(--navy); padding: 16px 18px; margin-bottom: 16px; }
+.calc-out span { display: block; font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+.calc-out b { display: block; font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.1; }
+.calc-out small { display: block; color: var(--muted); font-size: 14px; }
+.calc .btn-outline { color: var(--white); box-shadow: inset 0 0 0 2px rgba(255,255,255,.85); }
+@media (max-width: 560px) { .calc-grid { grid-template-columns: 1fr 1fr; } .calc-grid label:last-child { grid-column: 1 / -1; } .calc { padding: 18px; } }
+.calc .opt { display: flex; flex-direction: row; align-items: center; gap: 8px; }
+.calc .opt input { width: 20px; height: 20px; flex: none; margin: 0; }
