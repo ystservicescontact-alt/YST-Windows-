@@ -460,3 +460,65 @@ h1, h2, h3, .display { font-synthesis: none; }
 @media (max-width: 560px) { .calc-grid { grid-template-columns: 1fr 1fr; } .calc-grid label:last-child { grid-column: 1 / -1; } .calc { padding: 18px; } }
 .calc .opt { display: flex; flex-direction: row; align-items: center; gap: 8px; }
 .calc .opt input { width: 20px; height: 20px; flex: none; margin: 0; }
+
+/* ===== Rounded theme: same colours, softer shapes ===== */
+:root { --r-lg: 18px; --r-md: 12px; --r-sm: 8px; --shadow: 0 1px 2px rgba(15,27,51,.06), 0 8px 24px -12px rgba(15,27,51,.18); --shadow-hover: 0 2px 4px rgba(15,27,51,.06), 0 18px 40px -16px rgba(15,27,51,.28); }
+
+/* Buttons: rounded, sentence case */
+.btn { border-radius: var(--r-md); text-transform: none; letter-spacing: 0; font-weight: 700; }
+.btn-yellow { box-shadow: 0 6px 16px -8px rgba(196,30,37,.6); }
+.tag { border-radius: 999px; padding: 6px 14px; }
+input, select, textarea { border-radius: var(--r-sm); }
+.choice span { border-radius: var(--r-md); }
+.opt input { accent-color: var(--red); }
+
+/* Cards: rounded, soft shadow, no hard red bars */
+.card, .model, .wstyle, .factor, .who-card, .blog-card, .ba, .qf, .aside-box, .form-card, .stats div, .toc, .calc, .calc-out, .note, .price-note, .local-box, .review, .faq details {
+  border-radius: var(--r-lg);
+}
+.card, .model, .wstyle, .factor, .who-card, .blog-card, .ba, .qf, .aside-box, .form-card, .stats div { border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
+.card { transition: box-shadow .2s, transform .2s; }
+.card:hover, .who-card:hover, .blog-card:hover, .wstyle:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.who-card, .blog-card, .aside-box, .form-card, .factor, .stats div { border-top: 1px solid var(--line); }
+.who-card:hover { border-top-color: var(--line); }
+.card-media { border-bottom: 0; }
+.card-media svg { width: 56px; height: 56px; padding: 14px; box-sizing: content-box; background: var(--white); border-radius: var(--r-md); color: var(--red); box-shadow: var(--shadow); }
+.wstyle figcaption { border-top: 0; }
+.wstyle:hover, .wstyle:focus-visible, .wstyle.open { border-color: var(--line); }
+.quick { border-radius: var(--r-lg); border-top: 0; overflow: hidden; }
+.quick h2 { color: var(--navy); }
+.factor span { color: var(--red); }
+
+/* Photos */
+.prose-img, .team-media img, .feature-media img, .photo-grid img, .area-map iframe { border-radius: var(--r-lg); border: 0; }
+.ba-pair { border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; }
+.ba-pair span { border-radius: 999px; padding: 3px 10px; }
+.video, .video iframe { border-radius: var(--r-lg); overflow: hidden; }
+
+/* Sections */
+.trust .wrap { border-radius: 0; }
+.trust svg { background: rgba(255,255,255,.08); border-radius: 50%; padding: 6px; box-sizing: content-box; }
+.cta .wrap { background: var(--red); border-radius: var(--r-lg); padding: 36px 32px; margin-block: 40px; }
+.cta { background: transparent; }
+.faq { border-top: 0; display: grid; gap: 10px; }
+.faq details { background: var(--white); border: 1px solid var(--line); padding: 0 20px; box-shadow: var(--shadow); }
+.faq details p { padding-bottom: 18px; }
+.qf summary { border-left: 0; }
+.qf summary span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--red-bright); margin-inline-end: 10px; vertical-align: middle; }
+.toc { border: 1px solid var(--line); }
+.price-table { border-radius: var(--r-lg); overflow: hidden; }
+.table-wrap { border-radius: var(--r-lg); border: 1px solid var(--line); }
+.calc { border-top: 0; }
+.calc input[type=number] { border-radius: var(--r-sm); }
+.check12 li { border-radius: var(--r-md); }
+.steps li::before, .check12 li::before, .tips li::before { border-radius: 50%; }
+.mnav[open] .mnav-panel, .mnav-panel { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+.call-bar a:first-child { border-radius: 0; }
+.wa-float { border-radius: 50%; }
+.versus { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); }
+.areas a, .areas span { border-radius: var(--r-md); }
+.areas a::before, .areas span::before { border-radius: 50%; }
+.why div, .signs div, .local-box, .logos li { border-radius: var(--r-lg); }
+.promises div { border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.logos li { border-radius: 999px; }
+.mnav summary { border-radius: var(--r-md); }
