@@ -546,3 +546,26 @@ input, select, textarea { border-radius: var(--r-sm); }
 .choice svg { width: 22px; height: 22px; }
 @media (max-width: 420px) { .choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } .choice span { font-size: 13px; padding: 8px; } }
 .hero.has-photo .quick .btn-outline { color: var(--navy); background: transparent; box-shadow: inset 0 0 0 2px var(--navy); text-shadow: none; }
+.card-media img { object-position: center 30%; }
+
+/* ===== Feel: press feedback, hover only with a mouse, snappier motion ===== */
+:root { --ease-out: cubic-bezier(.23, 1, .32, 1); }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+.btn { transition: transform 160ms var(--ease-out), background-color 150ms ease, box-shadow 150ms ease; }
+.btn:active { transform: scale(.97); }
+.choice span { transition: transform 160ms var(--ease-out), border-color 150ms ease, background-color 150ms ease; }
+.choice:active span { transform: scale(.98); }
+.card, .who-card, .blog-card, .wstyle { transition: box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out), border-color 200ms ease; }
+.card:hover, .who-card:hover, .blog-card:hover, .wstyle:hover { transform: none; box-shadow: var(--shadow); }
+.card:active, .who-card:active, .blog-card:active { transform: scale(.985); }
+@media (hover: hover) and (pointer: fine) {
+  .card:hover, .who-card:hover, .blog-card:hover, .wstyle:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+}
+.btn-yellow:hover { background: var(--red); }
+@media (hover: hover) and (pointer: fine) { .btn-yellow:hover { background: #A8181E; } }
+.faq summary, .qf summary { transition: color 150ms ease; }
+.wstyle svg g { transition-duration: .6s; transition-timing-function: var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .choice span, .card, .who-card, .blog-card, .wstyle { transition: none; }
+  .btn:active, .choice:active span, .card:active, .who-card:active, .blog-card:active { transform: none; }
+}
