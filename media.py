@@ -22,7 +22,11 @@ EXTS = (".jpg", ".jpeg", ".png", ".webp")
 VIDEOS = {}
 
 # Captions for gallery pairs, keyed by number: {"01": ("Foggy picture window", "Mississauga")}
-GALLERY_CAPTIONS = {"01": ("Foggy glass replacement", "Downtown Toronto")}
+# Before/after jobs in src/photos/gallery/NN-before.jpg + NN-after.jpg.
+# number: (title, city, service page slugs it also shows on). Every pair shows on the home page.
+GALLERY_CAPTIONS = {
+    "01": ("Foggy glass replacement", "Downtown Toronto", ["foggy-window-repair", "window-glass-replacement"]),
+}
 
 
 def photo(name):
@@ -49,12 +53,25 @@ def gallery_pairs():
     for n in nums:
         p = pair(f"gallery/{n}")
         if p:
-            title, city = GALLERY_CAPTIONS.get(n, ("Recent job", ""))
-            out.append({"before": p[0], "after": p[1], "title": title, "city": city})
-    return out
+            title, city, services = (list(GALLERY_CAPTIONS.get(n, ("Recent job", ""))) + [[]])[:3]
+            out.append({"before": p[0], "after": p[1], "title": title, "city": city, "services": services})
+    return out[::-1]  # newest first
+
+
+# Our own video files in src/videos/: page slug -> (file, poster photo, title)
+LOCAL_VIDEOS = {
+    "storm-doors": ("/videos/storm-door-install-north-york.mp4", "/photos/storm-door-install-north-york-poster.jpg",
+                    "Storm door installation in North York"),
+}
 
 
 def video_html(key, title):
+    local = LOCAL_VIDEOS.get(key)
+    if local:
+        src, poster, vtitle = local
+        return (f'<figure class="video-local"><video controls playsinline preload="none" poster="{poster}" '
+                f'aria-label="{vtitle}"><source src="{src}" type="video/mp4"></video>'
+                f'<figcaption>{vtitle}</figcaption></figure>')
     vid = VIDEOS.get(key)
     if not vid:
         return ""

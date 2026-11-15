@@ -237,7 +237,7 @@ def media_block(service_slug, title):
     p = pair(f"services/{service_slug}")
     if p:
         out += f'<div class="gallery">{ba_figure(p[0], p[1], title)}</div>'
-    jobs = job_pairs(service_slug)
+    jobs = job_pairs(service_slug) + [g for g in gallery_pairs() if service_slug in g["services"]]
     if jobs:
         figs = "".join(ba_figure(j["before"], j["after"], j["title"], j["city"]) for j in jobs)
         out += f'<h2>Recent jobs</h2><div class="gallery">{figs}</div>'
@@ -1233,6 +1233,9 @@ def main():
     photos = ROOT / "src" / "photos"
     if photos.exists():
         shutil.copytree(photos, OUT / "photos")
+    videos = ROOT / "src" / "videos"
+    if videos.exists():
+        shutil.copytree(videos, OUT / "videos")
     build_home()
     for s in SERVICES:
         build_service(s)
