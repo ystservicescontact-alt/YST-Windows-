@@ -593,3 +593,9 @@ picture { display: contents; }
     -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent); mask-image: linear-gradient(to bottom, #000 65%, transparent); }
   .hero.has-photo .wrap { margin-top: -36px; position: relative; }
 }
+
+/* Accessibility: clear keyboard focus everywhere, never hidden behind the phone call bar */
+input:focus-visible, select:focus-visible, textarea:focus-visible { box-shadow: 0 0 0 3px rgba(229,38,46,.35); }
+.wstyle:focus-visible, .table-wrap:focus-visible, .ba-stage:focus-within { outline: 3px solid var(--red-bright); outline-offset: 3px; }
+html { scroll-padding-top: 90px; }
+@media (max-width: 940px) { html { scroll-padding-bottom: 90px; } }

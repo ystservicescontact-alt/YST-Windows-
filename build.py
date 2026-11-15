@@ -1131,13 +1131,13 @@ def build_cost_guide():
     <p class="updated">Updated {month}. Prices are for replacing the sealed glass unit only, in your existing frame. New windows are a different service: see <a href="/window-replacement/">window replacement</a>.</p>
     <nav class="toc" aria-label="On this page"><b>On this page</b><ol>{toc_html}</ol></nav>
     <section id="prices"><h2>Glass replacement prices by size</h2>
-      <div class="table-wrap"><table class="price-table"><thead><tr><th scope="col">Size</th><th scope="col">Typical window</th><th scope="col">Price</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Glass replacement prices by size"><table class="price-table"><thead><tr><th scope="col">Size</th><th scope="col">Typical window</th><th scope="col">Price</th></tr></thead><tbody>{rows}</tbody></table></div>
       <p class="note">Supply and installation of a clear double-pane sealed unit, before HST. Glass options and access are extra, as listed below.</p>
     </section>
     {calc}
     <section id="factors"><h2>What changes the price</h2><div class="factors">{factor_cards}</div>{terms_html}</section>
     <section id="glass"><h2>Glass options and what they add</h2>
-      <div class="table-wrap"><table class="price-table"><thead><tr><th scope="col">Option</th><th scope="col">What it does</th><th scope="col">Adds</th></tr></thead><tbody>{addon_rows}</tbody></table></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Glass options and what they add"><table class="price-table"><thead><tr><th scope="col">Option</th><th scope="col">What it does</th><th scope="col">Adds</th></tr></thead><tbody>{addon_rows}</tbody></table></div>
     </section>
     {inc_section}
     <section id="ask"><h2>Questions to ask before you sign</h2><div class="ask">{ask}</div></section>
