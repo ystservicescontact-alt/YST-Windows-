@@ -201,11 +201,15 @@ def card_media(s):
 
 
 def ba_figure(before, after, title, city=""):
+    """Before/after photo with a handle you drag to compare (works without JS at 50%)."""
     return f"""
 <figure class="ba">
-  <div class="ba-pair">
-    <div><img src="{before}" alt="Before: {escape(title)}" loading="lazy"><span>Before</span></div>
-    <div><img src="{after}" alt="After: {escape(title)}" loading="lazy"><span>After</span></div>
+  <div class="ba-stage" style="--pos:50%">
+    <img class="ba-img" src="{before}" alt="Before: {escape(title)}" loading="lazy">
+    <img class="ba-img ba-after" src="{after}" alt="After: {escape(title)}" loading="lazy">
+    <span class="ba-tag ba-tag-b">Before</span><span class="ba-tag ba-tag-a">After</span>
+    <span class="ba-handle" aria-hidden="true"></span>
+    <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after: {escape(title)}">
   </div>
   <figcaption>{escape(title)}<small>{escape(city)}</small></figcaption>
 </figure>"""
@@ -389,6 +393,10 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(description)}">
 <meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{SITE['domain']}/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
@@ -1149,6 +1157,58 @@ def build_cost_guide():
                        body=body, schemas=schemas, noindex=not ok))
 
 
+# ---------------------------------------------------------------- responsive images
+IMG_WIDTHS = (480, 960, 1600)
+
+
+def make_webp_sizes():
+    """Write -480/-960/-1600 WebP copies of every photo, never wider than the original."""
+    try:
+        from PIL import Image
+    except ImportError:  # no Pillow on this machine: keep plain JPEGs
+        return {}
+    dims = {}
+    for f in (OUT / "photos").rglob("*"):
+        if f.suffix.lower() not in (".jpg", ".jpeg", ".png"):
+            continue
+        im = Image.open(f).convert("RGB")
+        rel = "/" + f.relative_to(OUT).as_posix()
+        dims[rel] = (im.width, im.height, [])
+        for w in IMG_WIDTHS:
+            ww = min(w, im.width)
+            out = f.with_name(f"{f.stem}-{w}.webp")
+            im.resize((ww, round(im.height * ww / im.width))).save(out, "WEBP", quality=78, method=5)
+            dims[rel][2].append((rel.rsplit(".", 1)[0] + f"-{w}.webp", ww))
+            if ww == im.width:  # reached full size: no larger copies
+                break
+    return dims
+
+
+def responsive_images(dims):
+    """Wrap every /photos/ <img> in <picture> with WebP sizes, and add width/height."""
+    import re
+    def sizes_for(tag):
+        if "hero-bg" in tag:
+            return "100vw"
+        if "ba-img" in tag or "card" in tag:
+            return "(max-width: 700px) 100vw, 400px"
+        return "(max-width: 900px) 100vw, 760px"
+    def swap(m):
+        tag, src = m.group(0), m.group(1)
+        if src not in dims:
+            return tag
+        w, h, variants = dims[src]
+        if "width=" not in tag:
+            tag = tag.replace("<img ", f'<img width="{w}" height="{h}" ', 1)
+        srcset = ", ".join(f"{p} {ww}w" for p, ww in variants)
+        return f'<picture><source type="image/webp" srcset="{srcset}" sizes="{sizes_for(tag)}">{tag}</picture>'
+    for f in OUT.rglob("*.html"):
+        t = f.read_text(encoding="utf-8")
+        n = re.sub(r'<img [^>]*src="(/photos/[^"]+)"[^>]*>', swap, t)
+        if n != t:
+            f.write_text(n, encoding="utf-8")
+
+
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
             [p["slug"] for p in PAGES + EXTRA_PAGES if not p.get("noindex")] + \
@@ -1192,6 +1252,8 @@ def main():
                 build_town(r, n, part)
     build_cost_guide()
     build_404()
+    if (OUT / "photos").exists():
+        responsive_images(make_webp_sizes())
     build_sitemap()
     print(f"Built {len(list(OUT.rglob('*.html')))} pages into {OUT}")
 

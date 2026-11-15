@@ -77,3 +77,14 @@
   box.addEventListener('change', calc);
   calc();
 })();
+
+// Before/after: move the divider with the range input (drag, tap or arrow keys).
+(function () {
+  document.querySelectorAll('.ba-stage').forEach(function (stage) {
+    var r = stage.querySelector('.ba-range');
+    if (!r) return;
+    function set() { stage.style.setProperty('--pos', r.value + '%'); }
+    r.addEventListener('input', set);
+    set();
+  });
+})();

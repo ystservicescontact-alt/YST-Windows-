@@ -569,3 +569,27 @@ a, button, summary, label { -webkit-tap-highlight-color: transparent; }
   .btn, .choice span, .card, .who-card, .blog-card, .wstyle { transition: none; }
   .btn:active, .choice:active span, .card:active, .who-card:active, .blog-card:active { transform: none; }
 }
+
+/* Responsive images: <picture> should not change layout */
+picture { display: contents; }
+
+/* Before/after: drag to compare */
+.ba-stage { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--soft); border-radius: var(--r-lg) var(--r-lg) 0 0; touch-action: pan-y; }
+.ba-stage .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-stage .ba-after { clip-path: inset(0 0 0 var(--pos)); }
+.ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: var(--white); box-shadow: 0 0 0 1px rgba(15,27,51,.15); pointer-events: none; }
+.ba-handle::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--navy); display: grid; place-items: center; font-weight: 800; font-size: 18px; letter-spacing: 2px; box-shadow: 0 4px 14px rgba(15,27,51,.3); }
+.ba-tag { position: absolute; top: 10px; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; pointer-events: none; }
+.ba-tag-b { left: 10px; background: var(--navy); color: var(--white); }
+.ba-tag-a { right: 10px; background: var(--red); color: var(--white); }
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+.ba-range:focus-visible + * , .ba-stage:focus-within .ba-handle::after { outline: 3px solid var(--red-bright); outline-offset: 2px; }
+
+/* Phone hero: show the photo as a band above the headline */
+@media (max-width: 940px) {
+  .hero.has-photo { background: var(--navy); }
+  .hero.has-photo::before { display: none; }
+  .hero-bg { position: relative; inset: auto; display: block; width: 100%; height: 240px; z-index: 0; object-position: center 35%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent); mask-image: linear-gradient(to bottom, #000 65%, transparent); }
+  .hero.has-photo .wrap { margin-top: -36px; position: relative; }
+}
