@@ -603,3 +603,12 @@ html { scroll-padding-top: 90px; }
 .video-local video { display: block; width: auto; max-width: 100%; max-height: 640px; margin: 0 auto; background: var(--navy); border-radius: var(--r-lg); }
 .video-local figcaption { font-size: 15px; color: var(--muted); margin-top: 6px; text-align: center; }
 .faq-hub { display: flex; flex-direction: column; gap: 14px; padding-block: 32px 48px; } .faq-hub h2 { font-family: var(--display); font-size: 24px; margin-top: 18px; }
+
+/* Key facts box at the top of service pages */
+.key-facts { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--soft); padding: 18px 20px; margin: 0 0 24px; }
+.key-facts h2 { font-size: 18px; margin: 0 0 10px; }
+.key-facts dl { margin: 0; display: grid; gap: 8px; }
+.key-facts dl div { display: grid; grid-template-columns: 120px 1fr; gap: 10px; }
+.key-facts dt { font-weight: 700; color: var(--ink); }
+.key-facts dd { margin: 0; color: var(--text); }
+@media (max-width: 520px) { .key-facts dl div { grid-template-columns: 1fr; gap: 0; } }

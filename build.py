@@ -31,7 +31,8 @@ SITE = {
     "domain": "https://windowrepairgta.ca",
     "phone": "(365) 340-4760",
     "tel": "+13653404760",
-    "whatsapp": "",          # e.g. "13653404760" to show a WhatsApp button
+    "whatsapp": "",
+    "profiles": [],          # Google Business, Bing Places, HomeStars, Yelp... URLs once they exist          # e.g. "13653404760" to show a WhatsApp button
     "ga4": "",               # Google Analytics 4 ID, e.g. "G-XXXXXXX"
     "hours": "",             # e.g. "Mon–Sat 8am–7pm"
     "area": "Toronto and the Greater Toronto Area",
@@ -120,6 +121,7 @@ def business_schema():
         "url": SITE["domain"] + "/",
         "telephone": SITE["tel"],
         "priceRange": "$$",
+        **({"sameAs": SITE["profiles"]} if SITE.get("profiles") else {}),
         "areaServed": [{"@type": "City", "name": c["name"]} for c in CITIES],
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -796,6 +798,21 @@ def storm_models_html():
     return f'<div class="models">{cards}</div>'
 
 
+# Short, quotable facts at the top of service pages (for readers and AI answers).
+KEY_PRICES = {"window-crank-repair": "$150 to $400 per crank, condos at the higher end"}
+
+
+def key_facts_html(s):
+    rows = [("What we fix", s.get("spec", "")),
+            ("Where", "Toronto and the Greater Toronto Area"),
+            ("Price", KEY_PRICES.get(s["slug"], "Free quote from a photo")),
+            ("Warranty", "1-year workmanship; 5-year seal warranty on new glass in vinyl frames"),
+            ("Response", "Same-day appointments; 24/7 emergency service ($100 call-out after 10 PM)"),
+            ("Coverage", "Fully insured and WSIB covered")]
+    items = "".join(f"<div><dt>{escape(k)}</dt><dd>{escape(v)}</dd></div>" for k, v in rows if v)
+    return f'<aside class="key-facts" aria-label="Key facts"><h2>{escape(s["name"])}: key facts</h2><dl>{items}</dl></aside>'
+
+
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
     more = extras_html(s["slug"])
@@ -813,6 +830,7 @@ def build_service(s):
     jobs = ""
     if s["slug"] == "fapim-window-repair":
         jobs = folder_grid("fapim", s["body"], "FAPIM window repair job in a GTA condo", "More FAPIM jobs")
+    s = dict(s, body=key_facts_html(s) + s["body"])
     build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])],
                   media_block(s["slug"], s["name"]) + jobs + more + extra)
 
@@ -1071,6 +1089,36 @@ def build_faq_page():
                         body=body, schemas=[business_schema(), breadcrumb_schema(trail), faq_schema(allq)]))
 
 
+# ---------------------------------------------------------------- llms.txt and IndexNow
+INDEXNOW_KEY = "466fbd2ae516c74228461c2cfe9821da"
+
+
+def build_llms_txt():
+    """A plain summary of the business for AI assistants (llmstxt.org format)."""
+    d = SITE["domain"]
+    lines = [f"# {SITE['name']}", "",
+             f"> Window, glass and door repair for homes, condos and businesses in {SITE['area']}. "
+             "Repair first: we replace foggy or broken glass, cranks, hinges, locks and patio door rollers, "
+             "and replace whole windows and doors only when needed.", "",
+             f"- Phone: {SITE['phone']}",
+             "- Service area: Toronto, Mississauga, Brampton, Vaughan, Markham, Richmond Hill, Oakville and the GTA",
+             "- Fully insured and WSIB covered",
+             "- Warranty: 1-year workmanship; 5-year seal warranty on new glass in vinyl frames",
+             "- 24/7 emergency service; calls after 10 PM have a $100 after-hours call-out fee",
+             "- Free quotes from photos",
+             "- Specialty: FAPIM (Italian) condo window hardware, with genuine parts imported from Italy",
+             "- Window crank replacement: $150 to $400 per crank, condos at the higher end", "",
+             "## Services"]
+    lines += [f"- [{s['name']}]({d}{url(s['slug'])}): {s['card']}" for s in SERVICES]
+    lines += ["", "## Areas"] + [f"- [Window repair in {c['name']}]({d}{url(c['slug'])})" for c in CITIES]
+    lines += ["", "## Guides"] + [f"- [{bl['title']}]({d}/blog/{bl['slug']}/): {bl['description']}" for bl in BLOG]
+    lines += ["", "## Company", f"- [About]({d}/about/)", f"- [Warranty]({d}/warranty/)", f"- [FAQ]({d}/faq/)",
+              f"- [Contact and free estimate]({d}/contact/)", ""]
+    (OUT / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
+    # IndexNow: Bing (which ChatGPT search uses) reads this key to accept our "page changed" pings.
+    (OUT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
+
+
 def build_404():
     body = f"""
 <section class="page-hero"><div class="wrap">
@@ -1260,7 +1308,11 @@ def build_sitemap():
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      f"{urls}\n</urlset>\n", encoding="utf-8")
-    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE['domain']}/sitemap.xml\n",
+    ai_bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User",
+               "PerplexityBot", "Perplexity-User", "Google-Extended", "Bingbot", "Applebot", "Applebot-Extended"]
+    welcome = "".join(f"User-agent: {bot}\nAllow: /\n\n" for bot in ai_bots)
+    (OUT / "robots.txt").write_text(f"# Search engines and AI assistants are welcome to read this site.\n{welcome}"
+                                    f"User-agent: *\nAllow: /\n\nSitemap: {SITE['domain']}/sitemap.xml\n",
                                     encoding="utf-8")
 
 
@@ -1293,6 +1345,7 @@ def main():
                 build_town(r, n, part)
     build_cost_guide()
     build_faq_page()
+    build_llms_txt()
     build_404()
     if (OUT / "photos").exists():
         responsive_images(make_webp_sizes())
