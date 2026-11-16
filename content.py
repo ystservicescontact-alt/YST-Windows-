@@ -752,3 +752,10 @@ for _s in SERVICES:
     if _x:
         _s["body"] += _x["body"]
         _s["faqs"] = list(_s["faqs"]) + _x["faqs"]
+
+# Hardware brands section on the brands page (content_gap3.py)
+from content_gap3 import HARDWARE_BRANDS_SECTION
+for _p in PAGES:
+    if _p["slug"] == "window-brands":
+        _p["body"] = _p["body"].replace('<section class="section"><div class="wrap">\n  <div class="prose">\n    <h2>How to find your window brand</h2>',
+                                        HARDWARE_BRANDS_SECTION + '<section class="section"><div class="wrap">\n  <div class="prose">\n    <h2>How to find your window brand</h2>')

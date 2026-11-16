@@ -511,3 +511,5 @@ BLOG = NEW_BLOG + BLOG
 from content_gap2 import NEW_BLOG2, WARRANTY_PAGE
 BLOG = NEW_BLOG2 + BLOG
 EXTRA_PAGES.append(WARRANTY_PAGE)
+from content_gap3 import NEW_BLOG3
+BLOG = NEW_BLOG3 + BLOG
