@@ -485,3 +485,8 @@ STORM_MODELS = [
     ("self-storing", "Self-Storing", "Glass and screen are stored inside the door. Slide the glass down to let in air, with no panels to swap or store."),
     ("decorative", "Decorative glass", "Sandblasted and decorative glass options for more privacy and a custom look."),
 ]
+
+# Pages added to close SEO gaps (see content_gap.py)
+from content_gap import NEW_SERVICES, CATEGORY_ADDS
+MORE_SERVICES += NEW_SERVICES
+CATEGORIES = [(name, slugs + CATEGORY_ADDS.get(name, [])) for name, slugs in CATEGORIES]

@@ -505,3 +505,6 @@ EXTRA_PAGES = [
 {cta}""",
     },
 ]
+
+from content_gap import NEW_BLOG
+BLOG = NEW_BLOG + BLOG

@@ -77,6 +77,8 @@ SERVICE_ICON = {
     "curved-glass-replacement": "curved", "wood-window-repair": "wood", "window-leak-drainage-repair": "drop",
     "skylight-repair": "skylight", "fapim-window-repair": "tilt", "storm-door-repair": "door", "storm-doors": "doorglass",
 }
+from content_gap import NEW_ICONS
+SERVICE_ICON.update(NEW_ICONS)
 BY_SLUG_ALL = {s["slug"]: s for s in SERVICES}
 FEATURED = [BY_SLUG_ALL["fapim-window-repair"]] + SERVICES[:9] + \
     [BY_SLUG_ALL["tilt-and-turn-window-repair"], BY_SLUG_ALL["door-repair"]]
