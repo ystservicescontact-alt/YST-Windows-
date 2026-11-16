@@ -746,3 +746,9 @@ PAGES = [
 # Extra service pages (hardware parts, doors, special glass, frames)
 from services_more import MORE_SERVICES  # noqa: E402
 SERVICES += MORE_SERVICES
+from thin_expand import EXPAND
+for _s in SERVICES:
+    _x = EXPAND.get(_s["slug"])
+    if _x:
+        _s["body"] += _x["body"]
+        _s["faqs"] = list(_s["faqs"]) + _x["faqs"]
