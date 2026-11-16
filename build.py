@@ -78,7 +78,9 @@ SERVICE_ICON = {
     "skylight-repair": "skylight", "fapim-window-repair": "tilt", "storm-door-repair": "door", "storm-doors": "doorglass",
 }
 from content_gap import NEW_ICONS
+from content_gap2 import NEW_ICONS2
 SERVICE_ICON.update(NEW_ICONS)
+SERVICE_ICON.update(NEW_ICONS2)
 BY_SLUG_ALL = {s["slug"]: s for s in SERVICES}
 FEATURED = [BY_SLUG_ALL["fapim-window-repair"]] + SERVICES[:9] + \
     [BY_SLUG_ALL["tilt-and-turn-window-repair"], BY_SLUG_ALL["door-repair"]]
@@ -463,7 +465,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/warranty/">Warranty</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']} · <a href="/privacy-policy/">Privacy policy</a></div>
 </footer>
@@ -1035,6 +1037,40 @@ def build_pages():
                                 noindex=p.get("noindex", False)))
 
 
+# ---------------------------------------------------------------- FAQ hub
+def build_faq_page():
+    """All common questions in one place, grouped like the services menu."""
+    trail = [("Home", "/"), ("FAQ", "/faq/")]
+    groups = [("General", HOME["faqs"])]
+    for name, slugs in CATEGORIES:
+        qs = []
+        for sl in slugs:
+            s = BY_SLUG_ALL.get(sl)
+            if s and s.get("faqs"):
+                qs.extend(s["faqs"][:2])
+        if qs:
+            groups.append((name, qs))
+    seen, allq, sections = set(), [], ""
+    for name, qs in groups:
+        uniq = [(q, a) for q, a in qs if q not in seen and not seen.add(q)]
+        allq.extend(uniq)
+        items = "".join(f"<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>" for q, a in uniq)
+        sections += f'<h2>{escape(name)}</h2><div class="faq">{items}</div>'
+    body = f"""
+<section class="page-hero"><div class="wrap">
+  {crumbs_html(trail)}
+  <span class="tag">FAQ</span>
+  <h1>Window and door repair questions</h1>
+  <p class="lede">Straight answers to what GTA homeowners, condo owners and businesses ask us most. Don't see yours? Text us a photo.</p>
+  <div class="actions">{call_btn("faq")}{text_btn("faq")}</div>
+</div></section>
+<div class="wrap faq-hub">{sections}</div>
+{cta_html()}"""
+    write("faq", layout(slug="faq", title=f"Window & Door Repair FAQ | {SITE['name']}",
+                        description="Answers to common questions about window, glass and door repair in Toronto and the GTA: costs, warranty, condos, emergencies and more.",
+                        body=body, schemas=[business_schema(), breadcrumb_schema(trail), faq_schema(allq)]))
+
+
 def build_404():
     body = f"""
 <section class="page-hero"><div class="wrap">
@@ -1213,7 +1249,7 @@ def responsive_images(dims):
 
 def build_sitemap():
     slugs = [""] + [s["slug"] for s in SERVICES] + [c["slug"] for c in CITIES] + \
-            [p["slug"] for p in PAGES + EXTRA_PAGES if not p.get("noindex")] + \
+            [p["slug"] for p in PAGES + EXTRA_PAGES if not p.get("noindex")] + ["faq"] + \
             [f"blog/{b['slug']}" for b in BLOG] + \
             ([f"our-work/{w['slug']}" for w in WORK] + ["our-work"] if WORK else []) + \
             [combo_slug(c["slug"], k) for c in CITIES for k in COMBO_SERVICES] + ["service-areas"] + \
@@ -1256,6 +1292,7 @@ def main():
             if n not in RICH:
                 build_town(r, n, part)
     build_cost_guide()
+    build_faq_page()
     build_404()
     if (OUT / "photos").exists():
         responsive_images(make_webp_sizes())

@@ -490,3 +490,6 @@ STORM_MODELS = [
 from content_gap import NEW_SERVICES, CATEGORY_ADDS
 MORE_SERVICES += NEW_SERVICES
 CATEGORIES = [(name, slugs + CATEGORY_ADDS.get(name, [])) for name, slugs in CATEGORIES]
+from content_gap2 import NEW_SERVICES2, CATEGORY_ADDS2
+MORE_SERVICES += NEW_SERVICES2
+CATEGORIES = [(name, slugs + CATEGORY_ADDS2.get(name, [])) for name, slugs in CATEGORIES]

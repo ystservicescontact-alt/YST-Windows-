@@ -508,3 +508,6 @@ EXTRA_PAGES = [
 
 from content_gap import NEW_BLOG
 BLOG = NEW_BLOG + BLOG
+from content_gap2 import NEW_BLOG2, WARRANTY_PAGE
+BLOG = NEW_BLOG2 + BLOG
+EXTRA_PAGES.append(WARRANTY_PAGE)
