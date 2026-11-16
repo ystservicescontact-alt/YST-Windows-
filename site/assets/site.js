@@ -61,7 +61,7 @@
   function calc() {
     var w = parseFloat(box.querySelector('[name=w]').value), h = parseFloat(box.querySelector('[name=h]').value);
     var q = Math.max(1, parseInt(box.querySelector('[name=q]').value, 10) || 1);
-    if (!(w > 0 && h > 0)) { out.textContent = '—'; note.textContent = 'Enter the width and height.'; return; }
+    if (!(w > 0 && h > 0)) { out.textContent = '\u2014'; note.textContent = 'Enter the width and height.'; return; }
     var sq = w * h / 144;
     if (sq > 50) { out.textContent = 'Custom quote'; note.textContent = sq.toFixed(1) + ' sq ft: send us a photo for an exact price.'; return; }
     var i = sq <= 10 ? 0 : sq <= 20 ? 1 : sq <= 30 ? 2 : 3;
@@ -70,7 +70,7 @@
       d.addons.forEach(function (a) { if (a[0] === c.value) pct += a[2]; });
     });
     var lo = t[0] * (1 + pct / 100) * q, hi = t[1] ? t[1] * (1 + pct / 100) * q : null;
-    out.textContent = hi ? fmt(lo) + '–' + fmt(hi) : fmt(lo) + '+';
+    out.textContent = hi ? fmt(lo) + '\u2013' + fmt(hi) : fmt(lo) + '+';
     note.textContent = sq.toFixed(1) + ' sq ft per unit' + (q > 1 ? ' × ' + q + ' units' : '') + ' · before HST';
   }
   box.addEventListener('input', calc);
