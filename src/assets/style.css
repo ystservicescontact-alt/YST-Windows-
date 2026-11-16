@@ -612,3 +612,14 @@ html { scroll-padding-top: 90px; }
 .key-facts dt { font-weight: 700; color: var(--ink); }
 .key-facts dd { margin: 0; color: var(--text); }
 @media (max-width: 520px) { .key-facts dl div { grid-template-columns: 1fr; gap: 0; } }
+
+/* Phone menu: every service, grouped by category */
+.mnav-group details summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 14px 0; color: var(--white); font-family: var(--display); font-weight: 800; font-size: 20px; }
+.mnav-group details summary::-webkit-details-marker { display: none; }
+.mnav-group details summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--red-on-navy); }
+.mnav-group details[open] summary::after { content: "–"; }
+.mnav-group ul { list-style: none; margin: 0 0 10px; padding: 0 0 0 14px; border-left: 2px solid rgba(255,255,255,.15); }
+.mnav-group ul li { border: 0; }
+.mnav-main .mnav-group ul a { font-family: var(--body); font-weight: 600; font-size: 17px; padding: 9px 0; color: rgba(255,255,255,.9); }
+.mnav .mnav-group summary { width: auto; height: auto; border: 0; border-radius: 0; background: none; box-shadow: none; flex-direction: row; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; margin: 0; }
+.mnav[open] .mnav-group summary { border: 0; }

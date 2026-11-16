@@ -384,6 +384,10 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
               f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}"
               f"gtag('js',new Date());gtag('config','{SITE['ga4']}');</script>")
     robots = '<meta name="robots" content="noindex">' if noindex else ""
+    mnav_groups = "".join(
+        f'<li class="mnav-group"><details><summary>{escape(name)}</summary><ul>'
+        + "".join(f'<li><a href="{url(sl)}">{escape(BY_SLUG_ALL[sl]["name"])}</a></li>' for sl in slugs if sl in BY_SLUG_ALL)
+        + '</ul></details></li>' for name, slugs in CATEGORIES)
     hours = f'<b>{escape(SITE["hours"])}</b> · ' if SITE["hours"] else ""
     return f"""<!doctype html>
 <html lang="en-CA">
@@ -436,14 +440,13 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
       <div class="mnav-panel">
         <ul class="mnav-main">
           <li><a href="/">Home</a></li>
+          {mnav_groups}
           <li><a href="/services/">All services</a></li>
-          <li><a href="/fapim-window-repair/">FAPIM windows</a></li>
-          <li><a href="/foggy-window-repair/">Foggy glass</a></li>
-          <li><a href="/window-crank-repair/">Cranks &amp; hardware</a></li>
-          <li><a href="/patio-door-repair/">Patio doors</a></li>
-          <li><a href="/storm-doors/">Storm doors</a></li>
           <li><a href="/emergency-glass-repair/">24/7 emergency</a></li>
           <li><a href="/service-areas/">Service areas</a></li>
+          {'<li><a href="/glass-replacement-cost/">Prices</a></li>' if cost_ready() else ''}
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/warranty/">Warranty</a></li>
           <li><a href="/about/">About us</a></li>
           <li><a href="/blog/">Blog</a></li>
         </ul>
