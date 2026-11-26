@@ -445,6 +445,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
           <li><a href="/emergency-glass-repair/">24/7 emergency</a></li>
           <li><a href="/service-areas/">Service areas</a></li>
           {'<li><a href="/glass-replacement-cost/">Prices</a></li>' if cost_ready() else ''}
+          <li><a href="/see-inside-your-window/">3D: see inside your window</a></li>
           <li><a href="/faq/">FAQ</a></li>
           <li><a href="/warranty/">Warranty</a></li>
           <li><a href="/about/">About us</a></li>
@@ -470,7 +471,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/warranty/">Warranty</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/see-inside-your-window/">See inside your window (3D)</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/warranty/">Warranty</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']} · <a href="/privacy-policy/">Privacy policy</a></div>
 </footer>
@@ -816,9 +817,26 @@ def key_facts_html(s):
     return f'<aside class="key-facts" aria-label="Key facts"><h2>{escape(s["name"])}: key facts</h2><dl>{items}</dl></aside>'
 
 
+TEASER_3D = {
+    "foggy-window-repair": ("window", "See it in 3D: take a double-pane window apart, make it fog, and see the one part we replace."),
+    "window-glass-replacement": ("window", "See it in 3D: which part of the window we replace, and what stays."),
+    "broken-window-glass-replacement": ("window", "See it in 3D: how a sealed glass unit sits in your window, and what we swap out."),
+    "patio-door-repair": ("patio-door", "See it in 3D: slide a patio door with worn rollers, then with new ones."),
+    "patio-door-roller-replacement": ("patio-door", "See it in 3D: X-ray the bottom rail and watch worn rollers make the door grind."),
+}
+
+
+def teaser_3d(slug):
+    if slug not in TEASER_3D:
+        return ""
+    anchor, text = TEASER_3D[slug]
+    return (f'<div class="v3d-teaser"><p><strong>Interactive model.</strong> {escape(text)}</p>'
+            f'<a class="btn btn-navy" href="/see-inside-your-window/#{anchor}">Open the 3D model</a></div>')
+
+
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
-    more = extras_html(s["slug"])
+    more = teaser_3d(s["slug"]) + extras_html(s["slug"])
     if s["slug"] in COMBO_SERVICES:
         short = COMBO_SERVICES[s["slug"]]["short"]
         links = "".join(f'<li><a href="{url(combo_slug(c["slug"], s["slug"]))}">{escape(short)} {escape(c["name"])}</a></li>'
