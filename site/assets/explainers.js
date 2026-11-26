@@ -314,14 +314,22 @@
   function sceneFog(svg, id, root) {
     defs(svg, id);
     var clearUrl = root.dataset.clear, fogUrl = root.dataset.fog;
-    el('image', { href: clearUrl, x: 0, y: 0, width: 1200, height: 750, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    // blurred backdrop fills the frame; the full photo (whole window + handle) sits on the left
+    var PX = 40, PW = 782, PH = 750;
+    el('image', { href: root.dataset.bg, x: 0, y: 0, width: 1200, height: 750, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    el('rect', { x: PX - 2, y: 0, width: PW + 4, height: PH, fill: '#000', opacity: 0.25 }, svg);
+    el('image', { href: clearUrl, x: PX, y: 0, width: PW, height: PH, preserveAspectRatio: 'xMidYMid slice' }, svg);
     var mask = el('mask', { id: id + '-fogmask', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: 1200, height: 750 }, svg);
     var rg = el('radialGradient', { id: id + '-fogrg' }, svg);
     el('stop', { offset: 0.6, 'stop-color': '#fff' }, rg); el('stop', { offset: 1, 'stop-color': '#fff', 'stop-opacity': 0 }, rg);
-    var cxF = 168, cyF = 575; // failed corner: bottom-left of the glass, along the frame
+    var cxF = 154, cyF = 481; // failed corner: bottom-left of the glass, along the frame
     var fogCircle = el('circle', { cx: cxF, cy: cyF, r: 0, fill: 'url(#' + id + '-fogrg)' }, mask);
-    var fog = el('image', { href: fogUrl, x: 0, y: 0, width: 1200, height: 750, preserveAspectRatio: 'xMidYMid slice', mask: 'url(#' + id + '-fogmask)' }, svg);
-    var glassPoly = '95,413 657,0 1200,0 1200,750 583,750 230,734';
+    var glassPoly = '102,357 588,0 822,0 822,595 190,566';
+    var gclip = el('clipPath', { id: id + '-glassclip' }, svg);
+    el('polygon', { points: glassPoly }, gclip);
+    // the fogged glass slides out of the frame when we replace the unit
+    var fogSlide = el('g', null, el('g', { 'clip-path': 'url(#' + id + '-glassclip)' }, svg));
+    var fog = el('image', { href: fogUrl, x: PX, y: 0, width: PW, height: PH, preserveAspectRatio: 'xMidYMid slice', mask: 'url(#' + id + '-fogmask)' }, fogSlide);
     var newRing = el('polygon', { points: glassPoly, fill: 'none', stroke: C.green, 'stroke-width': 7, 'stroke-dasharray': '18 12', opacity: 0 }, svg);
     var crackMark = el('g', { opacity: 0 }, svg);
     el('circle', { cx: cxF, cy: cyF, r: 20, fill: 'none', stroke: C.red, 'stroke-width': 4 }, crackMark);
@@ -329,12 +337,12 @@
     titleBlock(svg, 30, 30, ['CONDO WINDOW · TORONTO', 'Sealed glass unit · edge seal']);
 
     // bubble: cross-section of the glass edge
-    var B = bubble(svg, id, 1040, 300, 140, cxF, cyF, 'EDGE OF THE GLASS');
-    var bx = 1040, by = 300, inn = B.inner;
+    var B = bubble(svg, id, 1030, 320, 140, cxF, cyF, 'EDGE OF THE GLASS');
+    var bx = 1030, by = 320, inn = B.inner;
     var top = by - 150, bot = by + 60;
     var p1x = bx - 62, p2x = bx + 38, pw = 24;
-    el('rect', { x: p1x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn);
-    el('rect', { x: p2x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn);
+    var panes = [el('rect', { x: p1x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn),
+      el('rect', { x: p2x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn)];
     var gapX0 = p1x + pw, gapX1 = p2x, spTop = bot - 46;
     el('rect', { x: gapX0 + 4, y: spTop, width: gapX1 - gapX0 - 8, height: 34, fill: '#B8BFC9', stroke: C.line, 'stroke-width': 1.5 }, inn);
     for (var d1 = 0; d1 < 8; d1++) el('circle', { cx: gapX0 + 14 + (d1 % 4) * 18, cy: spTop + 10 + Math.floor(d1 / 4) * 14, r: 4, fill: '#F2E7C9', stroke: C.line, 'stroke-width': 0.6 }, inn);
@@ -346,34 +354,35 @@
     var gasLabel = lab(bx - 13, top + 30, 'Argon', 'middle');
     var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
     var argon = [], moist = [];
-    for (var a = 0; a < 16; a++) argon.push({ n: el('circle', { r: 4.5, fill: '#8B6CD9', stroke: '#5B3FA8', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 40 + rnd() * (spTop - top - 50), ph: rnd() * 6, leave: 7.3 + rnd() * 3 });
-    for (var m = 0; m < 14; m++) moist.push({ n: el('circle', { r: 4.5, fill: C.blue, stroke: '#1F6FAE', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 30 + rnd() * (spTop - top - 40), ph: rnd() * 6, enter: 8 + rnd() * 3 });
+    for (var a = 0; a < 16; a++) argon.push({ n: el('circle', { r: 4.5, fill: '#8B6CD9', stroke: '#5B3FA8', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 40 + rnd() * (spTop - top - 50), ph: rnd() * 6, leave: 4.6 + rnd() * 2 });
+    for (var m = 0; m < 14; m++) moist.push({ n: el('circle', { r: 4.5, fill: C.blue, stroke: '#1F6FAE', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 30 + rnd() * (spTop - top - 40), ph: rnd() * 6, enter: 5 + rnd() * 2 });
     var condense = el('g', { opacity: 0 }, inn);
     for (var c2 = 0; c2 < 10; c2++) { el('circle', { cx: gapX0 + 3, cy: top + 30 + c2 * 14, r: 3, fill: '#ffffff', stroke: C.blue, 'stroke-width': 1 }, condense); el('circle', { cx: gapX1 - 3, cy: top + 36 + c2 * 14, r: 3, fill: '#ffffff', stroke: C.blue, 'stroke-width': 1 }, condense); }
     var crackX = bx - 6, crackY = bot + 4;
 
     return function update(t, time) {
-      var grow = ease(ramp(t, 11, 15.5)), clear = ease(ramp(t, 16.2, 18.2));
-      fogCircle.setAttribute('r', (grow * 1400).toFixed(1));
-      fog.setAttribute('opacity', 1 - clear);
-      crackMark.setAttribute('opacity', ramp(t, 4, 4.5) * (1 - ramp(t, 16, 16.6)));
+      var grow = ease(ramp(t, 7, 10)), clear = ease(ramp(t, 10.8, 12.2));
+      fogCircle.setAttribute('r', (grow * 1000).toFixed(1));
+      fogSlide.setAttribute('transform', 'translate(' + (clear * 820).toFixed(1) + ' 0)');
+      crackMark.setAttribute('opacity', ramp(t, 2.5, 3) * (1 - ramp(t, 10.5, 11)));
       var pk = (time * 1.2) % 1; pulse.setAttribute('r', 20 + pk * 26); pulse.setAttribute('opacity', 1 - pk);
-      newRing.setAttribute('opacity', ramp(t, 16, 16.6) * (1 - ramp(t, 22, 23)));
-      showBubble(B, ramp(t, 0.3, 1.1) * (1 - ramp(t, 11.5, 12.2) * (1 - ramp(t, 15.8, 16.4))));
-      var fixed = t >= 16.2;
-      crack.setAttribute('opacity', ramp(t, 4, 5) * (fixed ? 0 : 1));
+      newRing.setAttribute('opacity', ramp(t, 10.6, 11.1) * (1 - ramp(t, 14.5, 15.3)));
+      showBubble(B, ramp(t, 0.3, 1.0));
+      var fixed = t >= 10.8;
+      crack.setAttribute('opacity', ramp(t, 2.5, 3.3) * (fixed ? 0 : 1));
       seal.setAttribute('fill', fixed ? '#16301F' : '#1F242D');
       seal.setAttribute('stroke', fixed ? C.green : C.line);
-      B.tagText.textContent = fixed ? 'NEW SEALED UNIT' : 'EDGE OF THE GLASS';
-      condense.setAttribute('opacity', fixed ? 0 : ramp(t, 11, 13));
-      gasLabel.textContent = fixed ? 'New argon' : (t > 9 ? 'Humid air' : 'Argon');
+      B.tagText.textContent = fixed ? 'NEW GLASS UNIT' : 'EDGE OF THE GLASS';
+      panes.forEach(function (pn) { pn.setAttribute('fill', fixed ? '#BFEBD2' : '#CDE8F6'); pn.setAttribute('stroke', fixed ? C.green : C.line); });
+      condense.setAttribute('opacity', fixed ? 0 : ramp(t, 7, 8.5));
+      gasLabel.textContent = fixed ? 'New argon' : (t > 6 ? 'Humid air' : 'Argon');
       argon.forEach(function (p) {
         var x = p.x + Math.sin(time * 1.3 + p.ph) * 5, y = p.y + Math.cos(time * 1.1 + p.ph) * 5, op = 1;
         if (!fixed && t > p.leave) {
           var k = ramp(t, p.leave, p.leave + 2.2);
           x = lerp(x, crackX, k); y = lerp(y, crackY + k * 50, k); op = 1 - ramp(t, p.leave + 1.6, p.leave + 2.2);
         }
-        if (fixed) op = ramp(t, 17, 18);
+        if (fixed) op = ramp(t, 11.2, 12);
         p.n.setAttribute('cx', x.toFixed(1)); p.n.setAttribute('cy', y.toFixed(1)); p.n.setAttribute('opacity', op);
       });
       moist.forEach(function (p) {
