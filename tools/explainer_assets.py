@@ -25,6 +25,8 @@ SCENES = {
                   {"name": "sash", "poly": [(35, 300), (952, 300), (947, 1450), (243, 1450)],
                    "box": (0, 300, 960, 1460)},
               ]},
+    # landscape crop that fills the stage (1200 x 750)
+    "condo": {"crop": (0, 1050, 1932, 2258), "landscape": True},
 }
 
 
@@ -49,6 +51,10 @@ def run(scene, src):
             im = Image.fromarray(cv2.cvtColor(cv2.inpaint(bgr, dil, 9, cv2.INPAINT_TELEA), cv2.COLOR_BGR2RGB))
     crop = im.crop((x0, y0, x1, y1))
     w, h = crop.size
+    if spec.get("landscape"):
+        crop.resize((1600, 1000), Image.LANCZOS).save(OUT / f"{scene}.jpg", quality=86, optimize=True)
+        print(f"{scene}: fills the stage; scale {1200 / w:.4f}; source offset {x0},{y0}")
+        return
     target_h = 1100
     crop = crop.resize((round(w * target_h / h), target_h), Image.LANCZOS)
     save(crop, f"{scene}.jpg")

@@ -148,3 +148,9 @@ EXPLAINERS["fapim-window-repair"] = {
                               {"t": 10.6, "img": PH + "fapim-bubble-new.jpg", "tag": "NEW FAPIM PARTS", "tone": "green"}]},
     },
 }
+
+
+from explainer_scenes import SCENES as _SCENES  # noqa: E402
+
+for _slug, _e in _SCENES.items():
+    EXPLAINERS.setdefault(_slug, _e)
