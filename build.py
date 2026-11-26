@@ -17,6 +17,7 @@ from local import COMBO_SERVICES, CITY_LOCAL, WHY, combo_slug
 from areas import REGIONS, town_slug, INDEXED_TOWNS
 from extras import EXTRAS
 from window_styles import window_styles_html
+from explainers import explainer_html
 from cost_guide import ready as cost_ready
 from media import photo, pair, gallery_pairs, job_pairs, video_html, PHOTOS, EXTS
 from services_more import CATEGORIES, STORM_MODELS
@@ -440,7 +441,6 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
       <div class="mnav-panel">
         <ul class="mnav-main">
           <li><a href="/">Home</a></li>
-          <li class="mnav-3d"><a href="/see-inside-your-window/">NEW: See inside your window in 3D</a></li>
           {mnav_groups}
           <li><a href="/services/">All services</a></li>
           <li><a href="/emergency-glass-repair/">24/7 emergency</a></li>
@@ -471,7 +471,7 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
     </div>
     <div><h2>Services</h2><ul>{services}</ul></div>
     <div><h2>Service areas</h2><ul>{cities_a}</ul></div>
-    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/see-inside-your-window/">See inside your window (3D)</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/warranty/">Warranty</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
+    <div><h2>&nbsp;</h2><ul>{cities_b}<li><a href="/service-areas/">All service areas</a></li><li><a href="/window-brands/">Brands we fix</a></li><li><a href="/about/">About us</a></li><li><a href="/blog/">Blog</a></li><li><a href="/quote/">Get a quote</a></li><li><a href="/measure-glass/">Measure your glass</a></li><li><a href="/property-managers/">Property managers</a></li><li><a href="/real-estate-agents/">Real estate agents</a></li>{('<li><a href="/our-work/">Our work</a></li>') if WORK else ''}<li><a href="/insurance-claims/">Insurance claims</a></li><li><a href="/winter-ready/">Winter-ready checklist</a></li><li><a href="/warranty/">Warranty</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Free estimate</a></li></ul></div>
   </div>
   <div class="wrap footer-bottom">© {date.today().year} {SITE['name']} · <a href="/privacy-policy/">Privacy policy</a></div>
 </footer>
@@ -681,19 +681,6 @@ def build_work():
 
 
 # ---------------------------------------------------------------- pages
-def home_3d_html():
-    return """
-<section class="section soft home-3d" id="3d"><div class="wrap">
-  <a href="/see-inside-your-window/#window"><img src="/photos/3d-window-preview.jpg" alt="3D model of a double-pane window taken apart, with the sealed glass unit highlighted" loading="lazy" width="1160" height="725"></a>
-  <div class="copy">
-    <span class="tag">Interactive 3D</span>
-    <h2>See inside your window</h2>
-    <p>Turn a 3D window, take it apart and watch it fog up. Then slide a patio door with worn rollers and with new ones. You'll see exactly which part fails, and why it's usually a repair.</p>
-    <div class="actions"><a class="btn btn-navy" href="/see-inside-your-window/#window">3D window</a><a class="btn btn-navy" href="/see-inside-your-window/#patio-door">3D patio door</a></div>
-  </div>
-</div></section>"""
-
-
 def build_home():
     h = HOME
     extra_checks = ([f"{YEARS} years in business"] if YEARS else []) + ([f"{CUSTOMERS} customers"] if CUSTOMERS else [])
@@ -715,7 +702,6 @@ def build_home():
     <a class="more-link" href="/services/">All services →</a></div>
   {cards_html(FEATURED)}
 </div></section>
-{home_3d_html()}
 {fapim_html()}
 {who_html()}
 <section class="section soft" id="repair-or-replace"><div class="wrap">
@@ -772,7 +758,7 @@ def aside_html(current_slug):
 </aside>"""
 
 
-def build_article(page, trail, schemas, extra_html=""):
+def build_article(page, trail, schemas, extra_html="", top_html=""):
     body = f"""
 <section class="page-hero"><div class="wrap">
   {crumbs_html(trail)}
@@ -782,6 +768,7 @@ def build_article(page, trail, schemas, extra_html=""):
   <div class="actions">{call_btn("page-hero")}{text_btn("page-hero")}</div>
 </div></section>
 {trust_html()}
+{top_html}
 <div class="wrap article">
   <div class="prose">{page['body']}{extra_html}</div>
   {aside_html(page['slug'])}
@@ -831,26 +818,9 @@ def key_facts_html(s):
     return f'<aside class="key-facts" aria-label="Key facts"><h2>{escape(s["name"])}: key facts</h2><dl>{items}</dl></aside>'
 
 
-TEASER_3D = {
-    "foggy-window-repair": ("window", "See it in 3D: take a double-pane window apart, make it fog, and see the one part we replace."),
-    "window-glass-replacement": ("window", "See it in 3D: which part of the window we replace, and what stays."),
-    "broken-window-glass-replacement": ("window", "See it in 3D: how a sealed glass unit sits in your window, and what we swap out."),
-    "patio-door-repair": ("patio-door", "See it in 3D: slide a patio door with worn rollers, then with new ones."),
-    "patio-door-roller-replacement": ("patio-door", "See it in 3D: X-ray the bottom rail and watch worn rollers make the door grind."),
-}
-
-
-def teaser_3d(slug):
-    if slug not in TEASER_3D:
-        return ""
-    anchor, text = TEASER_3D[slug]
-    return (f'<div class="v3d-teaser"><p><strong>Interactive model.</strong> {escape(text)}</p>'
-            f'<a class="btn btn-navy" href="/see-inside-your-window/#{anchor}">Open the 3D model</a></div>')
-
-
 def build_service(s):
     trail = [("Home", "/"), ("Services", "/services/"), (s["name"], url(s["slug"]))]
-    more = teaser_3d(s["slug"]) + extras_html(s["slug"])
+    more = extras_html(s["slug"])
     if s["slug"] in COMBO_SERVICES:
         short = COMBO_SERVICES[s["slug"]]["short"]
         links = "".join(f'<li><a href="{url(combo_slug(c["slug"], s["slug"]))}">{escape(short)} {escape(c["name"])}</a></li>'
@@ -867,7 +837,7 @@ def build_service(s):
         jobs = folder_grid("fapim", s["body"], "FAPIM window repair job in a GTA condo", "More FAPIM jobs")
     s = dict(s, body=key_facts_html(s) + s["body"])
     build_article(s, trail, [service_schema(s["name"], s["slug"], SITE["area"])],
-                  media_block(s["slug"], s["name"]) + jobs + more + extra)
+                  media_block(s["slug"], s["name"]) + jobs + more + extra, top_html=explainer_html(s["slug"]))
 
 
 def build_city(c):
