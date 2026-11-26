@@ -53,7 +53,7 @@
   // Blueprint-style title block in the corner
   function titleBlock(svg, x, y, lines) {
     var g = el('g', { class: 'ex-tb' }, svg);
-    el('rect', { x: x, y: y, width: 230, height: 22 + lines.length * 20, fill: '#ffffff', 'fill-opacity': 0.85, stroke: C.line, 'stroke-width': 1.2 }, g);
+    el('rect', { x: x, y: y, width: 300, height: 22 + lines.length * 20, fill: '#ffffff', 'fill-opacity': 0.85, stroke: C.line, 'stroke-width': 1.2 }, g);
     lines.forEach(function (t, i) {
       var tx = el('text', { x: x + 12, y: y + 26 + i * 20, class: i === 0 ? 'ex-tb-h' : 'ex-tb-l' }, g);
       tx.textContent = t;
@@ -151,48 +151,6 @@
         });
       },
     };
-  }
-
-  // ------------------------------------------------------------ Toronto skyline (condo)
-  function skylineView(g, x, y, w, h, id) {
-    var sky = el('linearGradient', { id: id + '-sky', x1: 0, y1: 0, x2: 0, y2: 1 }, g);
-    el('stop', { offset: 0, 'stop-color': '#6FA8DC' }, sky); el('stop', { offset: 0.7, 'stop-color': '#CFE4F4' }, sky); el('stop', { offset: 1, 'stop-color': '#F4E6D2' }, sky);
-    el('rect', { x: x, y: y, width: w, height: h, fill: 'url(#' + id + '-sky)' }, g);
-    var horizon = y + h * 0.7;
-    el('rect', { x: x, y: horizon - 6, width: w, height: h, fill: '#5C8FB8' }, g); // Lake Ontario
-    for (var i = 0; i < 6; i++) el('line', { x1: x + 40 + i * 90, y1: horizon + 8 + (i % 3) * 14, x2: x + 90 + i * 90, y2: horizon + 8 + (i % 3) * 14, stroke: '#ffffff', 'stroke-opacity': 0.35, 'stroke-width': 2 }, g);
-    var win = el('pattern', { id: id + '-win', width: 10, height: 12, patternUnits: 'userSpaceOnUse' }, g);
-    el('rect', { width: 10, height: 12, fill: '#7E93AB' }, win);
-    el('rect', { x: 2, y: 2, width: 6, height: 7, fill: '#B9CCE0' }, win);
-    var win2 = el('pattern', { id: id + '-win2', width: 12, height: 14, patternUnits: 'userSpaceOnUse' }, g);
-    el('rect', { width: 12, height: 14, fill: '#3E5673' }, win2);
-    el('rect', { x: 1, y: 1, width: 10, height: 5, fill: '#7FA2C6' }, win2);
-    // far towers
-    var far = [[0.02, 0.38, 0.08], [0.11, 0.3, 0.07], [0.19, 0.44, 0.06], [0.62, 0.36, 0.07], [0.7, 0.27, 0.06], [0.77, 0.4, 0.09], [0.88, 0.33, 0.08]];
-    far.forEach(function (b) {
-      el('rect', { x: x + w * b[0], y: y + h * b[1], width: w * b[2], height: horizon - (y + h * b[1]), fill: 'url(#' + id + '-win)', stroke: C.line, 'stroke-width': 0.8 }, g);
-    });
-    // CN Tower
-    var cx = x + w * 0.44, top = y + h * 0.02;
-    var tw = el('g', { stroke: C.line, 'stroke-width': 1.2 }, g);
-    el('line', { x1: cx, y1: top - 40, x2: cx, y2: top + 70, stroke: '#9AA3AE', 'stroke-width': 3 }, tw);
-    el('polygon', { points: pts([[cx - 5, top + 60], [cx + 5, top + 60], [cx + 16, horizon], [cx - 16, horizon]]), fill: '#D6D2CB' }, tw);
-    el('polygon', { points: pts([[cx - 26, horizon], [cx - 9, top + 175], [cx - 4, top + 175], [cx - 10, horizon]]), fill: '#C9C4BC' }, tw);
-    el('polygon', { points: pts([[cx + 26, horizon], [cx + 9, top + 175], [cx + 4, top + 175], [cx + 10, horizon]]), fill: '#C9C4BC' }, tw);
-    el('rect', { x: cx - 9, y: top + 92, width: 18, height: 12, rx: 5, fill: '#CFCAC2' }, tw); // SkyPod
-    el('ellipse', { cx: cx, cy: top + 168, rx: 34, ry: 9, fill: '#BDB7AE' }, tw); // main pod
-    el('rect', { x: cx - 30, y: top + 152, width: 60, height: 16, rx: 6, fill: '#D8D3CB' }, tw);
-    el('ellipse', { cx: cx, cy: top + 152, rx: 30, ry: 7, fill: '#C3BEB6' }, tw);
-    el('rect', { x: cx - 28, y: top + 156, width: 56, height: 5, fill: '#5E6E80', stroke: 'none' }, tw);
-    // Rogers Centre dome
-    el('path', { d: 'M' + (cx + 20) + ' ' + horizon + 'A60 26 0 0 1 ' + (cx + 140) + ' ' + horizon + 'Z', fill: '#E7E4DE', stroke: C.line, 'stroke-width': 1.2 }, g);
-    for (var j = 1; j < 5; j++) el('path', { d: 'M' + (cx + 20 + j * 24) + ' ' + horizon + 'Q' + (cx + 80) + ' ' + (horizon - 34) + ' ' + (cx + 80) + ' ' + (horizon - 26), fill: 'none', stroke: '#B5B0A8', 'stroke-width': 1 }, g);
-    // near towers (in front)
-    [[0.0, 0.52, 0.1], [0.25, 0.5, 0.09], [0.82, 0.48, 0.12]].forEach(function (b) {
-      el('rect', { x: x + w * b[0], y: y + h * b[1], width: w * b[2], height: h, fill: 'url(#' + id + '-win2)', stroke: C.line, 'stroke-width': 1 }, g);
-    });
-    // Gardiner-style highway band at the bottom
-    el('rect', { x: x, y: y + h * 0.9, width: w, height: h * 0.1, fill: '#6E747C' }, g);
   }
 
   // ============================================================ Scene: window crank
@@ -350,65 +308,43 @@
     };
   }
 
-  // ============================================================ Scene: foggy glass (condo)
-  function sceneFog(svg, id) {
+  // ============================================================ Scene: foggy glass (condo, real photo)
+  // Two plates of the same photo: clear, and fogged (made from the photo itself). The fogged plate is
+  // revealed by a soft circle growing from the corner where the seal failed.
+  function sceneFog(svg, id, root) {
     defs(svg, id);
-    el('rect', { x: 0, y: 0, width: 1200, height: 750, fill: '#ECEEF0' }, svg);
-    el('rect', { x: 0, y: 670, width: 1200, height: 80, fill: '#C9B79C' }, svg); // floor
-    el('rect', { x: 0, y: 664, width: 1200, height: 8, fill: '#F7F7F7', stroke: C.line, 'stroke-width': 1 }, svg);
-    var ox = 292, oy = 70, ow = 580, oh = 560;
-    // aluminum condo frame
-    el('rect', { x: ox - 26, y: oy - 26, width: ow + 52, height: oh + 52, fill: '#3C424B', stroke: C.line, 'stroke-width': 1.5, filter: 'url(#' + id + '-shadow)' }, svg);
-    var clip = el('clipPath', { id: id + '-view' }, svg);
-    el('rect', { x: ox, y: oy, width: ow, height: oh }, clip);
-    var view = el('g', { 'clip-path': 'url(#' + id + '-view)' }, svg);
-    var sharp = el('g', null, view);
-    skylineView(sharp, ox, oy, ow, oh, id + 's');
-    // fog: blurred copy + haze + droplets, revealed by a growing mask from the failed corner
-    var mask = el('mask', { id: id + '-fogmask' }, svg);
+    var clearUrl = root.dataset.clear, fogUrl = root.dataset.fog;
+    el('image', { href: clearUrl, x: 0, y: 0, width: 1200, height: 750, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    var mask = el('mask', { id: id + '-fogmask', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: 1200, height: 750 }, svg);
     var rg = el('radialGradient', { id: id + '-fogrg' }, svg);
-    el('stop', { offset: 0.55, 'stop-color': '#fff' }, rg); el('stop', { offset: 1, 'stop-color': '#fff', 'stop-opacity': 0 }, rg);
-    var cxF = ox + ow - 30, cyF = oy + oh - 30;
+    el('stop', { offset: 0.6, 'stop-color': '#fff' }, rg); el('stop', { offset: 1, 'stop-color': '#fff', 'stop-opacity': 0 }, rg);
+    var cxF = 168, cyF = 575; // failed corner: bottom-left of the glass, along the frame
     var fogCircle = el('circle', { cx: cxF, cy: cyF, r: 0, fill: 'url(#' + id + '-fogrg)' }, mask);
-    var fog = el('g', { mask: 'url(#' + id + '-fogmask)' }, view);
-    var blurred = el('g', { filter: 'url(#' + id + '-blur)' }, fog);
-    skylineView(blurred, ox, oy, ow, oh, id + 'b');
-    el('rect', { x: ox, y: oy, width: ow, height: oh, fill: '#F4F7FA', opacity: 0.62 }, fog);
-    var drops = el('g', { fill: '#ffffff', stroke: '#9FB4C8', 'stroke-width': 0.6 }, fog);
-    var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
-    for (var i = 0; i < 260; i++) el('circle', { cx: ox + rnd() * ow, cy: oy + Math.pow(rnd(), 0.55) * oh, r: 1 + rnd() * 3.2, opacity: 0.55 + rnd() * 0.4 }, drops);
-    for (var r = 0; r < 14; r++) { var dx = ox + rnd() * ow, dy = oy + oh * 0.45 + rnd() * oh * 0.4; el('path', { d: 'M' + dx + ' ' + dy + 'q2 30 0 ' + (40 + rnd() * 50), stroke: '#ffffff', 'stroke-width': 2.5, fill: 'none', opacity: 0.7 }, drops); }
-    // glass reflections + edge line (spacer seen through the glass)
-    el('rect', { x: ox, y: oy, width: ow, height: oh, fill: 'url(#' + id + '-glass)' }, svg);
-    el('rect', { x: ox + 4, y: oy + 4, width: ow - 8, height: oh - 8, fill: 'none', stroke: '#8D96A3', 'stroke-width': 7 }, svg);
-    // failed corner marker
+    var fog = el('image', { href: fogUrl, x: 0, y: 0, width: 1200, height: 750, preserveAspectRatio: 'xMidYMid slice', mask: 'url(#' + id + '-fogmask)' }, svg);
+    var glassPoly = '95,413 657,0 1200,0 1200,750 583,750 230,734';
+    var newRing = el('polygon', { points: glassPoly, fill: 'none', stroke: C.green, 'stroke-width': 7, 'stroke-dasharray': '18 12', opacity: 0 }, svg);
     var crackMark = el('g', { opacity: 0 }, svg);
-    el('circle', { cx: cxF + 22, cy: cyF + 22, r: 20, fill: 'none', stroke: C.red, 'stroke-width': 4 }, crackMark);
-    var pulse = el('circle', { cx: cxF + 22, cy: cyF + 22, r: 20, fill: 'none', stroke: C.red, 'stroke-width': 3 }, crackMark);
-    var newRing = el('rect', { x: ox - 10, y: oy - 10, width: ow + 20, height: oh + 20, fill: 'none', stroke: C.green, 'stroke-width': 6, 'stroke-dasharray': '16 10', opacity: 0 }, svg);
-
-    titleBlock(svg, 30, 30, ['CONDO WINDOW', 'Sealed glass unit · edge seal']);
+    el('circle', { cx: cxF, cy: cyF, r: 20, fill: 'none', stroke: C.red, 'stroke-width': 4 }, crackMark);
+    var pulse = el('circle', { cx: cxF, cy: cyF, r: 20, fill: 'none', stroke: C.red, 'stroke-width': 3 }, crackMark);
+    titleBlock(svg, 30, 30, ['CONDO WINDOW · TORONTO', 'Sealed glass unit · edge seal']);
 
     // bubble: cross-section of the glass edge
-    var B = bubble(svg, id, 1050, 270, 140, cxF + 22, cyF + 22, 'EDGE OF THE GLASS');
-    var bx = 1050, by = 270, inn = B.inner;
-    var pane1 = ox, top = by - 150, bot = by + 60;
-    var p1x = bx - 62, p2x = bx + 38, pw = 24; // two panes (vertical bars), gap between
+    var B = bubble(svg, id, 1040, 300, 140, cxF, cyF, 'EDGE OF THE GLASS');
+    var bx = 1040, by = 300, inn = B.inner;
+    var top = by - 150, bot = by + 60;
+    var p1x = bx - 62, p2x = bx + 38, pw = 24;
     el('rect', { x: p1x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn);
     el('rect', { x: p2x, y: top, width: pw, height: bot - top, fill: '#CDE8F6', stroke: C.line, 'stroke-width': 1.5 }, inn);
     var gapX0 = p1x + pw, gapX1 = p2x, spTop = bot - 46;
-    var spacer = el('rect', { x: gapX0 + 4, y: spTop, width: gapX1 - gapX0 - 8, height: 34, fill: '#B8BFC9', stroke: C.line, 'stroke-width': 1.5 }, inn);
-    var desic = el('g', null, inn);
-    for (var d1 = 0; d1 < 8; d1++) el('circle', { cx: gapX0 + 14 + (d1 % 4) * 18, cy: spTop + 10 + Math.floor(d1 / 4) * 14, r: 4, fill: '#F2E7C9', stroke: C.line, 'stroke-width': 0.6 }, desic);
+    el('rect', { x: gapX0 + 4, y: spTop, width: gapX1 - gapX0 - 8, height: 34, fill: '#B8BFC9', stroke: C.line, 'stroke-width': 1.5 }, inn);
+    for (var d1 = 0; d1 < 8; d1++) el('circle', { cx: gapX0 + 14 + (d1 % 4) * 18, cy: spTop + 10 + Math.floor(d1 / 4) * 14, r: 4, fill: '#F2E7C9', stroke: C.line, 'stroke-width': 0.6 }, inn);
     var seal = el('rect', { x: gapX0 - pw, y: bot - 12, width: (p2x + pw) - (gapX0 - pw), height: 30, fill: '#1F242D', stroke: C.line, 'stroke-width': 1.5 }, inn);
     var crack = el('path', { d: 'M' + (bx - 6) + ' ' + (bot - 12) + 'l6 10l-8 6l7 8l-4 6', stroke: C.red, 'stroke-width': 4, fill: 'none', opacity: 0 }, inn);
-    // labels inside bubble
     function lab(x, y, text, anchor) { var t = el('text', { x: x, y: y, class: 'ex-blabel', 'text-anchor': anchor || 'start' }, inn); t.textContent = text; return t; }
     lab(p1x - 6, by - 10, 'Glass', 'end'); lab(p2x + pw + 6, by - 10, 'Glass');
-    lab(p2x + pw + 6, spTop + 22, 'Spacer');
-    lab(p2x + pw + 6, bot + 8, 'Seal');
+    lab(p2x + pw + 6, spTop + 22, 'Spacer'); lab(p2x + pw + 6, bot + 8, 'Seal');
     var gasLabel = lab(bx - 13, top + 30, 'Argon', 'middle');
-    // particles: argon (purple) and moist air (blue)
+    var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
     var argon = [], moist = [];
     for (var a = 0; a < 16; a++) argon.push({ n: el('circle', { r: 4.5, fill: '#8B6CD9', stroke: '#5B3FA8', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 40 + rnd() * (spTop - top - 50), ph: rnd() * 6, leave: 7.3 + rnd() * 3 });
     for (var m = 0; m < 14; m++) moist.push({ n: el('circle', { r: 4.5, fill: C.blue, stroke: '#1F6FAE', 'stroke-width': 1 }, inn), x: gapX0 + 8 + rnd() * (gapX1 - gapX0 - 16), y: top + 30 + rnd() * (spTop - top - 40), ph: rnd() * 6, enter: 8 + rnd() * 3 });
@@ -417,17 +353,15 @@
     var crackX = bx - 6, crackY = bot + 4;
 
     return function update(t, time) {
-      // fog grows from the corner, then clears when the unit is replaced
       var grow = ease(ramp(t, 11, 15.5)), clear = ease(ramp(t, 16.2, 18.2));
-      fogCircle.setAttribute('r', (grow * 1050).toFixed(1));
+      fogCircle.setAttribute('r', (grow * 1400).toFixed(1));
       fog.setAttribute('opacity', 1 - clear);
       crackMark.setAttribute('opacity', ramp(t, 4, 4.5) * (1 - ramp(t, 16, 16.6)));
       var pk = (time * 1.2) % 1; pulse.setAttribute('r', 20 + pk * 26); pulse.setAttribute('opacity', 1 - pk);
       newRing.setAttribute('opacity', ramp(t, 16, 16.6) * (1 - ramp(t, 22, 23)));
-      showBubble(B, ramp(t, 0.3, 1.1));
+      showBubble(B, ramp(t, 0.3, 1.1) * (1 - ramp(t, 11.5, 12.2) * (1 - ramp(t, 15.8, 16.4))));
       var fixed = t >= 16.2;
-      var crackK = ramp(t, 4, 5) * (fixed ? 0 : 1);
-      crack.setAttribute('opacity', crackK);
+      crack.setAttribute('opacity', ramp(t, 4, 5) * (fixed ? 0 : 1));
       seal.setAttribute('fill', fixed ? '#16301F' : '#1F242D');
       seal.setAttribute('stroke', fixed ? C.green : C.line);
       B.tagText.textContent = fixed ? 'NEW SEALED UNIT' : 'EDGE OF THE GLASS';
@@ -435,7 +369,7 @@
       gasLabel.textContent = fixed ? 'New argon' : (t > 9 ? 'Humid air' : 'Argon');
       argon.forEach(function (p) {
         var x = p.x + Math.sin(time * 1.3 + p.ph) * 5, y = p.y + Math.cos(time * 1.1 + p.ph) * 5, op = 1;
-        if (!fixed && t > p.leave) { // drift to the crack and out
+        if (!fixed && t > p.leave) {
           var k = ramp(t, p.leave, p.leave + 2.2);
           x = lerp(x, crackX, k); y = lerp(y, crackY + k * 50, k); op = 1 - ramp(t, p.leave + 1.6, p.leave + 2.2);
         }
@@ -450,7 +384,6 @@
         }
         p.n.setAttribute('cx', x.toFixed(1)); p.n.setAttribute('cy', y.toFixed(1)); p.n.setAttribute('opacity', op);
       });
-      desic.setAttribute('opacity', 1);
     };
   }
 
@@ -461,7 +394,7 @@
     var make = SCENES[root.dataset.scene];
     var svg = root.querySelector('svg');
     if (!make || !svg) return;
-    var update = make(svg, 'ex-' + root.dataset.scene);
+    var update = make(svg, 'ex-' + root.dataset.scene, root);
     var steps = [].slice.call(root.querySelectorAll('.ex-steps li'));
     var starts = steps.map(function (li) { return parseFloat(li.dataset.start); });
     var dur = parseFloat(root.dataset.duration);
