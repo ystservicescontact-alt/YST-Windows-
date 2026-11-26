@@ -16,9 +16,9 @@
   --tile: #DCE3EB;
   --white: #ffffff;
   --ok: #157F4B;
-  --display: "Plus Jakarta Sans", "Archivo", system-ui, sans-serif;
+  --display: "Amp", "Plus Jakarta Sans", "Archivo", system-ui, sans-serif;
   --logo: "Bebas Neue", "Archivo Narrow", Impact, sans-serif;
-  --body: Archivo, Arial, sans-serif;
+  --body: "Amp", Archivo, Arial, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -663,3 +663,11 @@ html { scroll-padding-top: 90px; }
 @media (max-width: 520px) { .v3d-btn, .v3d-range { flex: 1 1 auto; } .v3d-range input { width: 100%; } }
 .v3d-teaser { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 28px; padding: 20px 22px; background: var(--soft); border: 1px solid var(--line); }
 .v3d-teaser p { max-width: 40rem; }
+.home-3d .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+@media (max-width: 860px) { .home-3d .wrap { grid-template-columns: 1fr; } }
+.home-3d img { width: 100%; border: 1px solid var(--line); }
+.home-3d .copy { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.home-3d h2 { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 4vw, 44px); }
+.home-3d p { color: var(--text); font-size: 18px; max-width: 34rem; }
+.home-3d .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.mnav-main .mnav-3d a { font-weight: 800; color: var(--red-on-navy); }

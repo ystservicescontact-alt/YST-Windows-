@@ -440,12 +440,12 @@ def layout(*, slug, title, description, body, schemas=(), noindex=False):
       <div class="mnav-panel">
         <ul class="mnav-main">
           <li><a href="/">Home</a></li>
+          <li class="mnav-3d"><a href="/see-inside-your-window/">NEW: See inside your window in 3D</a></li>
           {mnav_groups}
           <li><a href="/services/">All services</a></li>
           <li><a href="/emergency-glass-repair/">24/7 emergency</a></li>
           <li><a href="/service-areas/">Service areas</a></li>
           {'<li><a href="/glass-replacement-cost/">Prices</a></li>' if cost_ready() else ''}
-          <li><a href="/see-inside-your-window/">3D: see inside your window</a></li>
           <li><a href="/faq/">FAQ</a></li>
           <li><a href="/warranty/">Warranty</a></li>
           <li><a href="/about/">About us</a></li>
@@ -681,6 +681,19 @@ def build_work():
 
 
 # ---------------------------------------------------------------- pages
+def home_3d_html():
+    return """
+<section class="section soft home-3d" id="3d"><div class="wrap">
+  <a href="/see-inside-your-window/#window"><img src="/photos/3d-window-preview.jpg" alt="3D model of a double-pane window taken apart, with the sealed glass unit highlighted" loading="lazy" width="1160" height="725"></a>
+  <div class="copy">
+    <span class="tag">Interactive 3D</span>
+    <h2>See inside your window</h2>
+    <p>Turn a 3D window, take it apart and watch it fog up. Then slide a patio door with worn rollers and with new ones. You'll see exactly which part fails, and why it's usually a repair.</p>
+    <div class="actions"><a class="btn btn-navy" href="/see-inside-your-window/#window">3D window</a><a class="btn btn-navy" href="/see-inside-your-window/#patio-door">3D patio door</a></div>
+  </div>
+</div></section>"""
+
+
 def build_home():
     h = HOME
     extra_checks = ([f"{YEARS} years in business"] if YEARS else []) + ([f"{CUSTOMERS} customers"] if CUSTOMERS else [])
@@ -702,6 +715,7 @@ def build_home():
     <a class="more-link" href="/services/">All services →</a></div>
   {cards_html(FEATURED)}
 </div></section>
+{home_3d_html()}
 {fapim_html()}
 {who_html()}
 <section class="section soft" id="repair-or-replace"><div class="wrap">
