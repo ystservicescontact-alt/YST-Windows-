@@ -390,7 +390,8 @@
         if (f.type === 'sprite') {
           var ang = f.keys ? keyed(f.keys, t) : 0;
           if (f.wiggle && t > f.wiggle[0] && t < f.wiggle[1]) ang += Math.sin(time * 18) * (f.wiggleDeg || 8);
-          it.g.setAttribute('transform', 'rotate(' + ang + ' ' + f.px + ' ' + f.py + ')');
+          var sy = f.sy ? keyed(f.sy, t) : 1;
+          it.g.setAttribute('transform', 'translate(' + f.px + ' ' + f.py + ') rotate(' + ang + ') scale(1 ' + sy + ') translate(' + -f.px + ' ' + -f.py + ')');
         }
         if (f.type === 'tint') it.n.setAttribute('opacity', v * (f.opacity || 0.35));
         if (f.type === 'ghost') {
