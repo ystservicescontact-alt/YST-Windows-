@@ -670,3 +670,10 @@ html { scroll-padding-top: 90px; }
 .ex-label.is-red { background: var(--red); }
 .ex-label.is-blue { background: #1F6FAE; }
 .ex-label.is-green { background: #17834A; }
+.exp-label { font: 800 15px var(--body); fill: #fff; letter-spacing: .2px; }
+.exp-dim { font: 800 15px var(--body); letter-spacing: 1.2px; paint-order: stroke; stroke: rgba(15, 27, 51, .55); stroke-width: 3px; }
+.exp-tag { font: 800 13px var(--body); letter-spacing: 1.2px; fill: #fff; }
+.exp-tb-h { font: 800 15px var(--body); letter-spacing: 1.5px; fill: var(--navy); }
+.exp-tb-l { font: 500 13px var(--body); fill: var(--text); }
+.exp-chip-t { font: 800 13px var(--body); letter-spacing: 1px; }
+.exp-svg { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 750; background: #1B2433; }
